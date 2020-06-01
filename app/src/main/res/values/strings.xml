@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">晚安卓</string>
+    <string name="home_page">首页</string>
+    <string name="qAndA">问答</string>
+    <string name="mine">我的</string>
+    <string name="system">体系</string>
+    <string name="search">搜索</string>
+    <string name="double_quit">再按一次退出</string>
+    <string name="click_search">点击了搜索按钮</string>
+    <string name="title">标题</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

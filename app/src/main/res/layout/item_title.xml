@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/iv_title_left"
+        android:layout_width="@dimen/titleImageSize"
+        android:layout_height="@dimen/titleImageSize"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/dp_10"
+        android:src="@drawable/qr_code"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_title_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/dp_10"
+        android:gravity="center"
+        android:text="@string/title"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/titleTextSize"
+        tools:ignore="RelativeOverlap" />
+
+    <ImageView
+        android:id="@+id/iv_title_right"
+        android:layout_width="@dimen/titleImageSize"
+        android:layout_height="@dimen/titleImageSize"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:src="@drawable/search"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

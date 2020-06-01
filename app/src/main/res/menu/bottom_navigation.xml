@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/homepage"
+        android:title="@string/home_page" />
+
+    <item
+        android:id="@+id/navigation_ask_question"
+        android:icon="@mipmap/ask_and_question"
+        android:title="@string/qAndA" />
+
+    <item
+        android:id="@+id/navigation_tree"
+        android:icon="@mipmap/tree"
+        android:title="@string/system" />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@mipmap/mine"
+        android:title="@string/mine" />
+
+</menu>
