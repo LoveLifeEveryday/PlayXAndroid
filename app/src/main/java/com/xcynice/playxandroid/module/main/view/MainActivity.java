@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.module.main.adapter.MainViewPagerAdapter;
 import com.xcynice.playxandroid.module.main.listener.MainBnvListener;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        ImmersionBar.with(this).titleBar(mRlTitle).init();
         initViewPager();
         initListener();
     }
