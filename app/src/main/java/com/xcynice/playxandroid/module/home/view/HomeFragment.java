@@ -2,6 +2,8 @@ package com.xcynice.playxandroid.module.home.view;
 
 import android.content.Intent;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
@@ -31,6 +33,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @BindView(R.id.banner_home)
     MZBannerView mBannerHome;
+    @BindView(R.id.srl_home)
+    SwipeRefreshLayout mSrlHome;
 
     private List<Banner> mBannerList = new ArrayList<>();
 
@@ -46,7 +50,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initView() {
-
+        mSrlHome.setColorSchemeResources(R.color.colorPrimary);
     }
 
     @Override
@@ -59,6 +63,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     protected void initData() {
         presenter.getBanner();
+        mSrlHome.setOnRefreshListener(() -> {
+            //开始刷新
+            mSrlHome.setRefreshing(true);
+            presenter.getBanner();
+        });
         initClick();
     }
 
@@ -82,6 +91,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mBannerList = list.data;
         mBannerHome.setPages(mBannerList, (MZHolderCreator<BannerViewHolder>) () -> new BannerViewHolder());
         mBannerHome.start();
+
+        //结束刷新
+        mSrlHome.setRefreshing(false);
     }
 
     @Override
