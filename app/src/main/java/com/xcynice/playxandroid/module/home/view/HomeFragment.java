@@ -1,64 +1,131 @@
 package com.xcynice.playxandroid.module.home.view;
 
-import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.Intent;
+
 import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.base.BaseBean;
+import com.xcynice.playxandroid.base.BaseFragment;
+import com.xcynice.playxandroid.bean.Article;
+import com.xcynice.playxandroid.bean.Banner;
+import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
+import com.xcynice.playxandroid.module.home.IHomeView;
+import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
+import com.xcynice.playxandroid.util.ToastUtil;
+import com.zhouwei.mzbanner.MZBannerView;
+import com.zhouwei.mzbanner.holder.MZHolderCreator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
+ * @Author 许朋友爱玩
+ * @Date 2020/6/1
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description HomeFragment
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    @BindView(R.id.banner_home)
+    MZBannerView mBannerHome;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private List<Banner> mBannerList = new ArrayList<>();
+
+    @Override
+    protected HomePresenter createPresenter() {
+        return new HomePresenter(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mBannerHome.pause();
+
+    }
+
+    @Override
+    protected void initData() {
+        presenter.getBanner();
+        initClick();
+    }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * 初始化 Banner 的点击事件，跳转到另一个 WebView
      */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    void initClick() {
+        mBannerHome.setBannerPageClickListener((view, i) -> {
+            if (mBannerList.size() != 0) {
+                Intent intent = new Intent(mContext, ArticleDetailActivity.class);
+                intent.putExtra(ArticleDetailActivity.WEB_URL, mBannerList.get(i).getUrl());
+                intent.putExtra(ArticleDetailActivity.WEB_TITLE, mBannerList.get(i).getTitle());
+                startActivity(intent);
+            }
+        });
     }
 
-    public HomeFragment() {
-        // Required empty public constructor
+    @SuppressWarnings("All")
+    @Override
+    public void setBanner(BaseBean<List<Banner>> list) {
+        mBannerList = list.data;
+        mBannerHome.setPages(mBannerList, (MZHolderCreator<BannerViewHolder>) () -> new BannerViewHolder());
+        mBannerHome.start();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void showBannerError(String errorMsg) {
+        ToastUtil.showToast(errorMsg);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public void setArticle(BaseBean<List<Article>> list) {
+
+    }
+
+    @Override
+    public void setArticleError(String errorMsg) {
+
+    }
+
+    @Override
+    public void setArticleDataByMore(BaseBean<Article> list) {
+
+    }
+
+    @Override
+    public void showArticleErrorByMore(String errorMessage) {
+
+    }
+
+    @Override
+    public void showCollectSuccess(String successMessage) {
+
+    }
+
+    @Override
+    public void showCollectError(String errorMessage) {
+
+    }
+
+    @Override
+    public void showUnCollectSuccess(String successMessage) {
+
+    }
+
+    @Override
+    public void showUnCollectError(String errorMessage) {
+
     }
 }

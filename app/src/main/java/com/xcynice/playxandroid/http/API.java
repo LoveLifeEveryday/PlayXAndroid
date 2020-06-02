@@ -3,7 +3,10 @@ package com.xcynice.playxandroid.http;
 
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.bean.Article;
+import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.bean.User;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -29,6 +32,10 @@ public class API {
 
         //-----------------------【首页相关】----------------------
 
+
+        //首页 banner
+        @GET("banner/json")
+        Observable<BaseBean<List<Banner>>> getBanner();
 
         //首页文章列表 这里的{}是填入页数
         @GET("article/list/{page}/json")
@@ -56,7 +63,7 @@ public class API {
 
         //取消收藏---文章列表
         @POST("lg/uncollect_originId/{id}/json")
-        Observable<BaseBean> uncollect(@Path("id") Integer id);
+        Observable<BaseBean> unCollect(@Path("id") Integer id);
 
 
     }

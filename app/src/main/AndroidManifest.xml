@@ -12,18 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".module.article_detail.ArticleDetailActivity"></activity>
         <activity android:name=".module.main.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--适配华为刘海屏-->
+        </activity> <!-- 适配华为刘海屏 -->
         <meta-data
             android:name="android.notch_support"
-            android:value="true" />
-        <!--适配小米刘海屏-->
+            android:value="true" /> <!-- 适配小米刘海屏 -->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />

@@ -57,5 +57,7 @@ dependencies {
     /*沉浸式状态栏*/
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
-    
+
+    /*轮播图*/
+    implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
 }

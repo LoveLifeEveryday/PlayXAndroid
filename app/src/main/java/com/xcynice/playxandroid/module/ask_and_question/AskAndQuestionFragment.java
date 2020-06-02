@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.askAndQuestion;
+package com.xcynice.playxandroid.module.ask_and_question;
 
 import android.os.Bundle;
 
