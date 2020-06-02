@@ -11,7 +11,7 @@
         android:id="@+id/banner_home"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bannerHeight"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="5dp"
         app:canLoop="true"
         app:indicatorAlign="center"
         app:open_mz_mode="true" />

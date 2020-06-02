@@ -49,7 +49,7 @@ public class ArticleDetailActivity extends BaseActivity {
     protected void initView() {
         //实现沉浸式
         ImmersionBar.with(this).init();
-        
+
         WebSettings webSettings = mWvArticleDetail.getSettings();
         //支持javascript脚本
         webSettings.setJavaScriptEnabled(true);

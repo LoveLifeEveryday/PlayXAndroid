@@ -31,8 +31,8 @@ public class RoundAngleImageView extends androidx.appcompat.widget.AppCompatImag
      * <p>
      * 这两个都是画圆的半径
      */
-    private int roundWidth = 20;
-    private int roundHeight = 20;
+    private int roundWidth = 40;
+    private int roundHeight = 40;
     private Paint paint2;
 
     public RoundAngleImageView(Context context, AttributeSet attrs, int defStyle) {
