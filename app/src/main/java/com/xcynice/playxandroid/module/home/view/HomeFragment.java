@@ -91,9 +91,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mBannerList = list.data;
         mBannerHome.setPages(mBannerList, (MZHolderCreator<BannerViewHolder>) () -> new BannerViewHolder());
         mBannerHome.start();
-
-        //结束刷新
-        mSrlHome.setRefreshing(false);
+        if (mSrlHome.isRefreshing()) {
+            //结束刷新
+            mSrlHome.setRefreshing(false);
+        }
     }
 
     @Override
