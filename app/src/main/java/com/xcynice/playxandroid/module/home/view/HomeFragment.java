@@ -1,10 +1,14 @@
 package com.xcynice.playxandroid.module.home.view;
 
-import android.content.Intent;
+import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.adapter.ArticleAdapter;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.Article;
@@ -12,11 +16,13 @@ import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.home.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
+import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,14 +35,38 @@ import butterknife.BindView;
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
  * @Description HomeFragment
  */
-public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, BaseQuickAdapter.RequestLoadMoreListener {
 
+    @SuppressWarnings("rawtypes")
     @BindView(R.id.banner_home)
     MZBannerView mBannerHome;
     @BindView(R.id.srl_home)
     SwipeRefreshLayout mSrlHome;
-
+    @BindView(R.id.rv_home)
+    RecyclerView mRvHome;
+    private ArticleAdapter mArticleAdapter;
     private List<Banner> mBannerList = new ArrayList<>();
+    private List<Article.DataDetailBean> mArticleList = new ArrayList<>();
+
+    /**
+     * 上一次加载的数量，方便进行是否加载到最后一页的判断： if (mCurrentCounter < TOTAL_COUNTER)
+     */
+    private int mCurrentCounter;
+
+    /**
+     * 每一次加载的数量
+     */
+    private final static int SINGLE_PAGE_TOTAL_COUNTER = 20;
+
+    /**
+     * 记录分页，方便进行加载更多
+     */
+    private int page = 0;
+
+    /**
+     * 记录点击事件的位置，方便后面进行收藏
+     */
+    private int mPosition;
 
     @Override
     protected HomePresenter createPresenter() {
@@ -51,36 +81,37 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     protected void initView() {
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
+        mRvHome.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mBannerHome.pause();
-
     }
 
     @Override
     protected void initData() {
         presenter.getBanner();
+        presenter.getArticleListByFirst();
         mSrlHome.setOnRefreshListener(() -> {
             //开始刷新
             mSrlHome.setRefreshing(true);
             presenter.getBanner();
         });
-        initClick();
+        initBannerClick();
     }
 
     /**
      * 初始化 Banner 的点击事件，跳转到另一个 WebView
      */
-    void initClick() {
+    void initBannerClick() {
         mBannerHome.setBannerPageClickListener((view, i) -> {
             if (mBannerList.size() != 0) {
-                Intent intent = new Intent(mContext, ArticleDetailActivity.class);
-                intent.putExtra(ArticleDetailActivity.WEB_URL, mBannerList.get(i).getUrl());
-                intent.putExtra(ArticleDetailActivity.WEB_TITLE, mBannerList.get(i).getTitle());
-                startActivity(intent);
+                HashMap<String, String> hashMap = new HashMap<>(3);
+                hashMap.put(ArticleDetailActivity.WEB_URL, mBannerList.get(i).getUrl());
+                hashMap.put(ArticleDetailActivity.WEB_TITLE, mBannerList.get(i).getTitle());
+                ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
             }
         });
     }
@@ -103,42 +134,106 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     @Override
-    public void setArticle(BaseBean<List<Article>> list) {
+    public void setArticle(BaseBean<Article> list) {
+        mArticleList = list.data.datas;
+        mCurrentCounter = mArticleList.size();
+        mArticleAdapter = new ArticleAdapter(R.layout.item_article_list, mArticleList);
+        mRvHome.setAdapter(mArticleAdapter);
 
+        //开启加载动画
+        mArticleAdapter.openLoadAnimation();
+
+        mArticleAdapter.setOnItemClickListener(this);
+        mArticleAdapter.setOnItemChildClickListener(this);
+        mArticleAdapter.setOnLoadMoreListener(this, mRvHome);
     }
+
 
     @Override
     public void setArticleError(String errorMsg) {
-
+        ToastUtil.showToast(errorMsg);
     }
 
     @Override
     public void setArticleDataByMore(BaseBean<Article> list) {
-
+        mCurrentCounter = list.data.datas.size();
+        mArticleList.addAll(list.data.datas);
+        mArticleAdapter.addData(mArticleList);
+        mArticleAdapter.loadMoreComplete();
     }
 
     @Override
     public void showArticleErrorByMore(String errorMessage) {
-
+        ToastUtil.showToast(errorMessage);
+        mArticleAdapter.loadMoreFail();
     }
 
     @Override
     public void showCollectSuccess(String successMessage) {
-
+        mArticleList.get(mPosition).collect = true;
+        // 因为收藏成功，所以要刷新界面，以显示小红心
+        mArticleAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showCollectError(String errorMessage) {
-
+        ToastUtil.showToast(errorMessage);
     }
 
     @Override
     public void showUnCollectSuccess(String successMessage) {
-
+        mArticleList.get(mPosition).collect = false;
+        //因为取消收藏成功，所以要刷新界面，以取消显示小红心
+        mArticleAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showUnCollectError(String errorMessage) {
+        ToastUtil.showToast(errorMessage);
+    }
 
+    /**
+     * 每一项整体的点击
+     *
+     * @param adapter  adapter
+     * @param view     view
+     * @param position 点击的选项的位置
+     */
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (0 != mArticleList.size()) {
+            HashMap<String, String> hashMap = new HashMap<>(3);
+            hashMap.put(ArticleDetailActivity.WEB_URL, mArticleList.get(position).link);
+            hashMap.put(ArticleDetailActivity.WEB_TITLE, mArticleList.get(position).title);
+            ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
+        }
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        if (view.getId() == R.id.iv_article_favorite) {
+            mPosition = position;
+            if (mArticleList.get(mPosition).collect) {
+                presenter.unCollect(mArticleList.get(mPosition).id);
+            } else {
+                presenter.collect(mArticleList.get(mPosition).id);
+            }
+        }
+    }
+
+
+    /**
+     * 加载更多的监听
+     */
+    @Override
+    public void onLoadMoreRequested() {
+        mRvHome.postDelayed(() -> {
+            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+                //数据加载完毕，没有更多的数据
+                mArticleAdapter.loadMoreEnd();
+            } else {
+                presenter.getArticleListByMore(++page);
+            }
+        }, 1000);
     }
 }

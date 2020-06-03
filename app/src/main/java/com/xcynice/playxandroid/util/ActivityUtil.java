@@ -11,6 +11,9 @@ import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -60,6 +63,36 @@ public class ActivityUtil {
     public static void startActivity(Class classes, boolean isFinish) {
         Activity currentActivity = getCurrentActivity();
         Intent intent = new Intent(currentActivity, classes);
+        currentActivity.startActivity(intent);
+        if (isFinish) {
+            finishActivity(currentActivity);
+        }
+    }
+
+
+    /**
+     * 启动 activity， 带上参数
+     *
+     * @param classes 需要打开的 activity
+     * @param hashMap 需要传递的参数
+     */
+    public static void startActivity(Class classes, HashMap<String, String> hashMap) {
+        startActivity(classes, hashMap, false);
+    }
+
+    /**
+     * 启动 activity， 可以设置是否关闭当前 activity
+     *
+     * @param classes  需要打开的 activity
+     * @param hashMap  需要传递的参数
+     * @param isFinish 是否关闭当前 activity
+     */
+    public static void startActivity(Class classes, HashMap<String, String> hashMap, boolean isFinish) {
+        Activity currentActivity = getCurrentActivity();
+        Intent intent = new Intent(currentActivity, classes);
+        for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+            intent.putExtra(entry.getKey(), entry.getValue());
+        }
         currentActivity.startActivity(intent);
         if (isFinish) {
             finishActivity(currentActivity);

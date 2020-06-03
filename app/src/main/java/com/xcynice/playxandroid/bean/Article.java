@@ -3,14 +3,16 @@ package com.xcynice.playxandroid.bean;
 import java.util.List;
 
 /**
- * Description : Article
- *
- * @author XuCanyou666
- * @date 2020/2/8
+ * @Author 许朋友爱玩
+ * @Date 2020/6/2
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description Article
  */
 
 
-public class  Article {
+public class Article {
+
 
     /**
      * curPage : 2
@@ -75,6 +77,7 @@ public class  Article {
         public int superChapterId;
         public String superChapterName;
         public String title;
+        public String shareUser;
         public int type;
         public int visible;
         public int zan;

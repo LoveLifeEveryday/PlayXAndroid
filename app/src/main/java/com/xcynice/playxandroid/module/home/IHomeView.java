@@ -39,7 +39,7 @@ public interface IHomeView extends BaseView {
      *
      * @param list 文章集合
      */
-    void setArticle(BaseBean<List<Article>> list);
+    void setArticle(BaseBean<Article> list);
 
 
     /**

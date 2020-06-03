@@ -5,4 +5,12 @@
     <dimen name="titleTextSize">20sp</dimen>
     <dimen name="bannerHeight">200dp</dimen>
     <dimen name="ProgressBarHeight">5dp</dimen>
+    <dimen name="cardCornerRadius">5dp</dimen>
+    <dimen name="cardElevation">2dp</dimen>
+    <dimen name="contentPadding">15dp</dimen>
+    <dimen name="authorTextSize">12sp</dimen>
+    <dimen name="newMarginEnd">5dp</dimen>
+    <dimen name="titleArticleSize">15sp</dimen>
+    <dimen name="chapterTextSize">12sp</dimen>
+    <dimen name="iv_article_favorite">23dp</dimen>
 </resources>

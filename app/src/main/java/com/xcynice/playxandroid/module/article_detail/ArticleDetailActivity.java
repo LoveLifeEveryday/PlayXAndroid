@@ -1,7 +1,6 @@
 package com.xcynice.playxandroid.module.article_detail;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -13,7 +12,6 @@ import com.xcynice.playxandroid.base.BaseActivity;
 import com.xcynice.playxandroid.base.BasePresenter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @Author 许朋友爱玩
@@ -33,8 +31,6 @@ public class ArticleDetailActivity extends BaseActivity {
     WebView mWvArticleDetail;
     @BindView(R.id.ll_article_detail)
     LinearLayout mLlArticleDetail;
-    private String mUrl;
-    private String mTitle;
 
     public static final String WEB_URL = "com.xcynice.playxandroid.module.article_detail.web_url";
     public static final String WEB_TITLE = "com.xcynice.playxandroid.module.article_detail.web_title";
@@ -68,8 +64,8 @@ public class ArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mUrl = getIntent().getStringExtra(WEB_URL);
-        mTitle = getIntent().getStringExtra(WEB_TITLE);
+        String mUrl = getIntent().getStringExtra(WEB_URL);
+        String mTitle = getIntent().getStringExtra(WEB_TITLE);
         mWvArticleDetail.loadUrl(mUrl);
     }
 
@@ -79,10 +75,5 @@ public class ArticleDetailActivity extends BaseActivity {
         return null;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

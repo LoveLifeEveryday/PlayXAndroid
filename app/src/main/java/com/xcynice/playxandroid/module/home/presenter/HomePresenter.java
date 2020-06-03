@@ -43,10 +43,12 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 第一次获取首页文章数据
      */
     public void getArticleListByFirst() {
-        addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<List<Article>>>(baseView) {
+        addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
+
+
 
             @Override
-            public void onSuccess(BaseBean<List<Article>> list) {
+            public void onSuccess(BaseBean<Article> list) {
                 baseView.setArticle(list);
             }
 
