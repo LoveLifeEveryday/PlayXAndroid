@@ -75,5 +75,4 @@ public class ArticleDetailActivity extends BaseActivity {
         return null;
     }
 
-
 }
