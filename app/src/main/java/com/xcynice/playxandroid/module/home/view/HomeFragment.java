@@ -2,6 +2,7 @@ package com.xcynice.playxandroid.module.home.view;
 
 import android.view.View;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -44,6 +45,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     SwipeRefreshLayout mSrlHome;
     @BindView(R.id.rv_home)
     RecyclerView mRvHome;
+    @BindView(R.id.nsv_home)
+    NestedScrollView mNsvHome;
     private ArticleAdapter mArticleAdapter;
     private List<Banner> mBannerList = new ArrayList<>();
     private List<Article.DataDetailBean> mArticleList = new ArrayList<>();

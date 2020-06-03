@@ -15,7 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * @Date 2020/6/3 20:39
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description 下拉刷新控件，修复了滑动冲突
+ * 思路：
+ * 1. 因为下拉刷新，只有纵向滑动的时候才有效，只需要判断此时是纵向滑动还是横向滑动就可以了。
+ * 2. 纵向滑动就拦截事件，横向滑动不拦截。
+ * 3. 怎么判断是纵向滑动还是横向滑动，只要判断Y轴的移动距离大于X轴的移动距离那么就判定为纵向滑动就行了
  */
 
 public class SuperSwipeRefreshLayout extends SwipeRefreshLayout {
@@ -45,7 +49,7 @@ public class SuperSwipeRefreshLayout extends SwipeRefreshLayout {
             case MotionEvent.ACTION_DOWN:
                 startX = ev.getX();
                 startY = ev.getY();
-                //初始化标记
+                // 初始化标记
                 mIsVpDragger = false;
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -69,7 +73,7 @@ public class SuperSwipeRefreshLayout extends SwipeRefreshLayout {
             default:
                 break;
         }
-        // 如果是Y轴位移大于X轴，事件交给 swipeRefreshLayout 处理
+        // 如果是 Y 轴位移大于 X 轴，事件交给 swipeRefreshLayout 处理
         return super.onInterceptTouchEvent(ev);
     }
 }
