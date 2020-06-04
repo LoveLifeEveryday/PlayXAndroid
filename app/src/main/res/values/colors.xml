@@ -23,4 +23,5 @@
     <color name="corner">#2196F3</color>
     <color name="box_line">#64B5FA</color>
     <color name="mask_color">#9C272626</color>
+    <color name="tab_color">#a6c5fb</color>
 </resources>

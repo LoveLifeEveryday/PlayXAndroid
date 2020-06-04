@@ -1,66 +1,63 @@
 package com.xcynice.playxandroid.module.tree;
 
-import android.os.Bundle;
+import androidx.viewpager.widget.ViewPager;
 
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.google.android.material.tabs.TabLayout;
 import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.adapter.CommonViewPagerAdapter;
+import com.xcynice.playxandroid.base.BaseFragment;
+import com.xcynice.playxandroid.base.BasePresenter;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link TreeFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @Author 许朋友爱玩
+ * @Date 2020/6/4
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description TreeFragment
  */
-public class TreeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+@SuppressWarnings("rawtypes")
+public class TreeFragment extends BaseFragment {
 
-    public TreeFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TreeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TreeFragment newInstance(String param1, String param2) {
-        TreeFragment fragment = new TreeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @BindView(R.id.tl_tree)
+    TabLayout mTlTree;
+    @BindView(R.id.vp_tree)
+    ViewPager mVpTree;
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    protected int getLayoutId() {
+        return R.layout.fragment_tree;
+    }
+
+    @Override
+    protected void initView() {
+        mTlTree.setupWithViewPager(mVpTree);
+    }
+
+    @Override
+    protected void initData() {
+        ArrayList<String> titleList = new ArrayList<>();
+        titleList.add(getResources().getString(R.string.system));
+        titleList.add(getResources().getString(R.string.navigation));
+        CommonViewPagerAdapter commonViewPagerAdapter = new CommonViewPagerAdapter(getFragmentManager(), titleList);
+        for (int i = 0; i < titleList.size(); i++) {
+            // TODO: 2020/6/4 这里要用单例新建  TreeChildFragment ，以达到效果
+            commonViewPagerAdapter.addFragment(new TreeChildFragment());
         }
+        mVpTree.setAdapter(commonViewPagerAdapter);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tree, container, false);
-    }
+
 }

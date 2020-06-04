@@ -8,5 +8,8 @@
     </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
+    <!-- TabLayout字体大小 -->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/font_16</item>
+    </style>
 </resources>

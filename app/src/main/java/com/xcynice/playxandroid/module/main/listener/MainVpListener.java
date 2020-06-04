@@ -54,7 +54,7 @@ public class MainVpListener implements ViewPager.OnPageChangeListener {
                 setImageInVisible(mIvLeft, mIvRight);
                 break;
             case 2:
-                mRlTitle.setVisibility(View.INVISIBLE);
+                mRlTitle.setVisibility(View.GONE);
                 break;
             case 3:
                 mRlTitle.setVisibility(View.VISIBLE);
