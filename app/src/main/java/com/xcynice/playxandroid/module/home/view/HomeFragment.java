@@ -20,6 +20,7 @@ import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.home.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.LogUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
@@ -156,9 +157,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mArticleAdapter.addHeaderView(mBannerHome);
         mRvHome.setAdapter(mArticleAdapter);
 
-        //开启加载动画
+        // 开启加载动画
         mArticleAdapter.openLoadAnimation();
-
+        // 设置点击事件
         mArticleAdapter.setOnItemClickListener(this);
         mArticleAdapter.setOnItemChildClickListener(this);
         mArticleAdapter.setOnLoadMoreListener(this, mRvHome);
@@ -173,8 +174,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setArticleDataByMore(BaseBean<Article> list) {
         mCurrentCounter = list.data.datas.size();
-        mArticleList.addAll(list.data.datas);
-        mArticleAdapter.addData(mArticleList);
+       // mArticleList.addAll(list.data.datas);
+        mArticleAdapter.addData(list.data.datas);
         mArticleAdapter.loadMoreComplete();
     }
 
