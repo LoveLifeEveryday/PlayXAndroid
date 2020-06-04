@@ -43,28 +43,30 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 第一次获取首页文章数据
      */
     public void getArticleListByFirst() {
-        addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
-
-            @Override
-            public void onSuccess(BaseBean<Article> list) {
-                baseView.setArticleByFirst(list);
-            }
-
-            @Override
-            public void onError(String msg) {
-                baseView.setArticleError(msg);
-            }
-        });
+        getArticleListByFirstOrRefresh(true);
     }
 
-
+    /**
+     * 通过刷新获取首页文章
+     */
     public void getArticleListByRefresh() {
+        getArticleListByFirstOrRefresh(false);
+    }
+
+    /**
+     * 获得 article 列表（封装首次获取和刷新获取重复的代码）
+     *
+     * @param isFirst true 表示首次获取，false 表示通过刷新获取
+     */
+    public void getArticleListByFirstOrRefresh(boolean isFirst) {
         addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
-
-
             @Override
             public void onSuccess(BaseBean<Article> list) {
-                baseView.setArticleByRefresh(list);
+                if (isFirst) {
+                    baseView.setArticleByFirst(list);
+                } else {
+                    baseView.setArticleByRefresh(list);
+                }
             }
 
             @Override

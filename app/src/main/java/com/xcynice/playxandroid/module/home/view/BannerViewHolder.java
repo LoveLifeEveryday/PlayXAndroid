@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.bean.Banner;
-import com.xcynice.playxandroid.util.LogUtil;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 /**
