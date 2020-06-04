@@ -20,7 +20,6 @@ import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.home.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
 import com.xcynice.playxandroid.util.ActivityUtil;
-import com.xcynice.playxandroid.util.LogUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
@@ -114,6 +113,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //开始刷新
             mSrlHome.setRefreshing(true);
             presenter.getBanner();
+            presenter.getArticleListByRefresh();
         });
         initBannerClick();
     }
@@ -150,7 +150,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     @Override
-    public void setArticle(BaseBean<Article> list) {
+    public void setArticleByFirst(BaseBean<Article> list) {
         mArticleList = list.data.datas;
         mCurrentCounter = mArticleList.size();
         mArticleAdapter = new ArticleAdapter(R.layout.item_article_list, mArticleList);
@@ -165,6 +165,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mArticleAdapter.setOnLoadMoreListener(this, mRvHome);
     }
 
+    @Override
+    public void setArticleByRefresh(BaseBean<Article> list) {
+        mArticleList = list.data.datas;
+        mCurrentCounter = mArticleList.size();
+        mArticleAdapter.setNewData(mArticleList);
+        page = 0;
+    }
+
 
     @Override
     public void setArticleError(String errorMsg) {
@@ -174,7 +182,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setArticleDataByMore(BaseBean<Article> list) {
         mCurrentCounter = list.data.datas.size();
-       // mArticleList.addAll(list.data.datas);
         mArticleAdapter.addData(list.data.datas);
         mArticleAdapter.loadMoreComplete();
     }

@@ -35,11 +35,18 @@ public interface IHomeView extends BaseView {
 
 
     /**
-     * 设置文章数据
+     * 第一次设置文章数据
      *
      * @param list 文章集合
      */
-    void setArticle(BaseBean<Article> list);
+    void setArticleByFirst(BaseBean<Article> list);
+
+
+    /**
+     * 通过刷新设置文章数据
+     * @param list 文章集合
+     */
+    void setArticleByRefresh(BaseBean<Article> list);
 
 
     /**

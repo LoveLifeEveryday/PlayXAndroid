@@ -45,11 +45,26 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     public void getArticleListByFirst() {
         addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
 
+            @Override
+            public void onSuccess(BaseBean<Article> list) {
+                baseView.setArticleByFirst(list);
+            }
+
+            @Override
+            public void onError(String msg) {
+                baseView.setArticleError(msg);
+            }
+        });
+    }
+
+
+    public void getArticleListByRefresh() {
+        addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
 
 
             @Override
             public void onSuccess(BaseBean<Article> list) {
-                baseView.setArticle(list);
+                baseView.setArticleByRefresh(list);
             }
 
             @Override
