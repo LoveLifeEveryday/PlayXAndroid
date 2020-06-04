@@ -33,7 +33,6 @@ public class BannerViewHolder implements MZViewHolder<Banner> {
 
     @Override
     public void onBind(Context context, int position, Banner data) {
-        LogUtil.e("current position:" + position);
         Glide.with(context).load(data.getImagePath()).into(mImageView);
     }
 }

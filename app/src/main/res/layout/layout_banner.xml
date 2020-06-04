@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhouwei.mzbanner.MZBannerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/banner_home"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bannerHeight"
+    android:paddingTop="5dp"
+    app:canLoop="true"
+    app:indicatorAlign="center"
+    app:open_mz_mode="true" />

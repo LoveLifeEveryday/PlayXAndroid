@@ -1,11 +1,13 @@
 package com.xcynice.playxandroid.module.home.view;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.core.widget.NestedScrollView;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xcynice.playxandroid.R;
@@ -38,15 +40,15 @@ import butterknife.BindView;
  */
 public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-    @SuppressWarnings("rawtypes")
-    @BindView(R.id.banner_home)
-    MZBannerView mBannerHome;
-    @BindView(R.id.srl_home)
-    SwipeRefreshLayout mSrlHome;
+
     @BindView(R.id.rv_home)
     RecyclerView mRvHome;
-    @BindView(R.id.nsv_home)
-    NestedScrollView mNsvHome;
+
+    @BindView(R.id.srl_home)
+    SuperSwipeRefreshLayout mSrlHome;
+
+    @SuppressWarnings("rawtypes")
+    private MZBannerView mBannerHome;
     private ArticleAdapter mArticleAdapter;
     private List<Banner> mBannerList = new ArrayList<>();
     private List<Article.DataDetailBean> mArticleList = new ArrayList<>();
@@ -85,6 +87,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     protected void initView() {
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
         mRvHome.setLayoutManager(new LinearLayoutManager(mContext));
+        mRvHome.setNestedScrollingEnabled(false);
+    }
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View mViewBanner = inflater.inflate(R.layout.layout_banner, container, false);
+        mBannerHome = mViewBanner.findViewById(R.id.banner_home);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -95,8 +107,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initData() {
-        presenter.getBanner();
         presenter.getArticleListByFirst();
+        presenter.getBanner();
         mSrlHome.setOnRefreshListener(() -> {
             //开始刷新
             mSrlHome.setRefreshing(true);
@@ -141,6 +153,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mArticleList = list.data.datas;
         mCurrentCounter = mArticleList.size();
         mArticleAdapter = new ArticleAdapter(R.layout.item_article_list, mArticleList);
+        mArticleAdapter.addHeaderView(mBannerHome);
         mRvHome.setAdapter(mArticleAdapter);
 
         //开启加载动画
