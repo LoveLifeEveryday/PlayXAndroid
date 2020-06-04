@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     /**
      * 记录分页，方便进行加载更多
      */
-    private int page = 0;
+    private int mPage = 0;
 
     /**
      * 记录点击事件的位置，方便后面进行收藏
@@ -87,7 +87,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     protected void initView() {
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
         mRvHome.setLayoutManager(new LinearLayoutManager(mContext));
-        mRvHome.setNestedScrollingEnabled(false);
     }
 
 
@@ -152,7 +151,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setArticleByFirst(BaseBean<Article> list) {
         mArticleList = list.data.datas;
-        mCurrentCounter = mArticleList.size();
+        mCurrentCounter = list.data.datas.size();
         mArticleAdapter = new ArticleAdapter(R.layout.item_article_list, mArticleList);
         mArticleAdapter.addHeaderView(mBannerHome);
         mRvHome.setAdapter(mArticleAdapter);
@@ -168,9 +167,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setArticleByRefresh(BaseBean<Article> list) {
         mArticleList = list.data.datas;
-        mCurrentCounter = mArticleList.size();
+        mCurrentCounter = list.data.datas.size();
         mArticleAdapter.setNewData(mArticleList);
-        page = 0;
+        mPage = 0;
     }
 
 
@@ -256,7 +255,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 //数据加载完毕，没有更多的数据
                 mArticleAdapter.loadMoreEnd();
             } else {
-                presenter.getArticleListByMore(++page);
+                presenter.getArticleListByMore(++mPage);
             }
         }, 1000);
     }

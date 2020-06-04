@@ -1,5 +1,6 @@
 package com.xcynice.playxandroid.adapter;
 
+import android.os.Build;
 import android.text.Html;
 import android.text.TextUtils;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.bean.Article;
+import com.xcynice.playxandroid.util.StringUtil;
 
 import java.util.List;
 
@@ -50,22 +52,47 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
             helper.setText(R.id.tv_article_author, item.author);
         }
         helper.setText(R.id.tv_article_time, item.niceDate);
-        helper.setText(R.id.tv_article_title, Html.fromHtml(item.title));
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            String desc = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString();
+            desc = StringUtil.removeAllBank(desc, 2);
+            helper.setText(R.id.tv_article_title, desc);
+        } else {
+            //noinspection AliDeprecation
+            String desc = Html.fromHtml(item.title).toString();
+            desc = StringUtil.removeAllBank(desc, 2);
+            helper.setText(R.id.tv_article_title, desc);
+        }
 
+        if (TextUtils.isEmpty(item.desc)) {
+            helper.setGone(R.id.tv_article_content, false);
+        } else {
+            helper.setGone(R.id.tv_article_content, true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                String desc = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString();
+                desc = StringUtil.removeAllBank(desc, 2);
+                helper.setText(R.id.tv_article_content, desc);
+            } else {
+                //noinspection AliDeprecation
+                String desc = Html.fromHtml(item.title).toString();
+                desc = StringUtil.removeAllBank(desc, 2);
+                helper.setText(R.id.tv_article_content, desc);
+            }
+        }
         helper.setText(R.id.tv_article_chapter_name, item.superChapterName + "·" + item.chapterName);
 
 
         //设置收藏的点击事件
         helper.addOnClickListener(R.id.iv_article_favorite);
         //先判断类型是不是收藏列表，因为收藏列表不返回item.collect字段，所以没法判断
-        if (mTypeIsCollect)
+        if (mTypeIsCollect) {
             Glide.with(mContext).load(R.drawable.ic_like_checked).into((ImageView) helper.getView(R.id.iv_article_favorite));
-        else {
-            if (item.collect)
+        } else {
+            if (item.collect) {
                 Glide.with(mContext).load(R.drawable.ic_like_checked).into((ImageView) helper.getView(R.id.iv_article_favorite));
-            else
+            } else {
                 Glide.with(mContext).load(R.drawable.ic_like_normal).into((ImageView) helper.getView(R.id.iv_article_favorite));
+            }
         }
 
     }

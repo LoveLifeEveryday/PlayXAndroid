@@ -55,6 +55,12 @@ public class API {
         Observable<BaseBean<User>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
 
+        //-----------------------【  问答  】----------------------
+
+        @GET("wenda/list/{page}/json")
+        Observable<BaseBean<Article>> getAskAndQuestionList(@Path("page") Integer page);
+
+
         //-----------------------【  收藏  】----------------------
 
         //收藏站内文章
