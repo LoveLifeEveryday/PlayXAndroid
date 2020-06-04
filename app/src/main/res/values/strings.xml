@@ -12,7 +12,10 @@
     <string name="author">作者</string>
     <string name="articleTitle">标题</string>
     <string name="article_chapter_name">广场tab</string>
+    <string name="my_qr">我的扫一扫</string>
+    <string name="scan_qr_code">扫描二维码</string>
+    <string name="open_flash">打开闪光灯</string>
+    <string name="close_flash">关闭闪光灯</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
