@@ -62,12 +62,16 @@ public class TreeFragment extends BaseFragment implements SimpleImmersionOwner {
         titleList.add(getResources().getString(R.string.navigation));
         CommonViewPagerAdapter commonViewPagerAdapter = new CommonViewPagerAdapter(getFragmentManager(), titleList);
         for (int i = 0; i < titleList.size(); i++) {
-            // TODO: 2020/6/4 这里要用单例新建  TreeChildFragment ，以达到效果
-            commonViewPagerAdapter.addFragment(new TreeChildFragment());
+            if (titleList.get(i).equals(getResources().getString(R.string.system))) {
+                commonViewPagerAdapter.addFragment(TreeChildFragment.newInstance(true));
+            } else {
+                commonViewPagerAdapter.addFragment(TreeChildFragment.newInstance(false));
+            }
         }
         mVpTree.setAdapter(commonViewPagerAdapter);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

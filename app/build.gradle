@@ -49,7 +49,7 @@ dependencies {
 
     /*glide*/
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     /*butterknife*/
     implementation 'com.jakewharton:butterknife:10.2.0'
@@ -67,4 +67,7 @@ dependencies {
 
     /*二维码*/
     implementation 'me.devilsen:czxing:1.0.12'
+
+    /*FlowLayout*/
+    implementation 'com.google.android:flexbox:2.0.1'
 }

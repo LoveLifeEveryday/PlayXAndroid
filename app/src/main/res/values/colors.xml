@@ -24,4 +24,8 @@
     <color name="box_line">#64B5FA</color>
     <color name="mask_color">#9C272626</color>
     <color name="tab_color">#a6c5fb</color>
+    <color name="ripple_dark">#11000000</color>
+    <color name="foreground_top">#f5f5f5</color>
+    <color name="text_surface">#333333</color>
+
 </resources>
