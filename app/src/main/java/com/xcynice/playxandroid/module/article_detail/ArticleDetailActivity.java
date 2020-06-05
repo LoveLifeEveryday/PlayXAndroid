@@ -3,6 +3,7 @@ package com.xcynice.playxandroid.module.article_detail;
 import android.annotation.SuppressLint;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -10,6 +11,8 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseActivity;
 import com.xcynice.playxandroid.base.BasePresenter;
+import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.LogUtil;
 
 import butterknife.BindView;
 
@@ -58,15 +61,21 @@ public class ArticleDetailActivity extends BaseActivity {
         //自适应屏幕
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         webSettings.setLoadWithOverviewMode(true);
-
+        //是否使用缓存
+        webSettings.setAppCacheEnabled(true);
+        //DOM Storage
+        webSettings.setDomStorageEnabled(true);
         mWvArticleDetail.setWebChromeClient(new ArticleWebChromeClient(mPbArticleDetail));
+        mWvArticleDetail.setWebViewClient(new WebViewClient());
     }
 
     @Override
     protected void initData() {
         String mUrl = getIntent().getStringExtra(WEB_URL);
+        LogUtil.i(mUrl);
         String mTitle = getIntent().getStringExtra(WEB_TITLE);
         mWvArticleDetail.loadUrl(mUrl);
+        
     }
 
     @SuppressWarnings("rawtypes")

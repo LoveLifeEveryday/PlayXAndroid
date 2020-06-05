@@ -13,7 +13,7 @@ import java.util.List;
  * @Date 2020/6/5 09:55
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description 体系主页面的接口
  */
 
 public interface ITreeChildView extends BaseView {

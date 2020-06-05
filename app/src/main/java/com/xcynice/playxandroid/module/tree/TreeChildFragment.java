@@ -12,8 +12,11 @@ import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
+import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
+import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,8 +38,6 @@ public class TreeChildFragment extends BaseFragment<TreeChildPresenter> implemen
     RecyclerView mRvTreeChild;
     private TreeChildAdapter mTreeChildAdapter;
     private NavigationAdapter mNavigationAdapter;
-    private List<Tree> mTreeList;
-    private List<Navigation> mNavigationList;
 
     private boolean mIsTree;
 
@@ -67,7 +68,9 @@ public class TreeChildFragment extends BaseFragment<TreeChildPresenter> implemen
 
     @Override
     protected void initView() {
-        mIsTree = getArguments().getBoolean(IS_TREE);
+        if (getArguments() != null) {
+            mIsTree = getArguments().getBoolean(IS_TREE);
+        }
         mRvTreeChild.setLayoutManager(new LinearLayoutManager(mContext));
         if (mIsTree) {
             mTreeChildAdapter = new TreeChildAdapter(R.layout.item_tree_list);
@@ -93,7 +96,7 @@ public class TreeChildFragment extends BaseFragment<TreeChildPresenter> implemen
 
     @Override
     public void setTreeData(BaseBean<List<Tree>> treeList) {
-        mTreeList = treeList.data;
+        List<Tree> mTreeList = treeList.data;
         mTreeChildAdapter.setNewData(mTreeList);
         mTreeChildAdapter.setOnItemClickListener((bean, pos) -> {
             // TODO: 2020/6/5 这里的点击事件，等跳转的界面写好再说
@@ -107,10 +110,13 @@ public class TreeChildFragment extends BaseFragment<TreeChildPresenter> implemen
 
     @Override
     public void setNavigationData(BaseBean<List<Navigation>> navigationList) {
-        mNavigationList = navigationList.data;
+        List<Navigation> mNavigationList = navigationList.data;
         mNavigationAdapter.setNewData(mNavigationList);
         mNavigationAdapter.setOnItemClickListener((navigation, pos) -> {
-            // TODO: 2020/6/5 这里的点击事件，等跳转的界面写好再说
+            HashMap<String, String> hashMap = new HashMap<>(2);
+            hashMap.put(ArticleDetailActivity.WEB_URL, navigation.getArticles().get(pos).getLink());
+            hashMap.put(ArticleDetailActivity.WEB_TITLE, navigation.getArticles().get(pos).getTitle());
+            ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
         });
     }
 
