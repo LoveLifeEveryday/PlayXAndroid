@@ -6,6 +6,7 @@ import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
+import com.xcynice.playxandroid.bean.TreeChild;
 import com.xcynice.playxandroid.bean.User;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Description : API
@@ -87,6 +89,18 @@ public class API {
          */
         @GET("tree/json")
         Observable<BaseBean<List<Tree>>> getTreeList();
+
+
+        /**
+         * 得到知识体系下的文章
+         *
+         * @param page 页数
+         * @param cid  分类的 id
+         * @return 知识体系文章
+         */
+        @GET("article/list/{page}/json?")
+        Observable<BaseBean<TreeChild>> getTreeChildList(@Path("page") Integer page, @Query("cid") Integer cid);
+
 
         //-----------------------【  导航  】----------------------
 

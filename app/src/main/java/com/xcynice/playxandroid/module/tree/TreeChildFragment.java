@@ -1,5 +1,6 @@
 package com.xcynice.playxandroid.module.tree;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -99,7 +100,11 @@ public class TreeChildFragment extends BaseFragment<TreeChildPresenter> implemen
         List<Tree> mTreeList = treeList.data;
         mTreeChildAdapter.setNewData(mTreeList);
         mTreeChildAdapter.setOnItemClickListener((bean, pos) -> {
-            // TODO: 2020/6/5 这里的点击事件，等跳转的界面写好再说
+            Intent intent = new Intent(mContext, TreeGrandsonActivity.class);
+            intent.putExtra(TreeGrandsonActivity.CID, bean);
+            intent.putExtra(TreeGrandsonActivity.TITLE, mTreeList.get(pos).getName());
+            intent.putExtra(TreeGrandsonActivity.POS, pos);
+            startActivity(intent);
         });
     }
 

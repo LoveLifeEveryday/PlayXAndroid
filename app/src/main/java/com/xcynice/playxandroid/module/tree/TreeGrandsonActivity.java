@@ -1,12 +1,25 @@
 package com.xcynice.playxandroid.module.tree;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.MenuItem;
+import android.view.View;
 
-import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.adapter.CommonViewPagerAdapter;
 import com.xcynice.playxandroid.base.BaseActivity;
 import com.xcynice.playxandroid.base.BasePresenter;
+import com.xcynice.playxandroid.bean.Tree;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * @Author 许朋友爱玩
@@ -17,11 +30,18 @@ import com.xcynice.playxandroid.base.BasePresenter;
  */
 
 
+@SuppressWarnings("rawtypes")
 public class TreeGrandsonActivity extends BaseActivity {
 
     public static final String CID = "com/xcynice/playxandroid/module/tree/TreeGrandsonActivity.java/CID";
     public static final String TITLE = "com/xcynice/playxandroid/module/tree/TreeGrandsonActivity.java/TITLE";
     public static final String POS = "com/xcynice/playxandroid/module/tree/TreeGrandsonActivity.java/POS";
+    @BindView(R.id.tb_tree_grandson)
+    Toolbar mTbTreeGrandson;
+    @BindView(R.id.tl_tree_grandson)
+    TabLayout mTlTreeGrandson;
+    @BindView(R.id.viewpager)
+    ViewPager mVpTreeGrandson;
 
     @Override
     protected int getLayoutId() {
@@ -30,17 +50,43 @@ public class TreeGrandsonActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this).titleBar(mTbTreeGrandson).init();
+        setSupportActionBar(mTbTreeGrandson);
+        if (null != getSupportActionBar()) {
+            String title = getIntent().getStringExtra(TITLE);
+            if (!TextUtils.isEmpty(title)) {
+                getSupportActionBar().setTitle(title);
 
+            }
+            mTbTreeGrandson.setNavigationOnClickListener(view -> finish());
+
+            mTbTreeGrandson.setNavigationIcon(R.drawable.back);
+        }
+        mTlTreeGrandson.setupWithViewPager(mVpTreeGrandson);
     }
 
     @Override
     protected void initData() {
-
+        Tree tree = (Tree) getIntent().getSerializableExtra(CID);
+        int pos = getIntent().getIntExtra(POS, 0);
+        List<String> titles = new ArrayList<>();
+        if (tree != null) {
+            for (int i = 0; i < tree.getChildren().size(); i++) {
+                titles.add(tree.getChildren().get(i).getName());
+            }
+        }
+        CommonViewPagerAdapter commonViewPagerAdapter = new CommonViewPagerAdapter(getSupportFragmentManager(), titles);
+        for (int i = 0; i < titles.size(); i++) {
+            commonViewPagerAdapter.addFragment(TreeGrandsonFragment.newInstance(tree.getChildren().get(i).getId()));
+        }
+        mVpTreeGrandson.setAdapter(commonViewPagerAdapter);
+        mVpTreeGrandson.setCurrentItem(pos);
     }
 
     @Override
     protected BasePresenter createPresenter() {
         return null;
     }
+
 
 }

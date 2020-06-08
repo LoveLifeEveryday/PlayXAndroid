@@ -1,6 +1,7 @@
 package com.xcynice.playxandroid.bean;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @Description 体系
  */
 
-public class Tree {
+public class Tree implements Serializable {
 
 
     /**
@@ -98,7 +99,7 @@ public class Tree {
         this.children = children;
     }
 
-    public static class ChildrenBean {
+    public static class ChildrenBean implements Serializable {
         /**
          * children : []
          * courseId : 13

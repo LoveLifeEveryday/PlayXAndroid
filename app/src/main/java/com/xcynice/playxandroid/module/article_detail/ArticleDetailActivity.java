@@ -75,7 +75,7 @@ public class ArticleDetailActivity extends BaseActivity {
         LogUtil.i(mUrl);
         String mTitle = getIntent().getStringExtra(WEB_TITLE);
         mWvArticleDetail.loadUrl(mUrl);
-        
+
     }
 
     @SuppressWarnings("rawtypes")

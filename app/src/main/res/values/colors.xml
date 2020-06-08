@@ -27,5 +27,6 @@
     <color name="ripple_dark">#11000000</color>
     <color name="foreground_top">#f5f5f5</color>
     <color name="text_surface">#333333</color>
+    <color name="tab_text">#a4c7ff</color>
 
 </resources>

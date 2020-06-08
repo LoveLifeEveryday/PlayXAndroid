@@ -40,7 +40,6 @@ import butterknife.BindView;
  */
 public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-
     @BindView(R.id.rv_home)
     RecyclerView mRvHome;
 
