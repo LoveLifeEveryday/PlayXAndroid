@@ -54,14 +54,14 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         helper.setText(R.id.tv_article_time, item.niceDate);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            String desc = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString();
-            desc = StringUtil.removeAllBank(desc, 2);
-            helper.setText(R.id.tv_article_title, desc);
+            String title = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString();
+            title = StringUtil.removeAllBank(title, 2);
+            helper.setText(R.id.tv_article_title, title);
         } else {
             //noinspection AliDeprecation
-            String desc = Html.fromHtml(item.title).toString();
-            desc = StringUtil.removeAllBank(desc, 2);
-            helper.setText(R.id.tv_article_title, desc);
+            String title = Html.fromHtml(item.title).toString();
+            title = StringUtil.removeAllBank(title, 2);
+            helper.setText(R.id.tv_article_title, title);
         }
 
         if (TextUtils.isEmpty(item.desc)) {
@@ -69,12 +69,12 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         } else {
             helper.setGone(R.id.tv_article_content, true);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                String desc = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString();
+                String desc = Html.fromHtml(item.desc, Html.FROM_HTML_MODE_LEGACY).toString();
                 desc = StringUtil.removeAllBank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             } else {
                 //noinspection AliDeprecation
-                String desc = Html.fromHtml(item.title).toString();
+                String desc = Html.fromHtml(item.desc).toString();
                 desc = StringUtil.removeAllBank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             }
