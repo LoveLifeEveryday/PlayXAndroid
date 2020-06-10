@@ -9,6 +9,7 @@ import java.util.List;
  * Created by yechao on 2018/5/2.
  * Describe :
  */
+@SuppressWarnings("all")
 public class User {
 
     /**

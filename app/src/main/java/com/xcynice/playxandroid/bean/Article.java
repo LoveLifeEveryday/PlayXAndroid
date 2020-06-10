@@ -10,7 +10,7 @@ import java.util.List;
  * @Description Article
  */
 
-
+@SuppressWarnings("all")
 public class Article {
 
 

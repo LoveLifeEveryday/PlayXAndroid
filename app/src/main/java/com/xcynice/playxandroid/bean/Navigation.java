@@ -10,7 +10,7 @@ import java.util.List;
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
  * @Description TODO
  */
-
+@SuppressWarnings("all")
 public class Navigation {
 
     /**
