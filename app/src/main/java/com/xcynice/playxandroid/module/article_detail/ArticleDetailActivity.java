@@ -11,7 +11,6 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseActivity;
 import com.xcynice.playxandroid.base.BasePresenter;
-import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.LogUtil;
 
 import butterknife.BindView;

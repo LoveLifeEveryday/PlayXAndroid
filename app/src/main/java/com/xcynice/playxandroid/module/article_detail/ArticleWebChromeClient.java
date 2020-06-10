@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
  * @Date 2020/6/2 11:19
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description ArticleWebChromeClient
+ * @Description ArticleWebChromeClient 设置加载进度条
  */
 
 public class ArticleWebChromeClient extends WebChromeClient {
