@@ -43,16 +43,12 @@ public class ToastUtil {
         if ("main".equals(Thread.currentThread().getName())) {
             createCenterToast(msg);
         } else {
-            ActivityUtil.getCurrentActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ToastUtil.createCenterToast(msg);
-                }
-            });
+            ActivityUtil.getCurrentActivity().runOnUiThread(() -> ToastUtil.createCenterToast(msg));
         }
 
     }
 
+    @SuppressLint("ShowToast")
     private static void createCenterToast(String msg) {
         if (toast == null) {
             toast = Toast.makeText(XUtil.getApplication(), msg, Toast.LENGTH_SHORT);

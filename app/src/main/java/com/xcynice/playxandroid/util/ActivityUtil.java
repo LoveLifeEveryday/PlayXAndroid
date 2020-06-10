@@ -11,8 +11,9 @@ import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -26,13 +27,13 @@ import java.util.Stack;
 @TargetApi(14)
 public class ActivityUtil {
     private static Stack<Activity> activityStack = new Stack<>();
-    private static final ActivityUtil.MyActivityLifecycleCallbacks instance = new ActivityUtil.MyActivityLifecycleCallbacks();
+    private static final ActivityUtil.MyActivityLifecycleCallbacks INSTANCE = new ActivityUtil.MyActivityLifecycleCallbacks();
 
     public ActivityUtil() {
     }
 
     public static ActivityLifecycleCallbacks getActivityLifecycleCallbacks() {
-        return instance;
+        return INSTANCE;
     }
 
     public static void finishActivity(Activity activity) {
@@ -47,7 +48,7 @@ public class ActivityUtil {
     /**
      * 不用 finish 当前 Activity 时直接调用此方法
      *
-     * @param classes
+     * @param classes 需要跳转到的 activity
      */
     public static void startActivity(Class classes) {
         startActivity(classes, false);
@@ -76,7 +77,7 @@ public class ActivityUtil {
      * @param classes 需要打开的 activity
      * @param hashMap 需要传递的参数
      */
-    public static void startActivity(Class classes, HashMap<String, String> hashMap) {
+    public static void startActivity(@SuppressWarnings("rawtypes") Class classes, HashMap<String, String> hashMap) {
         startActivity(classes, hashMap, false);
     }
 
@@ -87,7 +88,7 @@ public class ActivityUtil {
      * @param hashMap  需要传递的参数
      * @param isFinish 是否关闭当前 activity
      */
-    public static void startActivity(Class classes, HashMap<String, String> hashMap, boolean isFinish) {
+    public static void startActivity(@SuppressWarnings("rawtypes") Class classes, HashMap<String, String> hashMap, boolean isFinish) {
         Activity currentActivity = getCurrentActivity();
         Intent intent = new Intent(currentActivity, classes);
         for (Map.Entry<String, String> entry : hashMap.entrySet()) {
@@ -132,33 +133,33 @@ public class ActivityUtil {
         }
 
         @Override
-        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
             ActivityUtil.activityStack.remove(activity);
             ActivityUtil.activityStack.push(activity);
         }
 
         @Override
-        public void onActivityStarted(Activity activity) {
+        public void onActivityStarted(@NonNull Activity activity) {
         }
 
         @Override
-        public void onActivityResumed(Activity activity) {
+        public void onActivityResumed(@NonNull Activity activity) {
         }
 
         @Override
-        public void onActivityPaused(Activity activity) {
+        public void onActivityPaused(@NonNull Activity activity) {
         }
 
         @Override
-        public void onActivityStopped(Activity activity) {
+        public void onActivityStopped(@NonNull Activity activity) {
         }
 
         @Override
-        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
         }
 
         @Override
-        public void onActivityDestroyed(Activity activity) {
+        public void onActivityDestroyed(@NonNull Activity activity) {
             ActivityUtil.activityStack.remove(activity);
         }
     }

@@ -1,6 +1,7 @@
 package com.xcynice.playxandroid.util;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -14,10 +15,11 @@ import android.widget.ProgressBar;
  * @Date 2020/4/27 09:26
  * email：913710642@qq.com
  */
+@SuppressWarnings("AlibabaClassNamingShouldBeCamel")
 public class XUtil {
     private static Application mApplicationContext;
-    @SuppressWarnings("AliDeprecation")
     private static ProgressDialog progressDialog;
+    @SuppressLint("StaticFieldLeak")
     private static ProgressBar progressBar;
 
     public static void initialize(Application app) {

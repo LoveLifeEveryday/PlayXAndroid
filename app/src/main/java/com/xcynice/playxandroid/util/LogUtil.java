@@ -1,18 +1,21 @@
 package com.xcynice.playxandroid.util;
 
 
-/**
- * @Author xucanyou666
- * @Date 2020/4/27 09:28
- * email：913710642@qq.com
- */
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 
 import android.util.Log;
+
+
+
+/**
+ * @Author 许朋友爱玩
+ * @Date   2020/6/10
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ *
+ * @Description LogUtil
+ */
+
 
 public class LogUtil {
     private static String TAG = "LogUtil";
@@ -136,7 +139,7 @@ public class LogUtil {
 
     }
 
-    public static void e(String TAG, String msg) {
+    public static void e(String tag, String msg) {
         if (IS_LOG) {
             String[] info = getAutoJumpLogInfos();
             int strLength = msg.length();
@@ -145,11 +148,11 @@ public class LogUtil {
 
             for (int i = 0; i < 100; ++i) {
                 if (strLength <= end) {
-                    Log.e(TAG, info[1] + info[2] + " --->> " + msg.substring(start, strLength));
+                    Log.e(tag, info[1] + info[2] + " --->> " + msg.substring(start, strLength));
                     break;
                 }
 
-                Log.e(TAG, info[1] + info[2] + " --->> " + msg.substring(start, end));
+                Log.e(tag, info[1] + info[2] + " --->> " + msg.substring(start, end));
                 start = end;
                 end += MAX_LENGTH;
             }
