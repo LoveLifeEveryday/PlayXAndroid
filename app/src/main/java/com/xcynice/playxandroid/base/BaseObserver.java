@@ -20,6 +20,7 @@ import retrofit2.HttpException;
  */
 
 
+@SuppressWarnings("rawtypes")
 public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     protected BaseView view;
@@ -51,6 +52,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     public void onNext(T o) {
         onSuccess(o);
     }
+
 
     @Override
     public void onError(Throwable e) {
@@ -101,9 +103,16 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
         }
     }
 
-
+    /**
+     * 完成
+     * @param o 对象
+     */
     public abstract void onSuccess(T o);
 
+    /**
+     * 失败
+     * @param msg 失败信息
+     */
     public abstract void onError(String msg);
 
 }

@@ -19,16 +19,33 @@ import butterknife.ButterKnife;
  * @date 2020/2/7
  */
 
+@SuppressWarnings("rawtypes")
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements BaseView {
 
     protected P presenter;
 
+    /**
+     * 创建 presenter
+     *
+     * @return presenter
+     */
     protected abstract P createPresenter();
 
+    /**
+     * 得到布局文件 id
+     *
+     * @return layout id
+     */
     protected abstract int getLayoutId();
 
+    /**
+     * 初始化布局
+     */
     protected abstract void initView();
 
+    /**
+     * 初始化数据
+     */
     protected abstract void initData();
 
     @Override

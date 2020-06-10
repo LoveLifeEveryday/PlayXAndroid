@@ -24,6 +24,7 @@ import butterknife.Unbinder;
  */
 
 
+@SuppressWarnings("rawtypes")
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements BaseView {
 
     private Unbinder unbinder;
@@ -31,12 +32,29 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     protected P presenter;
 
+
+    /**
+     * 创建 presenter
+     *
+     * @return presenter
+     */
     protected abstract P createPresenter();
 
+    /**
+     * 得到布局文件 id
+     *
+     * @return layout id
+     */
     protected abstract int getLayoutId();
 
+    /**
+     * 初始化布局
+     */
     protected abstract void initView();
 
+    /**
+     * 初始化数据
+     */
     protected abstract void initData();
 
     @Nullable

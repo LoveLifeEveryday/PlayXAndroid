@@ -46,6 +46,7 @@ public class BasePresenter<V extends BaseView> {
         return baseView;
     }
 
+    @SuppressWarnings("all")
     public void addDisposable(Observable<?> observable, BaseObserver observer) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();

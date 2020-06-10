@@ -8,14 +8,15 @@ import com.xcynice.playxandroid.util.XUtil;
 
 
 /**
- * GitHub : https://github.com/yechaoa
- * CSDN : http://blog.csdn.net/yechaoa
- * <p>
- * Created by yechao on 2018/4/22.
- * Describe :
+ * @Author 许朋友爱玩
+ * @Date 2020/6/6
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description App
  */
-public class App extends Application {
 
+
+public class App extends Application {
 
     @Override
     public void onCreate() {
