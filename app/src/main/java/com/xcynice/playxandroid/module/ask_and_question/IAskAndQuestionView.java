@@ -10,7 +10,7 @@ import com.xcynice.playxandroid.bean.Article;
  * @Date 2020/6/4 17:35
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description 问答页面的 IView 接口
  */
 
 public interface IAskAndQuestionView extends BaseView {

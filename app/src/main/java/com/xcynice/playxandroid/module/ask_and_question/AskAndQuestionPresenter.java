@@ -11,7 +11,7 @@ import com.xcynice.playxandroid.bean.Article;
  * @Date 2020/6/4 17:38
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description 问答页面的 presenter
  */
 
 public class AskAndQuestionPresenter extends BasePresenter<IAskAndQuestionView> {
@@ -81,6 +81,7 @@ public class AskAndQuestionPresenter extends BasePresenter<IAskAndQuestionView> 
      * @param id 文章id
      */
     public void collect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.collectIn(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
@@ -100,6 +101,7 @@ public class AskAndQuestionPresenter extends BasePresenter<IAskAndQuestionView> 
      * @param id 文章id
      */
     public void unCollect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
