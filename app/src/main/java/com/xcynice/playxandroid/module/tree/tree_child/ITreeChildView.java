@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.tree;
+package com.xcynice.playxandroid.module.tree.tree_child;
 
 
 import com.xcynice.playxandroid.base.BaseBean;

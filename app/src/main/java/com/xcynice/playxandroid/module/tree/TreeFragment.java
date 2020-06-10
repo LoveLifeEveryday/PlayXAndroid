@@ -15,6 +15,7 @@ import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.adapter.CommonViewPagerAdapter;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.base.BasePresenter;
+import com.xcynice.playxandroid.module.tree.tree_child.TreeChildFragment;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.tree;
+package com.xcynice.playxandroid.module.tree.tree_child;
 
 
 import com.xcynice.playxandroid.base.BaseBean;
@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2020/6/5 10:01
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description 体系界面一级的 presenter ，如：界面上的体系和导航标题数据的展示
  */
 
 public class TreeChildPresenter extends BasePresenter<ITreeChildView> {

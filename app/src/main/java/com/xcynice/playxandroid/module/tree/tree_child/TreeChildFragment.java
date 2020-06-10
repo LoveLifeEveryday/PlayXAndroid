@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.tree;
+package com.xcynice.playxandroid.module.tree.tree_child;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
+import com.xcynice.playxandroid.module.tree.tree_grandson.TreeGrandsonActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 

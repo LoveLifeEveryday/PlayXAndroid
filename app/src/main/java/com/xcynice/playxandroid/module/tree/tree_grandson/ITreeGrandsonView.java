@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.tree;
+package com.xcynice.playxandroid.module.tree.tree_grandson;
 
 
 import com.xcynice.playxandroid.base.BaseBean;
@@ -10,7 +10,7 @@ import com.xcynice.playxandroid.bean.TreeChild;
  * @Date 2020/6/5 16:56
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description ITreeGrandsonView
  */
 
 public interface ITreeGrandsonView extends BaseView {

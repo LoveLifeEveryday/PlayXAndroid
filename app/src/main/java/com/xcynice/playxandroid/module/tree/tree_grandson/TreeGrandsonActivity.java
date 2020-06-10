@@ -1,10 +1,7 @@
-package com.xcynice.playxandroid.module.tree;
+package com.xcynice.playxandroid.module.tree.tree_grandson;
 
 import android.text.TextUtils;
-import android.view.MenuItem;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
@@ -77,7 +74,9 @@ public class TreeGrandsonActivity extends BaseActivity {
         }
         CommonViewPagerAdapter commonViewPagerAdapter = new CommonViewPagerAdapter(getSupportFragmentManager(), titles);
         for (int i = 0; i < titles.size(); i++) {
-            commonViewPagerAdapter.addFragment(TreeGrandsonFragment.newInstance(tree.getChildren().get(i).getId()));
+            if (tree != null) {
+                commonViewPagerAdapter.addFragment(TreeGrandsonFragment.newInstance(tree.getChildren().get(i).getId()));
+            }
         }
         mVpTreeGrandson.setAdapter(commonViewPagerAdapter);
         mVpTreeGrandson.setCurrentItem(pos);

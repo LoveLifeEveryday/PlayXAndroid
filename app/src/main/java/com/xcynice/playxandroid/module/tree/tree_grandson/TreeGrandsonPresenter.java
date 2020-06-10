@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.tree;
+package com.xcynice.playxandroid.module.tree.tree_grandson;
 
 
 import com.xcynice.playxandroid.base.BaseBean;
@@ -11,7 +11,7 @@ import com.xcynice.playxandroid.bean.TreeChild;
  * @Date 2020/6/5 16:55
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description TreeGrandsonPresenter 体系二级界面的 presenter ，如：里面的文章列表展示
  */
 
 public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
@@ -79,6 +79,7 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
     }
 
     public void collect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.collectIn(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
@@ -93,6 +94,7 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
     }
 
     public void unCollect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {

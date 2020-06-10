@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".module.tree.TreeGrandsonFragment">
+    tools:context=".module.tree.tree_grandson.TreeGrandsonFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srf_tree_grandson"
