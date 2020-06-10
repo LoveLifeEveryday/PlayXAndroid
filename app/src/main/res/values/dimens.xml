@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bNVMaginTop">8dp</dimen>
-    <dimen name="titleImageSize">25dp</dimen>
+    <dimen name="titleImageSize">20dp</dimen>
     <dimen name="titleTextSize">20sp</dimen>
     <dimen name="bannerHeight">200dp</dimen>
     <dimen name="ProgressBarHeight">5dp</dimen>

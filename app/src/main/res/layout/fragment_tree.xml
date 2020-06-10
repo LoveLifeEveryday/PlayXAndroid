@@ -10,7 +10,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_tree"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="41dp"
         android:background="@color/colorPrimary"
         app:tabMode="fixed"
         app:tabGravity="center"
