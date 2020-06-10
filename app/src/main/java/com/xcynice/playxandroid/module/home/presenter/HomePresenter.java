@@ -103,6 +103,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * @param id 文章id
      */
     public void collect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.collectIn(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
@@ -122,6 +123,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * @param id 文章id
      */
     public void unCollect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
