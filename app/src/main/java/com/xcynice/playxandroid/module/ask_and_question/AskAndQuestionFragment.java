@@ -14,7 +14,6 @@ import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.home.view.SuperSwipeRefreshLayout;
 import com.xcynice.playxandroid.util.ActivityUtil;
-import com.xcynice.playxandroid.util.LogUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 
 import java.util.ArrayList;

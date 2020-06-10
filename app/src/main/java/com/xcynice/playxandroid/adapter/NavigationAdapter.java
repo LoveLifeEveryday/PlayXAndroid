@@ -20,7 +20,7 @@ import java.util.Queue;
  * @Date 2020/6/5 10:34
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description Navigation 界面的 Adapter
  */
 
 public class NavigationAdapter extends BaseQuickAdapter<Navigation, BaseViewHolder> {

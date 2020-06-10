@@ -1,5 +1,6 @@
 package com.xcynice.playxandroid.adapter;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -27,14 +28,13 @@ public class CommonViewPagerAdapter extends FragmentPagerAdapter {
         mTitleList = titles;
     }
 
-    public CommonViewPagerAdapter(FragmentManager fm) {
-        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-    }
+
 
     public void addFragment(Fragment fragment) {
         mFragments.add(fragment);
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);

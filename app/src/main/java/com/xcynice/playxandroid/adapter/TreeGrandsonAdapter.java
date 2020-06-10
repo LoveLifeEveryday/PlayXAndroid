@@ -4,6 +4,8 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -13,12 +15,15 @@ import com.xcynice.playxandroid.bean.TreeChild;
 import java.util.List;
 
 /**
- * GitHub : https://github.com/yechaoa
- * CSDN : http://blog.csdn.net/yechaoa
- * <p>
- * Created by yechao on 2018/4/30.
- * Describe :
+ * @Author 许朋友爱玩
+ * @Date   2020/6/10
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ *
+ * @Description TreeGrandsonAdapter
  */
+
+
 public class TreeGrandsonAdapter extends BaseQuickAdapter<TreeChild.DatasBean, BaseViewHolder> {
 
     public TreeGrandsonAdapter(int layoutResId, List data) {
@@ -26,7 +31,7 @@ public class TreeGrandsonAdapter extends BaseQuickAdapter<TreeChild.DatasBean, B
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, TreeChild.DatasBean item) {
+    protected void convert(@NonNull BaseViewHolder helper, TreeChild.DatasBean item) {
         if (item.isFresh()) {
             helper.setVisible(R.id.tv_article_new, true);
         } else {

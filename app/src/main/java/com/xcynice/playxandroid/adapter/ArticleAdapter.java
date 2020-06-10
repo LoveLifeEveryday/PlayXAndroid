@@ -5,6 +5,8 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -15,14 +17,17 @@ import com.xcynice.playxandroid.util.StringUtil;
 import java.util.List;
 
 /**
- * GitHub : https://github.com/yechaoa
- * CSDN : http://blog.csdn.net/yechaoa
- * <p>
- * Created by yechao on 2018/4/22.
- * Describe :
+ * @Author 许朋友爱玩
+ * @Date 2020/6/10
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description ArticleAdapter
  */
+
+
 public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, BaseViewHolder> {
 
+    @SuppressWarnings("all")
     public ArticleAdapter(int layoutResId, List data) {
         super(layoutResId, data);
     }
@@ -33,13 +38,9 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         mTypeIsCollect = typeIsCollect;
     }
 
-    @Override
-    protected void convert(BaseViewHolder helper, Article.DataDetailBean item) {
-        //fromHtml，因为搜索结果中的title中含有html标签
-//        helper.setText(R.id.article_title, Html.fromHtml(item.title));
-//        helper.setText(R.id.article_chapter, item.chapterName);
-//        helper.setText(R.id.article_author, item.author);
 
+    @Override
+    protected void convert(@NonNull BaseViewHolder helper, Article.DataDetailBean item) {
         if (item.fresh) {
             helper.setGone(R.id.tv_article_new, true);
         } else {
@@ -58,7 +59,6 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
             title = StringUtil.removeAllBank(title, 2);
             helper.setText(R.id.tv_article_title, title);
         } else {
-            //noinspection AliDeprecation
             String title = Html.fromHtml(item.title).toString();
             title = StringUtil.removeAllBank(title, 2);
             helper.setText(R.id.tv_article_title, title);
@@ -73,7 +73,6 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
                 desc = StringUtil.removeAllBank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             } else {
-                //noinspection AliDeprecation
                 String desc = Html.fromHtml(item.desc).toString();
                 desc = StringUtil.removeAllBank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
