@@ -14,7 +14,7 @@ import com.xcynice.playxandroid.R;
  * @Date 2020/6/1 12:00
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description MainBnvListener
  */
 
 public class MainBnvListener implements BottomNavigationView.OnNavigationItemSelectedListener {

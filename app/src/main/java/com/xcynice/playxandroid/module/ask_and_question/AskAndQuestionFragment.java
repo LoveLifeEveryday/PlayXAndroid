@@ -1,11 +1,15 @@
 package com.xcynice.playxandroid.module.ask_and_question;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.adapter.ArticleAdapter;
 import com.xcynice.playxandroid.base.BaseBean;
@@ -38,6 +42,14 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
     RecyclerView mRvAskAndQuestion;
     @BindView(R.id.srl_ask_and_question)
     SuperSwipeRefreshLayout mSrlAskAndQuestion;
+    @BindView(R.id.iv_title_left)
+    ImageView mIvTitleLeft;
+    @BindView(R.id.tv_title_center)
+    TextView mTvTitleCenter;
+    @BindView(R.id.iv_title_right)
+    ImageView mIvTitleRight;
+    @BindView(R.id.rl_title)
+    RelativeLayout mRlTitle;
 
 
     private ArticleAdapter mArticleAdapter;
@@ -63,8 +75,7 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
      */
     private int mPosition;
 
-    public AskAndQuestionFragment() {
-    }
+
 
 
     @Override
@@ -79,6 +90,11 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this).titleBar(mRlTitle).init();
+        mTvTitleCenter.setText(mContext.getString(R.string.qAndA));
+        mIvTitleLeft.setVisibility(View.INVISIBLE);
+        mIvTitleRight.setVisibility(View.INVISIBLE);
+
         mSrlAskAndQuestion.setColorSchemeResources(R.color.colorPrimary);
         mRvAskAndQuestion.setLayoutManager(new LinearLayoutManager(mContext));
     }

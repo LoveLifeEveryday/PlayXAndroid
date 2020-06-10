@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".module.ask_and_question.AskAndQuestionFragment">
+
+    <include
+        layout="@layout/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <com.xcynice.playxandroid.module.home.view.SuperSwipeRefreshLayout
         android:id="@+id/srl_ask_and_question"

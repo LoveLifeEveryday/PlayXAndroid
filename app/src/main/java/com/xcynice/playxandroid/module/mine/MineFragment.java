@@ -23,15 +23,10 @@ import com.xcynice.playxandroid.R;
 public class MineFragment extends Fragment {
 
 
-    public MineFragment() {
-        // Required empty public constructor
-    }
 
 
 
-    private void initView(){
-        RotateAnimation animation=new RotateAnimation(0,167,123,0f);
-    }
+
 
 
     @Override

@@ -1,15 +1,27 @@
 package com.xcynice.playxandroid.module.home.view;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.adapter.ArticleAdapter;
 import com.xcynice.playxandroid.base.BaseBean;
@@ -21,14 +33,24 @@ import com.xcynice.playxandroid.module.home.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import me.devilsen.czxing.Scanner;
+import me.devilsen.czxing.code.BarcodeReader;
+import me.devilsen.czxing.code.CodeResult;
+import me.devilsen.czxing.util.BarCodeUtil;
+import me.devilsen.czxing.util.BitmapUtil;
+import me.devilsen.czxing.view.ScanActivityDelegate;
+import me.devilsen.czxing.view.ScanView;
 
 
 /**
@@ -45,6 +67,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @BindView(R.id.srl_home)
     SuperSwipeRefreshLayout mSrlHome;
+    @BindView(R.id.iv_title_left)
+    ImageView mIvQrCode;
+    @BindView(R.id.tv_title_center)
+    TextView mTvTitleCenter;
+    @BindView(R.id.iv_title_right)
+    ImageView mIvSearch;
+    @BindView(R.id.rl_title)
+    RelativeLayout mRlTitle;
+
+    private static final int CODE_SELECT_IMAGE = 1;
 
     @SuppressWarnings("rawtypes")
     private MZBannerView mBannerHome;
@@ -84,6 +116,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this).titleBar(mRlTitle).init();
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
         mRvHome.setLayoutManager(new LinearLayoutManager(mContext));
     }
@@ -257,5 +290,98 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 presenter.getArticleListByMore(++mPage);
             }
         }, 1000);
+    }
+
+    /**
+     * 开启二维码扫描
+     */
+    private void openScan() {
+        List<Integer> scanColors = Arrays.asList(getColorFromValue(R.color.scan_side), getColorFromValue(R.color.scan_partial), getColorFromValue(R.color.scan_middle));
+        Scanner.with(mContext)
+                .setMaskColor(getColorFromValue(R.color.mask_color))
+                .setBorderColor(getColorFromValue(R.color.box_line))
+                .setBorderSize(BarCodeUtil.dp2px(mContext, 200))
+                .setCornerColor(getColorFromValue(R.color.corner))
+                .setScanLineColors(scanColors)
+                .setScanMode(ScanView.SCAN_MODE_BIG)
+                .setTitle(getStringFromValue(R.string.my_qr))
+                .showAlbum(true)
+                .setScanNoticeText(getStringFromValue(R.string.scan_qr_code))
+                .setFlashLightOnText(getStringFromValue(R.string.open_flash))
+                .setFlashLightOffText(getStringFromValue(R.string.close_flash))
+                .setFlashLightOnDrawable(R.drawable.ic_highlight_blue_open_24dp)
+                .setFlashLightOffDrawable(R.drawable.ic_highlight_white_close_24dp)
+                .continuousScan()
+                .setOnClickAlbumDelegate(new ScanActivityDelegate.OnClickAlbumDelegate() {
+                    @Override
+                    public void onClickAlbum(Activity activity) {
+                        Intent albumIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        activity.startActivityForResult(albumIntent, CODE_SELECT_IMAGE);
+                    }
+
+                    @Override
+                    public void onSelectData(int requestCode, Intent data) {
+                        if (requestCode == CODE_SELECT_IMAGE) {
+                            decodeImage(data);
+                        }
+                    }
+                })
+                .setOnScanResultDelegate((activity, result, format) -> {
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put(ArticleDetailActivity.WEB_URL, result);
+                    ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
+                }).start();
+    }
+
+    private void decodeImage(Intent intent) {
+        Uri selectImageUri = intent.getData();
+        if (selectImageUri == null) {
+            return;
+        }
+        //noinspection deprecation
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = mContext.getContentResolver().query(selectImageUri, filePathColumn, null, null, null);
+        if (cursor == null) {
+            return;
+        }
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+
+        // 适当压缩图片
+        Bitmap bitmap = BitmapUtil.getDecodeAbleBitmap(picturePath);
+        // 这个方法比较耗时，推荐放到子线程执行
+        CodeResult result = BarcodeReader.getInstance().read(bitmap);
+        if (result == null) {
+            Log.e("Scan >>> ", "no code");
+        } else {
+            Log.e("Scan >>> ", result.getText());
+        }
+
+    }
+
+    private int getColorFromValue(int color) {
+        return ContextCompat.getColor(XUtil.getApplication(), color);
+    }
+
+
+    private String getStringFromValue(int string) {
+        return getResources().getString(string);
+    }
+
+    @OnClick({R.id.iv_title_left, R.id.iv_title_right})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_title_left:
+                openScan();
+                break;
+            case R.id.iv_title_right:
+                ToastUtil.showToast("你点击了右边的按钮");
+
+                break;
+            default:
+                break;
+        }
     }
 }
