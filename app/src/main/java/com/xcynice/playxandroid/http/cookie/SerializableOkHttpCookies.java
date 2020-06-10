@@ -8,9 +8,14 @@ import java.io.Serializable;
 import okhttp3.Cookie;
 
 /**
- * Created by yechao on 2019/11/19/019.
- * Describe :
+ * @Author 许朋友爱玩
+ * @Date 2020/6/10
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description SerializableOkHttpCookies
  */
+
+
 public class SerializableOkHttpCookies implements Serializable {
 
     private transient final Cookie cookies;
@@ -51,13 +56,17 @@ public class SerializableOkHttpCookies implements Serializable {
         boolean hostOnly = in.readBoolean();
         boolean persistent = in.readBoolean();
         Cookie.Builder builder = new Cookie.Builder();
-        builder = builder.name(name);
-        builder = builder.value(value);
-        builder = builder.expiresAt(expiresAt);
+        builder.name(name);
+        builder.value(value);
+        builder.expiresAt(expiresAt);
         builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);
-        builder = builder.path(path);
-        builder = secure ? builder.secure() : builder;
-        builder = httpOnly ? builder.httpOnly() : builder;
+        builder.path(path);
+        if (secure) {
+            builder.secure();
+        }
+        if (httpOnly) {
+            builder.httpOnly();
+        }
         clientCookies = builder.build();
     }
 }

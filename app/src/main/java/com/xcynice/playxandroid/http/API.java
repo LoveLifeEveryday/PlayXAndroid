@@ -1,6 +1,7 @@
 package com.xcynice.playxandroid.http;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
@@ -8,6 +9,7 @@ import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
 import com.xcynice.playxandroid.bean.TreeChild;
 import com.xcynice.playxandroid.bean.User;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
 
@@ -30,30 +32,40 @@ import retrofit2.http.Query;
 
 public class API {
 
-    static final String BASE_URL = "https://www.wanandroid.com/";
+    static final String BASE_URL = XUtil.getApplication().getString(R.string.baseUrl);
 
-    public interface WAZApi {
+    public interface IWAZApi {
 
         //-----------------------【首页相关】----------------------
 
 
-        //首页 banner
+        /**
+         * 首页 banner
+         *
+         * @return banner数据
+         */
         @GET("banner/json")
         Observable<BaseBean<List<Banner>>> getBanner();
 
-        //首页文章列表 这里的{}是填入页数
+
+        /**
+         * 首页文章列表 这里的{}是填入页数
+         *
+         * @param page 页数
+         * @return 文章列表
+         */
         @GET("article/list/{page}/json")
         Observable<BaseBean<Article>> getArticleList(@Path("page") Integer page);
 
 
         //-----------------------【登录注册】----------------------
 
-        //登录
+
         @FormUrlEncoded
         @POST("user/login")
         Observable<BaseBean<User>> login(@Field("username") String username, @Field("password") String password);
 
-        //注册
+
         @FormUrlEncoded
         @POST("user/register")
         Observable<BaseBean<User>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
@@ -77,6 +89,13 @@ public class API {
         Observable<BaseBean> collectIn(@Path("id") Integer id);
 
         //取消收藏---文章列表
+
+        /**
+         * 取消收藏 -- 文章列表
+         *
+         * @param id 文章 id
+         * @return 是否取消收藏成功
+         */
         @POST("lg/uncollect_originId/{id}/json")
         Observable<BaseBean> unCollect(@Path("id") Integer id);
 

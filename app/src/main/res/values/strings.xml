@@ -17,6 +17,12 @@
     <string name="open_flash">打开闪光灯</string>
     <string name="close_flash">关闭闪光灯</string>
     <string name="navigation">导航</string>
+    <string name="gsonIsNull">gson == null</string>
+    <string name="MEDIA_TYPE">application/json; charset=UTF-8</string>
+    <string name="errorCode">errorCode</string>
+    <string name="loginFail">登录失效，请重新登录</string>
+    <string name="errorMsg">errorMsg</string>
+    <string name="baseUrl">https://www.wanandroid.com/</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

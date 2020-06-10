@@ -1,7 +1,9 @@
 package com.xcynice.playxandroid.http.gson;
 
 import com.google.gson.TypeAdapter;
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseException;
+import com.xcynice.playxandroid.util.XUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,14 +35,14 @@ public class BaseResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         String jsonString = value.string();
         try {
             JSONObject object = new JSONObject(jsonString);
-            int code = object.getInt("errorCode");
+            int code = object.getInt(XUtil.getApplication().getString(R.string.errorCode));
             if (0 != code) {
                 String data;
                 //错误信息
                 if (code == LOG_OUT_TIME) {
-                    data = "登录失效，请重新登录";
+                    data = XUtil.getApplication().getString(R.string.loginFail);
                 } else {
-                    data = object.getString("errorMsg");
+                    data = object.getString(XUtil.getApplication().getString(R.string.errorMsg));
                 }
                 //异常处理
                 throw new BaseException(code, data);

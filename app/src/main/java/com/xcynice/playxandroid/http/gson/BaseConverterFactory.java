@@ -3,6 +3,8 @@ package com.xcynice.playxandroid.http.gson;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -13,19 +15,23 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- * Created by yechao on 2019/11/18/018.
- * Describe :
+ * @Author 许朋友爱玩
+ * @Date 2020/6/10
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description BaseConverterFactory
  */
+
+
 public class BaseConverterFactory extends Converter.Factory {
 
     public static BaseConverterFactory create() {
         return create(new Gson());
     }
 
-    @SuppressWarnings("ConstantConditions")
     public static BaseConverterFactory create(Gson gson) {
         if (gson == null) {
-            throw new NullPointerException("gson == null");
+            throw new NullPointerException(XUtil.getApplication().getString(R.string.gsonIsNull));
         }
         return new BaseConverterFactory(gson);
     }

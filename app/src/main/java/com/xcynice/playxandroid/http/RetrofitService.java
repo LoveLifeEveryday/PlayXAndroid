@@ -24,7 +24,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitService {
 
     private volatile static RetrofitService apiRetrofit;
-    private API.WAZApi apiServer;
+    private API.IWAZApi apiServer;
 
     /**
      * 单例调用
@@ -48,7 +48,7 @@ public class RetrofitService {
      *
      * @return api对象
      */
-    public API.WAZApi getApiService() {
+    public API.IWAZApi getApiService() {
         return apiServer;
     }
 
@@ -78,7 +78,7 @@ public class RetrofitService {
                 .baseUrl(API.BASE_URL)
                 .build();
 
-        apiServer = retrofit.create(API.WAZApi.class);
+        apiServer = retrofit.create(API.IWAZApi.class);
     }
 
 }

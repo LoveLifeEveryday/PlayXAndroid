@@ -15,15 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
 /**
- * Created by yechao on 2019/11/19/019.
- * Describe :
+ * @Author 许朋友爱玩
+ * @Date 2020/6/10
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description PersistentCookieStore
  */
+
+
 public class PersistentCookieStore {
     private static final String LOG_TAG = "PersistentCookieStore";
     public static final String COOKIE_PREFS = "Cookies_Prefs";
@@ -45,9 +51,9 @@ public class PersistentCookieStore {
                     Cookie decodedCookie = decodeCookie(encodedCookie);
                     if (decodedCookie != null) {
                         if (!cookies.containsKey(entry.getKey())) {
-                            cookies.put(entry.getKey(), new ConcurrentHashMap<String, Cookie>());
+                            cookies.put(entry.getKey(), new ConcurrentHashMap<>());
                         }
-                        cookies.get(entry.getKey()).put(name, decodedCookie);
+                        Objects.requireNonNull(cookies.get(entry.getKey())).put(name, decodedCookie);
                     }
                 }
             }
@@ -65,13 +71,13 @@ public class PersistentCookieStore {
         //将cookies缓存到内存中 如果缓存过期 就重置此cookie
         if (!cookie.persistent()) {
             if (!cookies.containsKey(url.host())) {
-                cookies.put(url.host(), new ConcurrentHashMap<String, Cookie>());
+                cookies.put(url.host(), new ConcurrentHashMap<>());
             }
-            cookies.get(url.host()).put(name, cookie);
+            Objects.requireNonNull(cookies.get(url.host())).put(name, cookie);
         } else {
             if (cookies.containsKey(url.host())) {
                 if (cookies.get(url.host()) != null) {
-                    cookies.get(url.host()).remove(name);
+                    Objects.requireNonNull(cookies.get(url.host())).remove(name);
                 }
             }
         }
@@ -80,7 +86,7 @@ public class PersistentCookieStore {
 
             //讲cookies持久化到本地
             SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-            prefsWriter.putString(url.host(), TextUtils.join(",", cookies.get(url.host()).keySet()));
+            prefsWriter.putString(url.host(), TextUtils.join(",", Objects.requireNonNull(cookies.get(url.host())).keySet()));
             prefsWriter.putString(name, encodeCookie(new SerializableOkHttpCookies(cookie)));
             prefsWriter.apply();
         }
@@ -89,7 +95,7 @@ public class PersistentCookieStore {
     public List<Cookie> get(HttpUrl url) {
         ArrayList<Cookie> ret = new ArrayList<>();
         if (cookies.containsKey(url.host())) {
-            ret.addAll(cookies.get(url.host()).values());
+            ret.addAll(Objects.requireNonNull(cookies.get(url.host())).values());
         }
         return ret;
     }
@@ -105,14 +111,14 @@ public class PersistentCookieStore {
     public boolean remove(HttpUrl url, Cookie cookie) {
         String name = getCookieToken(cookie);
 
-        if (cookies.containsKey(url.host()) && cookies.get(url.host()).containsKey(name)) {
-            cookies.get(url.host()).remove(name);
+        if (cookies.containsKey(url.host()) && Objects.requireNonNull(cookies.get(url.host())).containsKey(name)) {
+            Objects.requireNonNull(cookies.get(url.host())).remove(name);
 
             SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
             if (cookiePrefs.contains(name)) {
                 prefsWriter.remove(name);
             }
-            prefsWriter.putString(url.host(), TextUtils.join(",", cookies.get(url.host()).keySet()));
+            prefsWriter.putString(url.host(), TextUtils.join(",", Objects.requireNonNull(cookies.get(url.host())).keySet()));
             prefsWriter.apply();
 
             return true;
@@ -124,7 +130,7 @@ public class PersistentCookieStore {
     public List<Cookie> getCookies() {
         ArrayList<Cookie> ret = new ArrayList<>();
         for (String key : cookies.keySet()) {
-            ret.addAll(cookies.get(key).values());
+            ret.addAll(Objects.requireNonNull(cookies.get(key)).values());
         }
         return ret;
     }
