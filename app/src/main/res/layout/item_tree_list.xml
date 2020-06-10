@@ -20,19 +20,19 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:textColor="#666666"
-            android:textSize="15sp"
-            tools:text="公众号文章列表强势上线" />
+            android:layout_marginEnd="@dimen/tv_tree_name_magin_end"
+            android:textColor="@color/tv_article_content"
+            android:textSize="@dimen/titleArticleSize"
+            tools:text="@string/tv_tree_title" />
 
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/fbl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="11dp"
-            android:layout_marginBottom="11dp"
+            android:layout_marginTop="@dimen/newMarginEnd"
+            android:layout_marginEnd="@dimen/flexboxLayoutMarginEnd"
+            android:layout_marginBottom="@dimen/flexboxLayoutMarginEnd"
             app:flexWrap="wrap" />
     </LinearLayout>
 

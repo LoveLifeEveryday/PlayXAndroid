@@ -16,6 +16,7 @@
     <color name="titleTextColor">#333333</color>
     <color name="chapterTextColor">#999999</color>
     <color name="test">#7f7f7f</color>
+    <color name="tv_article_content">#666666</color>
 
     <color name="scan_side">#2A017CB4</color>
     <color name="scan_partial">#B20493D5</color>

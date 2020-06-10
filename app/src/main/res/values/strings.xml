@@ -23,6 +23,8 @@
     <string name="loginFail">登录失效，请重新登录</string>
     <string name="errorMsg">errorMsg</string>
     <string name="baseUrl">https://www.wanandroid.com/</string>
+    <string name="tv_article_content">1111111111111111111111111111111111111111111111111111111111111111111111111</string>
+    <string name="tv_tree_title">公众号文章列表强势上线</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

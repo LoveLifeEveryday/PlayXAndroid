@@ -81,16 +81,17 @@
                 android:text="@string/articleTitle"
                 android:textColor="@color/titleTextColor"
                 android:textSize="@dimen/titleArticleSize" />
+
             <TextView
-                android:layout_marginTop="5dp"
-                android:visibility="gone"
                 android:id="@+id/tv_article_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:maxLines="3"
-                android:text="1111111111111111111111111111111111111111111111111111111111111111111111111"
-                android:textColor="#666666"
-                android:textSize="13sp" />
+                android:text="@string/tv_article_content"
+                android:textColor="@color/tv_article_content"
+                android:textSize="@dimen/tv_article_content"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -117,7 +118,8 @@
                     android:id="@+id/iv_article_favorite"
                     android:layout_width="@dimen/iv_article_favorite"
                     android:layout_height="@dimen/iv_article_favorite"
-                    android:src="@drawable/ic_like_normal" />
+                    android:src="@drawable/ic_like_normal"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
         </LinearLayout>

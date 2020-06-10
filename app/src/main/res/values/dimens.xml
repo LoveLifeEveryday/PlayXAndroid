@@ -15,4 +15,7 @@
     <dimen name="iv_article_favorite">23dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="font_16">16sp</dimen>
+    <dimen name="tv_article_content">13sp</dimen>
+    <dimen name="tv_tree_name_magin_end">16dp</dimen>
+    <dimen name="flexboxLayoutMarginEnd">11dp</dimen>
 </resources>
