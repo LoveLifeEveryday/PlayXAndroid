@@ -184,12 +184,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @SuppressWarnings("AliDeprecation")
     private void decodeImage(Intent intent) {
         Uri selectImageUri = intent.getData();
         if (selectImageUri == null) {
             return;
         }
+        //noinspection deprecation
         String[] filePathColumn = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(selectImageUri, filePathColumn, null, null, null);
         if (cursor == null) {

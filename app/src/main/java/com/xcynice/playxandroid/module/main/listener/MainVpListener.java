@@ -10,7 +10,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.xcynice.playxandroid.R;
-import com.xcynice.playxandroid.util.LogUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
 /**
