@@ -5,5 +5,9 @@
         <attr name="roundWidth" format="dimension" />
         <attr name="roundHeight" format="dimension" />
     </declare-styleable>
-
+    <declare-styleable name="SubmitView">
+        <attr name="sv_bindEditText1" format="reference" />
+        <attr name="sv_bindEditText2" format="reference" />
+        <attr name="sv_bindEditText3" format="reference" />
+    </declare-styleable>
 </resources>

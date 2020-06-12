@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_login"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--背景图片-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/colorPrimary" />
+
+        <!--添加虚化层-->
+        <io.alterac.blurkit.BlurLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:blk_blurRadius="25"
+            app:blk_fps="0" />
+
+
+        <!--添加标题和输入框视图-->
+        <LinearLayout
+            android:id="@+id/ll_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_login"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+
+            <!--添加一个输入框-->
+            <EditText
+                android:id="@+id/et_user"
+                style="@style/EditTextStyle"
+                android:drawableLeft="@drawable/ic_account_normal"
+                android:hint="请输入用户名"
+                android:inputType="text"
+                android:textSize="@dimen/text_content" />
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/EditTextStyle"
+                android:drawableLeft="@drawable/ic_password_normal"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:textSize="@dimen/text_content" />
+
+            <EditText
+                android:id="@+id/et_repassword"
+                style="@style/EditTextStyle"
+                android:drawableLeft="@drawable/ic_password_normal"
+                android:hint="请再次输入密码"
+                android:inputType="textPassword"
+                android:textSize="@dimen/text_content" />
+            <!--添加按钮-->
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/login_btn_selector"
+                android:enabled="false"
+                android:text="登录"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignTop="@id/ll_login"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-150dp"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/gif_register" />
+    </RelativeLayout>
+
+</LinearLayout>

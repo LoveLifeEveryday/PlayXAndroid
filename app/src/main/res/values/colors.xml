@@ -17,6 +17,10 @@
     <color name="chapterTextColor">#999999</color>
     <color name="test">#7f7f7f</color>
     <color name="tv_article_content">#666666</color>
+    <color name="mine_blur_overlay">@color/background_mask</color>
+    <color name="background_mask">#11000000</color>
+    <color name="text_accent">@color/accent</color>
+    <color name="accent">#f86734</color>
 
     <color name="scan_side">#2A017CB4</color>
     <color name="scan_partial">#B20493D5</color>
@@ -29,5 +33,6 @@
     <color name="foreground_top">#f5f5f5</color>
     <color name="text_surface">#333333</color>
     <color name="tab_text">#a4c7ff</color>
+    <color name="basic_ui_action_bar_text">@color/white</color>
 
 </resources>

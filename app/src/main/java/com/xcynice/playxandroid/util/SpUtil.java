@@ -10,6 +10,10 @@ import android.content.SharedPreferences;
  */
 public class SpUtil {
     private static final String FILE_NAME = "config";
+
+    public static final String IS_LOGIN = "isLogin";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
     private static SharedPreferences sp = XUtil.getApplication().getSharedPreferences("config", 0);
 
     public SpUtil() {

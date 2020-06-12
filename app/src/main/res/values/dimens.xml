@@ -18,4 +18,9 @@
     <dimen name="tv_article_content">13sp</dimen>
     <dimen name="tv_tree_name_magin_end">16dp</dimen>
     <dimen name="flexboxLayoutMarginEnd">11dp</dimen>
+    <dimen name="text_headline">22sp</dimen>
+    <dimen name="text_content">15sp</dimen>
+    <dimen name="text_notes">12sp</dimen>
+    <dimen name="button_height">44dp</dimen>
+
 </resources>

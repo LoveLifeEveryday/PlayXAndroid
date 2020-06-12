@@ -1,10 +1,12 @@
 package com.xcynice.playxandroid.module.tree.tree_grandson;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @Author 许朋友爱玩
@@ -39,6 +42,8 @@ public class TreeGrandsonActivity extends BaseActivity {
     TabLayout mTlTreeGrandson;
     @BindView(R.id.viewpager)
     ViewPager mVpTreeGrandson;
+    @BindView(R.id.abl_tree_grandson)
+    AppBarLayout mAblTreeGrandson;
 
     @Override
     protected int getLayoutId() {
@@ -53,7 +58,6 @@ public class TreeGrandsonActivity extends BaseActivity {
             String title = getIntent().getStringExtra(TITLE);
             if (!TextUtils.isEmpty(title)) {
                 getSupportActionBar().setTitle(title);
-
             }
             mTbTreeGrandson.setNavigationOnClickListener(view -> finish());
 
@@ -86,6 +90,5 @@ public class TreeGrandsonActivity extends BaseActivity {
     protected BasePresenter createPresenter() {
         return null;
     }
-
 
 }

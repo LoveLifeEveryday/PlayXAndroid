@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.module.ask_and_question.AskAndQuestionFragment;
 import com.xcynice.playxandroid.module.home.view.HomeFragment;
-import com.xcynice.playxandroid.module.mine.MineFragment;
+import com.xcynice.playxandroid.module.mine.fragment.MineFragment;
 import com.xcynice.playxandroid.module.tree.TreeFragment;
 import com.xcynice.playxandroid.util.XUtil;
 
