@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
@@ -100,6 +101,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     protected void initView() {
         EventBus.getDefault().register(this);
         mSrlMine.setColorSchemeResources(R.color.colorPrimary);
+
+        ImmersionBar.with(this).titleBar(mRlTitle).init();
+        mTvTitleCenter.setVisibility(View.INVISIBLE);
+        mIvTitleLeft.setVisibility(View.INVISIBLE);
+        mIvTitleRight.setImageResource(R.drawable.notification);
+        mIvTitleRight.setOnClickListener(view -> {
+            // TODO: 2020/6/13 设置点击事件跳转到通知界面
+        });
     }
 
     @Override

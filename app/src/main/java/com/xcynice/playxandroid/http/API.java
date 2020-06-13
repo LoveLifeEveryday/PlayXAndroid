@@ -9,6 +9,7 @@ import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
 import com.xcynice.playxandroid.bean.TreeChild;
 import com.xcynice.playxandroid.bean.User;
+import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
@@ -132,6 +133,16 @@ public class API {
         Observable<BaseBean<List<Navigation>>> getNavigationList();
 
 
+        //-----------------------【获取个人信息】----------------------
+
+
+        /**
+         * 得到用户的积分信息
+         *
+         * @return 用户的积分信息
+         */
+        @GET("lg/coin/userinfo/json")
+        Observable<BaseBean<UserInfo>> getUserCoin();
     }
 
 }
