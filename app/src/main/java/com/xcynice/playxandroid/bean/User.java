@@ -28,6 +28,7 @@ public class User {
     public String password;
     public int type;
     public String username;
+    public String nickname;
     public List<?> collectIds;
     public String repassword;
 

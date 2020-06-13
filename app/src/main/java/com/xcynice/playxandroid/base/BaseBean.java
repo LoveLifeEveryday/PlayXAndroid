@@ -2,11 +2,16 @@ package com.xcynice.playxandroid.base;
 
 import java.io.Serializable;
 
+
+
+
 /**
- * Description : BaseBean 实体类的基类
+ * @Author 许朋友爱玩
+ * @Date   2020/6/12
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
  *
- * @author XuCanyou666
- * @date 2020/2/7
+ * @Description BaseBean
  */
 
 

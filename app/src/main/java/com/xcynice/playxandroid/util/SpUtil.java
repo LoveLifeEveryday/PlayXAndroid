@@ -14,6 +14,7 @@ public class SpUtil {
     public static final String IS_LOGIN = "isLogin";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+    public static final String NICK_NAME = "nickName";
     private static SharedPreferences sp = XUtil.getApplication().getSharedPreferences("config", 0);
 
     public SpUtil() {

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
+import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
 import com.xcynice.playxandroid.bean.User;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
 import com.xcynice.playxandroid.module.login.presenter.LoginPresenter;
@@ -21,6 +22,8 @@ import com.xcynice.playxandroid.module.login.widget.SubmitView;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.xcynice.playxandroid.util.XUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Objects;
 
@@ -92,6 +95,9 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
         //存进sp里面
         SpUtil.setString(SpUtil.USERNAME, user.data.username);
         SpUtil.setString(SpUtil.PASSWORD, user.data.password);
+        SpUtil.setString(SpUtil.NICK_NAME, user.data.nickname);
+        EventBus.getDefault().post(new MessageLoginSuccessWrap("refresh user info"));
+
         Objects.requireNonNull(getActivity()).finish();
     }
 

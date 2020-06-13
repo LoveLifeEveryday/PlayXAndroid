@@ -10,10 +10,20 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
-import com.xcynice.playxandroid.base.BasePresenter;
+import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
+import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
+import com.xcynice.playxandroid.module.mine.presenter.MinePresenter;
+import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.SpUtil;
+import com.xcynice.playxandroid.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,7 +37,7 @@ import butterknife.OnClick;
  */
 
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment<MinePresenter> implements IMineView {
 
 
     @BindView(R.id.iv_title_left)
@@ -75,9 +85,10 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.srl_mine)
     SwipeRefreshLayout mSrlMine;
 
+
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MinePresenter createPresenter() {
+        return new MinePresenter(this);
     }
 
     @Override
@@ -87,14 +98,38 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        EventBus.getDefault().register(this);
+        mSrlMine.setColorSchemeResources(R.color.colorPrimary);
     }
 
     @Override
     protected void initData() {
 
+        mSrlMine.setOnRefreshListener(() -> {
+            mSrlMine.setRefreshing(true);
+            initUserData();
+        });
+        initUserData();
     }
 
+    /**
+     * 初始化用户数据
+     */
+    private void initUserData() {
+        //如果已经登陆
+        if (SpUtil.getBoolean(SpUtil.IS_LOGIN)) {
+            mTvUsernameMine.setText(SpUtil.getString(SpUtil.NICK_NAME));
+            mLlUserIdMine.setVisibility(View.VISIBLE);
+            mLlUserLevelRanking.setVisibility(View.VISIBLE);
+            mTvCoinMine.setVisibility(View.VISIBLE);
+            presenter.getUserInfo();
+        } else {
+            mTvUsernameMine.setText("请登陆");
+            mLlUserIdMine.setVisibility(View.INVISIBLE);
+            mLlUserLevelRanking.setVisibility(View.INVISIBLE);
+            mTvCoinMine.setVisibility(View.INVISIBLE);
+        }
+    }
 
     @OnClick({R.id.iv_title_right, R.id.riv_mine, R.id.ll_coin_mine, R.id.ll_share_mine, R.id.ll_collect_mine, R.id.ll_open_mine, R.id.ll_about_me_mine, R.id.ll_setting_mine})
     public void onViewClicked(View view) {
@@ -119,5 +154,34 @@ public class MineFragment extends BaseFragment {
             default:
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getLoginMsg(MessageLoginSuccessWrap messageWrap) {
+        if (messageWrap.getMsg().equals("refresh user info")) {
+            initUserData();
+        }
+    }
+
+    @Override
+    public void setUserInfoSuccess(BaseBean<UserInfo> userInfo) {
+        mTvUserIdMine.setText(userInfo.data.getUserId() + "");
+        mTvUserLevelMine.setText(userInfo.data.getLevel() + "");
+        mTvUserRankingMine.setText(userInfo.data.getRank());
+        mTvCoinMine.setText(userInfo.data.getCoinCount() + "");
+        if (mSrlMine.isRefreshing()) {
+            mSrlMine.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void setUserInfoFail(String msg) {
+        ToastUtil.showToast(msg);
     }
 }

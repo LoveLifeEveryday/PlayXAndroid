@@ -86,4 +86,7 @@ dependencies {
 
     /*自由指定宽高比的ImageView*/
     implementation 'com.github.goweii:PercentImageView:1.0.2'
+
+    /*EventBus*/
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }
