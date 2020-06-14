@@ -16,6 +16,7 @@ import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
 import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
+import com.xcynice.playxandroid.module.mine.activity.CoinActivity;
 import com.xcynice.playxandroid.module.mine.presenter.MinePresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
@@ -149,6 +150,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 ActivityUtil.startActivity(LoginActivity.class);
                 break;
             case R.id.ll_coin_mine:
+                ActivityUtil.startActivity(CoinActivity.class);
                 break;
             case R.id.ll_share_mine:
                 break;
@@ -178,6 +180,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         mTvUserLevelMine.setText(userInfo.data.getLevel() + "");
         mTvUserRankingMine.setText(userInfo.data.getRank());
         mTvCoinMine.setText(userInfo.data.getCoinCount() + "");
+        SpUtil.setInt(SpUtil.COIN, userInfo.data.getCoinCount());
         if (mSrlMine.isRefreshing()) {
             mSrlMine.setRefreshing(false);
         }

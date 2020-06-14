@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".module.mine.activity.CoinActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop"
+            android:tint="@color/mine_blur_overlay" />
+
+        <include
+            android:id="@+id/title_coin"
+            layout="@layout/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_coin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_coin"
+            android:layout_alignBottom="@+id/iv_bg"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/basic_ui_action_bar_text"
+            android:textSize="80sp"
+            tools:text="520" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_coin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="#f8f8f8" />
+
+</LinearLayout>

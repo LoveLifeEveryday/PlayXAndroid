@@ -5,6 +5,7 @@ import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
+import com.xcynice.playxandroid.bean.Coin;
 import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
 import com.xcynice.playxandroid.bean.TreeChild;
@@ -143,6 +144,15 @@ public class API {
          */
         @GET("lg/coin/userinfo/json")
         Observable<BaseBean<UserInfo>> getUserCoin();
+
+        /**
+         * 得到用户的积分列表
+         *
+         * @param page 页数
+         * @return 积分列表
+         */
+        @GET("/lg/coin/list/{page}/json")
+        Observable<BaseBean<Coin>> getUserCoinList(@Path("page") Integer page);
     }
 
 }
