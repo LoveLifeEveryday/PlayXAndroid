@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.mine.activity.CoinActivity"></activity>
+        <activity android:name=".module.mine.activity.CoinRankActivity"></activity>
+        <activity android:name=".module.mine.activity.CoinActivity" />
         <activity android:name=".module.register.RegisterActivity" />
         <activity android:name=".module.login.activity.LoginActivity" />
         <activity android:name=".module.tree.tree_grandson.TreeGrandsonActivity" />

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ProgressBar
+        android:id="@+id/pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:indeterminate="false"
+        android:max="1000"
+        android:progress="520"
+        android:progressDrawable="@drawable/coin_rank_progress_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <FrameLayout
+            android:id="@+id/fl_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/iv_index"
+                android:layout_width="24dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:paddingTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_rank_1"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:textColor="@color/text_surface"
+                android:textSize="@dimen/text_auxiliary"
+                tools:text="1" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/fl_index"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content"
+            tools:text="g**eii" />
+
+        <TextView
+            android:id="@+id/tv_coin_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_content"
+            tools:ignore="RelativeOverlap"
+            tools:text="520" />
+
+    </RelativeLayout>
+
+</FrameLayout>

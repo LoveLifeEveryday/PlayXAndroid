@@ -23,5 +23,6 @@
     <dimen name="text_notes">12sp</dimen>
     <dimen name="button_height">44dp</dimen>
     <dimen name="text_time">11sp</dimen>
+    <dimen name="text_auxiliary">13sp</dimen>
 
 </resources>

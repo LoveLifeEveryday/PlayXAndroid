@@ -1,6 +1,5 @@
 package com.xcynice.playxandroid.module.mine.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,15 +17,12 @@ import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.bean.Coin;
 import com.xcynice.playxandroid.module.mine.presenter.CoinPresenter;
 import com.xcynice.playxandroid.module.mine.view.ICoinView;
+import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.AnimatorUtils;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinView, BaseQuickAdapter.RequestLoadMoreListener {
@@ -63,8 +59,6 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
      */
     private int mPage = 1;
 
-    private List<Coin.DatasBean> mCoinList = new ArrayList<>();
-
 
     @Override
     protected CoinPresenter createPresenter() {
@@ -81,14 +75,8 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mTvTitleCenter.setText("我的积分");
         mIvTitleLeft.setImageResource(R.drawable.back);
-        mIvTitleLeft.setOnClickListener(view -> finish());
         mIvTitleRight.setImageResource(R.drawable.ic_rank);
-        mIvTitleRight.setOnClickListener(view -> {
-            // TODO: 2020/6/13 打开积分排行榜界面
-        });
         mRvCoin.setLayoutManager(new LinearLayoutManager(this));
-
-
     }
 
     @Override
@@ -104,7 +92,6 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
     @Override
     public void setCoinFirstSuccess(BaseBean<Coin> coinBaseBean) {
         mCoinRecordAdapter = new CoinRecordAdapter(coinBaseBean.data.getDatas());
-        mCoinList = coinBaseBean.data.getDatas();
         mCurrentCounter = coinBaseBean.data.getSize();
         mRvCoin.setAdapter(mCoinRecordAdapter);
         mCoinRecordAdapter.openLoadAnimation();
@@ -135,8 +122,10 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_title_left:
+                finish();
                 break;
             case R.id.iv_title_right:
+                ActivityUtil.startActivity(CoinRankActivity.class);
                 break;
             default:
                 break;
@@ -154,10 +143,5 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
         }, 1000);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }
