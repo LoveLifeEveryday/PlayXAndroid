@@ -24,5 +24,7 @@
     <dimen name="button_height">44dp</dimen>
     <dimen name="text_time">11sp</dimen>
     <dimen name="text_auxiliary">13sp</dimen>
+    <dimen name="margin_def">16dp</dimen>
+    <dimen name="margin_big">48dp</dimen>
 
 </resources>

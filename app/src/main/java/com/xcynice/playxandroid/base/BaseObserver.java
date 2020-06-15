@@ -1,6 +1,9 @@
 package com.xcynice.playxandroid.base;
 
 import com.google.gson.JsonParseException;
+import com.xcynice.playxandroid.module.login.activity.LoginActivity;
+import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.SpUtil;
 
 import org.json.JSONException;
 
@@ -68,6 +71,8 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
                 //回调到view层 处理 或者根据项目情况处理
                 if (view != null) {
                     // 处理登录失效 更新
+                    ActivityUtil.startActivity(LoginActivity.class);
+                    SpUtil.setBoolean(SpUtil.IS_LOGIN, false);
                     view.onErrorCode(new BaseBean(be.getErrorCode(), be.getErrorMsg()));
                 } else {
                     onError(be.getErrorMsg());
@@ -85,7 +90,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
                     be = new BaseException(BaseException.CONNECT_TIMEOUT_MSG, e);
                 } else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException) {
                     //解析错误
-                    be = new BaseException( BaseException.PARSE_ERROR_MSG, e);
+                    be = new BaseException(BaseException.PARSE_ERROR_MSG, e);
                 } else {
                     be = new BaseException(BaseException.OTHER_MSG, e);
                 }
@@ -105,12 +110,14 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     /**
      * 完成
+     *
      * @param o 对象
      */
     public abstract void onSuccess(T o);
 
     /**
      * 失败
+     *
      * @param msg 失败信息
      */
     public abstract void onError(String msg);

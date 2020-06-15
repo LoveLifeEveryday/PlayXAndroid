@@ -7,6 +7,7 @@ import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.bean.Coin;
 import com.xcynice.playxandroid.bean.CoinRank;
+import com.xcynice.playxandroid.bean.MineShare;
 import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
 import com.xcynice.playxandroid.bean.TreeChild;
@@ -164,6 +165,28 @@ public class API {
          */
         @GET("coin/rank/{page}/json")
         Observable<BaseBean<CoinRank>> getCoinRankList(@Path("page") Integer page);
+
+
+        /**
+         * 得到我的分享文章
+         *
+         * @param page 页数
+         * @return 分享文章列表
+         */
+        @GET("user/lg/private_articles/{page}/json")
+        Observable<BaseBean<MineShare>> getMineShare(@Path("page") Integer page);
+
+
+        /**
+         * 分享文章
+         *
+         * @param title 标题
+         * @param link  链接
+         * @return 分享文章信息
+         */
+        @FormUrlEncoded
+        @POST("lg/user_article/add/json")
+        Observable<BaseBean> shareArticle(@Field("title") String title, @Field("link") String link);
     }
 
 }

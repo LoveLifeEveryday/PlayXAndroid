@@ -17,6 +17,7 @@ import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
 import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
 import com.xcynice.playxandroid.module.mine.activity.CoinActivity;
+import com.xcynice.playxandroid.module.mine.activity.MineShareActivity;
 import com.xcynice.playxandroid.module.mine.presenter.MinePresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
@@ -150,9 +151,18 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 ActivityUtil.startActivity(LoginActivity.class);
                 break;
             case R.id.ll_coin_mine:
-                ActivityUtil.startActivity(CoinActivity.class);
+                if (SpUtil.getBoolean(SpUtil.IS_LOGIN)){
+                    ActivityUtil.startActivity(CoinActivity.class);
+                }else {
+                    ActivityUtil.startActivity(LoginActivity.class);
+                }
                 break;
             case R.id.ll_share_mine:
+                if (SpUtil.getBoolean(SpUtil.IS_LOGIN)){
+                    ActivityUtil.startActivity(MineShareActivity.class);
+                }else {
+                    ActivityUtil.startActivity(LoginActivity.class);
+                }
                 break;
             case R.id.ll_collect_mine:
                 break;
