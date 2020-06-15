@@ -70,9 +70,6 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
                 be = (BaseException) e;
                 //回调到view层 处理 或者根据项目情况处理
                 if (view != null) {
-                    // 处理登录失效 更新
-                    ActivityUtil.startActivity(LoginActivity.class);
-                    SpUtil.setBoolean(SpUtil.IS_LOGIN, false);
                     view.onErrorCode(new BaseBean(be.getErrorCode(), be.getErrorMsg()));
                 } else {
                     onError(be.getErrorMsg());

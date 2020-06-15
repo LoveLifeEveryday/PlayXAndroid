@@ -188,8 +188,7 @@ public class MineShareActivity extends BaseActivity<MineSharePresenter> implemen
                 finish();
                 break;
             case R.id.iv_title_right:
-                // TODO: 2020/6/15 跳转到添加文章的界面
-                
+                ActivityUtil.startActivity(ShareArticleActivity.class);
                 break;
             default:
                 break;

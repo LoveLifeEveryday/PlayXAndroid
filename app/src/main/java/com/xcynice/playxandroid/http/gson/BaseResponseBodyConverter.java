@@ -3,6 +3,9 @@ package com.xcynice.playxandroid.http.gson;
 import com.google.gson.TypeAdapter;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseException;
+import com.xcynice.playxandroid.module.login.activity.LoginActivity;
+import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
 import org.json.JSONException;
@@ -41,6 +44,9 @@ public class BaseResponseBodyConverter<T> implements Converter<ResponseBody, T> 
                 //错误信息
                 if (code == LOG_OUT_TIME) {
                     data = XUtil.getApplication().getString(R.string.loginFail);
+                    // 处理登录失效 更新
+                    ActivityUtil.startActivity(LoginActivity.class);
+                    SpUtil.setBoolean(SpUtil.IS_LOGIN, false);
                 } else {
                     data = object.getString(XUtil.getApplication().getString(R.string.errorMsg));
                 }
