@@ -47,6 +47,7 @@ public class BaseResponseBodyConverter<T> implements Converter<ResponseBody, T> 
                     // 处理登录失效 更新
                     ActivityUtil.startActivity(LoginActivity.class);
                     SpUtil.setBoolean(SpUtil.IS_LOGIN, false);
+
                 } else {
                     data = object.getString(XUtil.getApplication().getString(R.string.errorMsg));
                 }
