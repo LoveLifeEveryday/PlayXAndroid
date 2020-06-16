@@ -17,6 +17,7 @@ import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
 import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
 import com.xcynice.playxandroid.module.mine.activity.CoinActivity;
+import com.xcynice.playxandroid.module.mine.activity.MineCollectActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineShareActivity;
 import com.xcynice.playxandroid.module.mine.presenter.MinePresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineView;
@@ -151,20 +152,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 ActivityUtil.startActivity(LoginActivity.class);
                 break;
             case R.id.ll_coin_mine:
-                if (SpUtil.getBoolean(SpUtil.IS_LOGIN)){
-                    ActivityUtil.startActivity(CoinActivity.class);
-                }else {
-                    ActivityUtil.startActivity(LoginActivity.class);
-                }
+                checkLogin(CoinActivity.class);
                 break;
             case R.id.ll_share_mine:
-                if (SpUtil.getBoolean(SpUtil.IS_LOGIN)){
-                    ActivityUtil.startActivity(MineShareActivity.class);
-                }else {
-                    ActivityUtil.startActivity(LoginActivity.class);
-                }
+                checkLogin(MineShareActivity.class);
                 break;
             case R.id.ll_collect_mine:
+                checkLogin(MineCollectActivity.class);
                 break;
             case R.id.ll_open_mine:
                 break;
@@ -174,6 +168,20 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 break;
             default:
                 break;
+        }
+    }
+
+
+    /**
+     * 检测登陆后自动跳转到对应的界面
+     *
+     * @param toClass 跳转到的界面
+     */
+    private void checkLogin(Class toClass) {
+        if (SpUtil.getBoolean(SpUtil.IS_LOGIN)) {
+            ActivityUtil.startActivity(toClass);
+        } else {
+            ActivityUtil.startActivity(LoginActivity.class);
         }
     }
 

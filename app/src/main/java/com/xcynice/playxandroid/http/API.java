@@ -83,6 +83,16 @@ public class API {
 
         //-----------------------【  收藏  】----------------------
 
+
+        /**
+         * 收藏文章列表
+         *
+         * @param page 页数 从0开始
+         * @return 收藏文章列表
+         */
+        @GET("lg/collect/list/{page}/json")
+        Observable<BaseBean<Article>> getCollectList(@Path("page") Integer page);
+
         /**
          * 收藏站内文章
          *
@@ -92,7 +102,6 @@ public class API {
         @POST("lg/collect/{id}/json")
         Observable<BaseBean> collectIn(@Path("id") Integer id);
 
-        //取消收藏---文章列表
 
         /**
          * 取消收藏 -- 文章列表
@@ -102,6 +111,18 @@ public class API {
          */
         @POST("lg/uncollect_originId/{id}/json")
         Observable<BaseBean> unCollect(@Path("id") Integer id);
+
+
+        /**
+         * 取消收藏---我的收藏页面
+         *
+         * @param id       文章id
+         * @param originId 收藏之前的那篇文章本身的id
+         * @return 是否取消收藏成功
+         */
+        @FormUrlEncoded
+        @POST("lg/uncollect/{id}/json")
+        Observable<BaseBean> unCollectInMineCollect(@Path("id") Integer id, @Field("originId") Integer originId);
 
         //-----------------------【  体系  】----------------------
 

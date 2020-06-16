@@ -1,5 +1,6 @@
 package com.xcynice.playxandroid.module.mine.activity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -102,9 +104,13 @@ public class ShareArticleActivity extends BaseActivity<ShareArticlePresenter> im
                 mEtTitle.setText("");
                 break;
             case R.id.tv_open:
-                HashMap<String, String> hashMap = new HashMap<>(1);
-                hashMap.put(ArticleDetailActivity.WEB_URL, mEtLink.getText().toString().trim());
-                ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
+                if (checkUrl(mEtLink.getText().toString().trim())) {
+                    HashMap<String, String> hashMap = new HashMap<>(1);
+                    hashMap.put(ArticleDetailActivity.WEB_URL, mEtLink.getText().toString().trim());
+                    ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
+                } else {
+                    ToastUtil.showToast("输入的网站格式不正确");
+                }
                 break;
             case R.id.tv_share:
                 presenter.shareArticle(mEtTitle.getText().toString().trim(), mEtLink.getText().toString().trim());
@@ -112,5 +118,18 @@ public class ShareArticleActivity extends BaseActivity<ShareArticlePresenter> im
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 测试网站是否符合格式
+     *
+     * @param url 网站 url
+     * @return 网站是否符合格式
+     */
+    private boolean checkUrl(String url) {
+        String regex = "^([hH][tT]{2}[pP]:/*|[hH][tT]{2}[pP][sS]:/*|[fF][tT][pP]:/*)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+(\\?{0,1}(([A-Za-z0-9-~]+\\={0,1})([A-Za-z0-9-~]*)\\&{0,1})*)$";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(url).matches();
     }
 }

@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.mine.activity.ShareArticleActivity"></activity>
+        <activity android:name=".module.mine.activity.MineCollectActivity"></activity>
+        <activity android:name=".module.mine.activity.ShareArticleActivity" />
         <activity android:name=".module.mine.activity.MineShareActivity" />
         <activity android:name=".module.mine.activity.CoinRankActivity" />
         <activity android:name=".module.mine.activity.CoinActivity" />

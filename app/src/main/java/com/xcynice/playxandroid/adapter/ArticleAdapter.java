@@ -48,7 +48,12 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         }
 
         if (TextUtils.isEmpty(item.author)) {
-            helper.setText(R.id.tv_article_author, item.shareUser);
+            // 如果是收藏列表的话，不会返回 shareUser 字段，因此直接设为匿名
+            if (mTypeIsCollect) {
+                helper.setText(R.id.tv_article_author, "匿名");
+            } else {
+                helper.setText(R.id.tv_article_author, item.shareUser);
+            }
         } else {
             helper.setText(R.id.tv_article_author, item.author);
         }
@@ -78,7 +83,13 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
                 helper.setText(R.id.tv_article_content, desc);
             }
         }
-        helper.setText(R.id.tv_article_chapter_name, item.superChapterName + "·" + item.chapterName);
+        //如果是我的收藏页面，不会返回 superChapterName 字段，因此要特殊化处理
+        if (mTypeIsCollect){
+            helper.setText(R.id.tv_article_chapter_name,  item.chapterName);
+        }else {
+            helper.setText(R.id.tv_article_chapter_name, item.superChapterName + "·" + item.chapterName);
+        }
+
 
 
         //设置收藏的点击事件
