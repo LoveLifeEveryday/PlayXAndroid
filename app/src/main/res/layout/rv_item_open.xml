@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_press_color_surface"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_surface"
+        android:textSize="@dimen/text_content"
+        tools:text="goweii/AnyLayer" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_project"
+        android:layout_marginTop="5dp"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:textColor="@color/tv_article_content"
+        android:textSize="@dimen/text_auxiliary"
+        tools:text="高拓展高自定义性ActionBar，完美替代Android系统默认，完美替代Android系统默认，完美替代Android系统默认" />
+
+</RelativeLayout>

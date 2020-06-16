@@ -19,6 +19,7 @@ import com.xcynice.playxandroid.module.login.activity.LoginActivity;
 import com.xcynice.playxandroid.module.mine.activity.CoinActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineCollectActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineShareActivity;
+import com.xcynice.playxandroid.module.mine.activity.OpenSourceActivity;
 import com.xcynice.playxandroid.module.mine.presenter.MinePresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
@@ -161,6 +162,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 checkLogin(MineCollectActivity.class);
                 break;
             case R.id.ll_open_mine:
+                ActivityUtil.startActivity(OpenSourceActivity.class);
                 break;
             case R.id.ll_about_me_mine:
                 break;

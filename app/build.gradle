@@ -75,11 +75,6 @@ dependencies {
     /*圆形 ImageView*/
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    /*蒙版*/
-    implementation 'io.alterac.blurkit:blurkit:1.1.0'
-
-    /*gif 图*/
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
     /*kotlin*/
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
