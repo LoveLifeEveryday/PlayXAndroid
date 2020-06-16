@@ -29,7 +29,7 @@
                 android:layout_height="260dp"
                 android:background="@color/colorPrimary">
 
-                <com.makeramen.roundedimageview.RoundedImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/riv_mine"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -37,8 +37,7 @@
                     android:layout_centerVertical="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image_holder"
-                    app:riv_corner_radius="80dp"
-                    app:riv_mutate_background="true" />
+                    app:civ_circle_background_color="@color/surface_mask" />
 
                 <TextView
                     android:id="@+id/tv_username_mine"

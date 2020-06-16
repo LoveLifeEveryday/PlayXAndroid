@@ -9,13 +9,13 @@ import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
 import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
+import com.xcynice.playxandroid.module.mine.activity.AboutMeActivity;
 import com.xcynice.playxandroid.module.mine.activity.CoinActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineCollectActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineShareActivity;
@@ -32,6 +32,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @Author 许朋友爱玩
@@ -54,7 +55,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     @BindView(R.id.rl_title)
     RelativeLayout mRlTitle;
     @BindView(R.id.riv_mine)
-    RoundedImageView mRivMine;
+    CircleImageView mRivMine;
     @BindView(R.id.tv_username_mine)
     TextView mTvUsernameMine;
     @BindView(R.id.tv_user_id_mine)
@@ -165,6 +166,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 ActivityUtil.startActivity(OpenSourceActivity.class);
                 break;
             case R.id.ll_about_me_mine:
+                ActivityUtil.startActivity(AboutMeActivity.class);
                 break;
             case R.id.ll_setting_mine:
                 break;
