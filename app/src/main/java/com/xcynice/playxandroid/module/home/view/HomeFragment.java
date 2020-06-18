@@ -31,6 +31,7 @@ import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.home.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
+import com.xcynice.playxandroid.module.search.SearchActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.xcynice.playxandroid.util.XUtil;
@@ -116,6 +117,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initView() {
+        mIvSearch.setImageResource(R.drawable.search);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
         mRvHome.setLayoutManager(new LinearLayoutManager(mContext));
@@ -377,8 +379,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 openScan();
                 break;
             case R.id.iv_title_right:
-                ToastUtil.showToast("你点击了右边的按钮");
-
+                ActivityUtil.startActivity(SearchActivity.class);
                 break;
             default:
                 break;

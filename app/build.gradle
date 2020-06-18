@@ -85,7 +85,15 @@ dependencies {
     /*EventBus*/
     implementation 'org.greenrobot:eventbus:3.2.0'
 
-
     /*blurkit*/
     implementation 'io.alterac.blurkit:blurkit:1.1.0'
+
+    /*搜索框*/
+    implementation 'com.github.goweii:ActionBarEx:3.3.0'
+
+    /*进度条*/
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
+
+    /*浮层创建管理框架*/
+    implementation 'com.github.goweii:AnyLayer:3.3.0-androidx'
 }

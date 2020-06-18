@@ -23,6 +23,12 @@
     <color name="text_accent">@color/accent</color>
     <color name="accent">#f86734</color>
     <color name="transparent">#00000000</color>
+    <color name="assist">#3cdc86</color>
+    <color name="basic_ui_action_bar_icon">@color/white</color>
+    <color name="invert_alpha">#11000000</color>
+    <color name="basic_ui_action_bar_text_alpha">@color/text_invert_alpha</color>
+    <color name="text_invert_alpha">#88ffffff</color>
+
 
     <color name="scan_side">#2A017CB4</color>
     <color name="scan_partial">#B20493D5</color>

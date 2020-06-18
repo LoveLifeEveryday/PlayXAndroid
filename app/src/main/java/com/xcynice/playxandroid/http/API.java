@@ -7,6 +7,7 @@ import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.bean.Coin;
 import com.xcynice.playxandroid.bean.CoinRank;
+import com.xcynice.playxandroid.bean.HotKey;
 import com.xcynice.playxandroid.bean.MineShare;
 import com.xcynice.playxandroid.bean.Navigation;
 import com.xcynice.playxandroid.bean.Tree;
@@ -208,6 +209,30 @@ public class API {
         @FormUrlEncoded
         @POST("lg/user_article/add/json")
         Observable<BaseBean> shareArticle(@Field("title") String title, @Field("link") String link);
+
+
+        //-----------------------【  搜索  】----------------------
+
+        /**
+         * 得到搜索热词
+         *
+         * @return 搜索热词
+         */
+        @GET("hotkey/json")
+        Observable<BaseBean<List<HotKey>>> getHotKeyList();
+
+
+        /**
+         * 搜索
+         *
+         * @param page 页数
+         * @param key  关键词
+         * @return 搜索结果
+         */
+        @FormUrlEncoded
+        @POST("article/query/{page}/json")
+        Observable<BaseBean<Article>> search(@Path("page") int page,
+                                             @Field("k") String key);
     }
 
 }

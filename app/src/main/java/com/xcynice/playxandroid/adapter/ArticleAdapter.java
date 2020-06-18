@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,12 +28,16 @@ import java.util.List;
 
 public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, BaseViewHolder> {
 
-    @SuppressWarnings("all")
-    public ArticleAdapter(int layoutResId, List data) {
+
+    private boolean mTypeIsCollect = false;
+
+    public ArticleAdapter(int layoutResId, @Nullable List<Article.DataDetailBean> data) {
         super(layoutResId, data);
     }
 
-    private boolean mTypeIsCollect = false;
+    public ArticleAdapter(int layoutResId) {
+        super(layoutResId);
+    }
 
     public void setType(boolean typeIsCollect) {
         mTypeIsCollect = typeIsCollect;
@@ -84,12 +89,11 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
             }
         }
         //如果是我的收藏页面，不会返回 superChapterName 字段，因此要特殊化处理
-        if (mTypeIsCollect){
-            helper.setText(R.id.tv_article_chapter_name,  item.chapterName);
-        }else {
+        if (mTypeIsCollect) {
+            helper.setText(R.id.tv_article_chapter_name, item.chapterName);
+        } else {
             helper.setText(R.id.tv_article_chapter_name, item.superChapterName + "·" + item.chapterName);
         }
-
 
 
         //设置收藏的点击事件

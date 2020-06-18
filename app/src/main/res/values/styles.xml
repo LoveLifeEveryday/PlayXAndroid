@@ -32,4 +32,26 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/bg_press_color_main_radius_max</item>
     </style>
+
+
+    <style name="ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="ab_bottomLineHeight">0dp</item>
+        <item name="ab_foregroundLayerLayout">@layout/basic_ui_loading_bar</item>
+        <item name="ab_statusBarColor">@color/transparent</item>
+        <item name="ab_titleBarHeight">@dimen/action_bar_height</item>
+    </style>
+
+
+    <style name="basic_ui_LoadingBarH" parent="Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding">
+        <item name="android:minHeight">1dp</item>
+        <item name="android:maxHeight">5dp</item>
+        <item name="mpb_showProgressBackground">false</item>
+        <item name="mpb_progressTint">@color/assist</item>
+        <item name="mpb_indeterminateTint">@color/assist</item>
+        <item name="mpb_progressStyle">horizontal</item>
+        <item name="mpb_useIntrinsicPadding">false</item>
+    </style>
 </resources>
