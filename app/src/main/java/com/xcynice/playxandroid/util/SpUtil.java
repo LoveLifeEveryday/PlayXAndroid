@@ -16,6 +16,10 @@ public class SpUtil {
     public static final String PASSWORD = "password";
     public static final String NICK_NAME = "nickName";
     public static final String COIN = "coin";
+    public static final String HIDE_BANNER = "hideBanner";
+    public static final String HIDE_ABOUT_ME = "hide_about_me";
+    public static final String HIDE_OPEN_SOURCE = "hide_open_source";
+
 
     private static SharedPreferences sp = XUtil.getApplication().getSharedPreferences("config", 0);
 

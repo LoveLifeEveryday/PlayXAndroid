@@ -13,6 +13,8 @@ import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
+import com.xcynice.playxandroid.bean.MessageLogoutSuccessWrap;
+import com.xcynice.playxandroid.bean.SettingChangeEvent;
 import com.xcynice.playxandroid.bean.UserInfo;
 import com.xcynice.playxandroid.module.login.activity.LoginActivity;
 import com.xcynice.playxandroid.module.mine.activity.AboutMeActivity;
@@ -20,6 +22,7 @@ import com.xcynice.playxandroid.module.mine.activity.CoinActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineCollectActivity;
 import com.xcynice.playxandroid.module.mine.activity.MineShareActivity;
 import com.xcynice.playxandroid.module.mine.activity.OpenSourceActivity;
+import com.xcynice.playxandroid.module.mine.activity.SettingActivity;
 import com.xcynice.playxandroid.module.mine.presenter.MinePresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
@@ -114,6 +117,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         mIvTitleRight.setOnClickListener(view -> {
             // TODO: 2020/6/13 设置点击事件跳转到通知界面
         });
+        setMenuVisible();
     }
 
     @Override
@@ -169,6 +173,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
                 ActivityUtil.startActivity(AboutMeActivity.class);
                 break;
             case R.id.ll_setting_mine:
+                ActivityUtil.startActivity(SettingActivity.class);
                 break;
             default:
                 break;
@@ -195,6 +200,43 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
             initUserData();
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void logoutSuccess(MessageLogoutSuccessWrap messageLogoutSuccessWrap) {
+        if (messageLogoutSuccessWrap.isLogoutSuccess()) {
+            initUserData();
+        }
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSettingChangeEvent(SettingChangeEvent event) {
+        if (isDetached()) {
+            return;
+        }
+        // 如果有其中一个配置发生改变
+        if (event.isHideAboutMeChanged() || event.isHideOpenChanged() || event.isShowBannerChanged()) {
+            setMenuVisible();
+        }
+    }
+
+
+    /**
+     * 设置菜单项的显示
+     */
+    private void setMenuVisible() {
+        if (SpUtil.getBoolean(SpUtil.HIDE_ABOUT_ME)) {
+            mLlAboutMeMine.setVisibility(View.GONE);
+        } else {
+            mLlAboutMeMine.setVisibility(View.VISIBLE);
+        }
+        if (SpUtil.getBoolean(SpUtil.HIDE_OPEN_SOURCE)) {
+            mLlOpenMine.setVisibility(View.GONE);
+        } else {
+            mLlOpenMine.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     @Override
     public void setUserInfoSuccess(BaseBean<UserInfo> userInfo) {

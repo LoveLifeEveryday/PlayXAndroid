@@ -28,15 +28,21 @@ import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
+import com.xcynice.playxandroid.bean.SettingChangeEvent;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.home.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
 import com.xcynice.playxandroid.module.search.SearchActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.xcynice.playxandroid.util.XUtil;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,6 +123,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initView() {
+        EventBus.getDefault().register(this);
         mIvSearch.setImageResource(R.drawable.search);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
@@ -136,7 +143,24 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void onDestroyView() {
         super.onDestroyView();
         mBannerHome.pause();
+        EventBus.getDefault().unregister(this);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSettingChangeEvent(SettingChangeEvent event) {
+        if (isDetached()) {
+            return;
+        }
+        if (event.isShowBannerChanged()) {
+            if (SpUtil.getBoolean(SpUtil.HIDE_BANNER)) {
+                mBannerHome.setVisibility(View.GONE);
+            } else {
+                mBannerHome.setVisibility(View.VISIBLE);
+                presenter.getBanner();
+            }
+        }
+    }
+
 
     @Override
     protected void initData() {

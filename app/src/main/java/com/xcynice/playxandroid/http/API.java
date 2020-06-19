@@ -76,6 +76,14 @@ public class API {
         Observable<BaseBean<User>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
 
+        /**
+         * 退出登陆
+         * @return 是否退出登陆成功
+         */
+        @GET("user/logout/json")
+        Observable<BaseBean> logout();
+
+
         //-----------------------【  问答  】----------------------
 
         @GET("wenda/list/{page}/json")

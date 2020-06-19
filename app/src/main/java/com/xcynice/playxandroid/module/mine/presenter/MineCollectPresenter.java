@@ -23,7 +23,7 @@ public class MineCollectPresenter extends BasePresenter<IMineCollectView> {
 
 
     public void getMineCollectFirst() {
-        addDisposable(apiServer.getCollectList(0), new BaseObserver<BaseBean<Article>>(baseView) {
+        addDisposable(apiServer.getCollectList(0), new BaseObserver<BaseBean<Article>>(baseView,true) {
 
             @Override
             public void onSuccess(BaseBean<Article> bean) {

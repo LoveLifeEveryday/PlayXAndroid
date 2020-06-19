@@ -24,7 +24,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
     public void getBanner() {
-        addDisposable(apiServer.getBanner(), new BaseObserver<BaseBean<List<Banner>>>(baseView) {
+        addDisposable(apiServer.getBanner(), new BaseObserver<BaseBean<List<Banner>>>(baseView,true) {
 
             @Override
             public void onSuccess(BaseBean<List<Banner>> list) {

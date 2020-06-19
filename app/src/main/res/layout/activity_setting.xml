@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".module.mine.activity.SettingActivity">
+
+    <include layout="@layout/item_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_press_color_surface"
+        android:paddingLeft="16dp"
+        android:paddingTop="14dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:id="@+id/tv_hide_banner_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="隐藏轮播图"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+        <TextView
+            android:id="@+id/tv_show_banner_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_hide_banner_title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_toLeftOf="@+id/sc_hide_banner"
+            android:text="开启后首页隐藏轮播图"
+            android:textColor="@color/timeTextColor"
+            android:textSize="@dimen/text_notes" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sc_hide_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_press_color_surface"
+        android:paddingLeft="16dp"
+        android:paddingTop="14dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:id="@+id/tv_hide_about_me_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="隐藏关于作者"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+        <TextView
+            android:id="@+id/tv_hide_about_me_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_hide_about_me_title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_toLeftOf="@+id/sc_hide_about_me"
+            android:text="开启后隐藏我的页面的关于作者入口"
+            android:textColor="@color/timeTextColor"
+            android:textSize="@dimen/text_notes" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sc_hide_about_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_press_color_surface"
+        android:paddingLeft="16dp"
+        android:paddingTop="14dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:id="@+id/tv_hide_open_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="隐藏开源项目"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+        <TextView
+            android:id="@+id/tv_hide_open_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_hide_open_title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_toLeftOf="@+id/sc_hide_open"
+            android:text="开启后隐藏我的页面的开源项目入口"
+            android:textColor="@color/timeTextColor"
+            android:textSize="@dimen/text_notes" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sc_hide_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_press_color_surface"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="关于我们"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+        <TextView
+            android:id="@+id/tv_curr_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/timeTextColor"
+            android:textSize="@dimen/text_notes"
+            tools:text="1.0.0" />
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:rotation="180"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back"
+            android:tint="@color/timeTextColor" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_press_color_surface"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="退出登录"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+    </LinearLayout>
+</LinearLayout>
