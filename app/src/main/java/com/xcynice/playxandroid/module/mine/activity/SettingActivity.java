@@ -15,6 +15,7 @@ import com.xcynice.playxandroid.bean.MessageLogoutSuccessWrap;
 import com.xcynice.playxandroid.bean.SettingChangeEvent;
 import com.xcynice.playxandroid.module.mine.presenter.SettingPresenter;
 import com.xcynice.playxandroid.module.mine.view.ISettingView;
+import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 
@@ -171,7 +172,7 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements I
                 finish();
                 break;
             case R.id.ll_about:
-                // TODO: 2020/6/19 跳转到 about
+                ActivityUtil.startActivity(AboutUsActivity.class);
                 break;
             case R.id.ll_logout:
                 presenter.logout();

@@ -26,7 +26,7 @@
             <RelativeLayout
                 android:id="@+id/rl_mine"
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
+                android:layout_height="230dp"
                 android:background="@color/colorPrimary">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -34,7 +34,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="55dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image_holder"
                     app:civ_circle_background_color="@color/surface_mask" />
