@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -67,14 +66,6 @@ import static android.app.Activity.RESULT_OK;
 public class MineFragment extends BaseFragment<MinePresenter> implements IMineView {
 
 
-    @BindView(R.id.iv_title_left)
-    ImageView mIvTitleLeft;
-    @BindView(R.id.tv_title_center)
-    TextView mTvTitleCenter;
-    @BindView(R.id.iv_title_right)
-    ImageView mIvTitleRight;
-    @BindView(R.id.rl_title)
-    RelativeLayout mRlTitle;
     @BindView(R.id.riv_mine)
     CircleImageView mRivMine;
     @BindView(R.id.tv_username_mine)
@@ -131,13 +122,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         EventBus.getDefault().register(this);
         mSrlMine.setColorSchemeResources(R.color.colorPrimary);
         mRxPermissions = new RxPermissions(this);
-        ImmersionBar.with(this).titleBar(mRlTitle).init();
-        mTvTitleCenter.setVisibility(View.INVISIBLE);
-        mIvTitleLeft.setVisibility(View.INVISIBLE);
-        mIvTitleRight.setImageResource(R.drawable.notification);
-        mIvTitleRight.setOnClickListener(view -> {
-            // TODO: 2020/6/13 设置点击事件跳转到通知界面
-        });
+        ImmersionBar.with(this).titleBar(mRlMine).init();
         setMenuVisible();
 
         HeadIcon headIcon = mKv.decodeParcelable(SpUtil.HEAD_ICON, HeadIcon.class);
@@ -176,11 +161,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     }
 
     @SuppressLint("CheckResult")
-    @OnClick({R.id.iv_title_right, R.id.riv_mine, R.id.ll_coin_mine, R.id.ll_share_mine, R.id.ll_collect_mine, R.id.ll_open_mine, R.id.ll_about_me_mine, R.id.ll_setting_mine})
+    @OnClick({ R.id.riv_mine, R.id.ll_coin_mine, R.id.ll_share_mine, R.id.ll_collect_mine, R.id.ll_open_mine, R.id.ll_about_me_mine, R.id.ll_setting_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_title_right:
-                break;
             case R.id.riv_mine:
                 if (SpUtil.getBoolean(SpUtil.IS_LOGIN)) {
                     mRxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -319,5 +302,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     @Override
     public void setUserInfoFail(String msg) {
         ToastUtil.showToast(msg);
+        if (mSrlMine.isRefreshing()) {
+            mSrlMine.setRefreshing(false);
+        }
     }
 }

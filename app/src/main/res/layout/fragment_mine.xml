@@ -8,10 +8,7 @@
     android:orientation="vertical"
     tools:context=".module.mine.fragment.MineFragment">
 
-    <include
-        layout="@layout/item_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_mine"
