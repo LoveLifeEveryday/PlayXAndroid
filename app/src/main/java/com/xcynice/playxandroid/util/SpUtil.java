@@ -2,6 +2,11 @@ package com.xcynice.playxandroid.util;
 
 
 import android.content.SharedPreferences;
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 /**
  * @Author xucanyou666
@@ -19,7 +24,7 @@ public class SpUtil {
     public static final String HIDE_BANNER = "hideBanner";
     public static final String HIDE_ABOUT_ME = "hide_about_me";
     public static final String HIDE_OPEN_SOURCE = "hide_open_source";
-
+    public static final String HEAD_ICON = "head_icon";
 
     private static SharedPreferences sp = XUtil.getApplication().getSharedPreferences("config", 0);
 
@@ -29,6 +34,80 @@ public class SpUtil {
     public static void setString(String key, String value) {
         sp.edit().putString(key, value).apply();
     }
+
+
+    /**
+     * 保存一个普通对象（非泛型）
+     *
+     * @param object 普通对象
+     */
+    public static void setObject(Object object) {
+        String key = getKey(object.getClass());
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        setString(key, json);
+    }
+
+
+    /**
+     * 保存一个泛型对象
+     *
+     * @param object 对象
+     * @param type   类型 例如： new TypeToken<List<Person>>() { }.getType()
+     */
+    public static void setObject(Object object, Type type) {
+        String key = getKey(type);
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        setString(key, json);
+    }
+
+    public static String getKey(Class<?> clazz) {
+        return clazz.getName();
+    }
+
+    public static String getKey(Type type) {
+        return type.toString();
+    }
+
+
+    /**
+     * @param clazz 类名
+     * @param <T>   类型
+     * @return 类
+     */
+    public static <T> T getObject(Class<T> clazz) {
+        String key = getKey(clazz);
+        String json = getString(key);
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(json, clazz);
+    }
+
+
+    /**
+     * 通过Type去获取一个泛型对象
+     *
+     * @param type 类型
+     * @param <T>  类型
+     * @return 对象
+     */
+    public static <T> T getObject(Type type) {
+        String key = getKey(type);
+        String json = getString(key);
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+        try {
+            Gson gson = new Gson();
+            return gson.fromJson(json, type);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     public static String getString(String key) {
         return sp.getString(key, "");

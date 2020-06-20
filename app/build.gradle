@@ -40,6 +40,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
 
+
     /*retrofit、rxjava*/
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
@@ -96,4 +97,13 @@ dependencies {
 
     /*浮层创建管理框架*/
     implementation 'com.github.goweii:AnyLayer:3.3.0-androidx'
+
+    /*权限申请框架*/
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    /*图片选择框架*/
+    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+
+    /*mmkv存储框架*/
+    implementation 'com.tencent:mmkv-static:1.1.2'
 }

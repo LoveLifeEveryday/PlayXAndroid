@@ -1,17 +1,27 @@
 package com.xcynice.playxandroid.module.mine.fragment;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.gyf.immersionbar.ImmersionBar;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tencent.mmkv.MMKV;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
+import com.xcynice.playxandroid.bean.HeadIcon;
 import com.xcynice.playxandroid.bean.MessageLoginSuccessWrap;
 import com.xcynice.playxandroid.bean.MessageLogoutSuccessWrap;
 import com.xcynice.playxandroid.bean.SettingChangeEvent;
@@ -28,14 +38,22 @@ import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * @Author 许朋友爱玩
@@ -93,7 +111,10 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     LinearLayout mLlSettingMine;
     @BindView(R.id.srl_mine)
     SwipeRefreshLayout mSrlMine;
-
+    private List<Uri> mHeadIcon = new ArrayList<>();
+    private static final int REQUEST_CODE_CHOOSE = 123;
+    private RxPermissions mRxPermissions;
+    private MMKV mKv = MMKV.defaultMMKV();
 
     @Override
     protected MinePresenter createPresenter() {
@@ -109,7 +130,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     protected void initView() {
         EventBus.getDefault().register(this);
         mSrlMine.setColorSchemeResources(R.color.colorPrimary);
-
+        mRxPermissions = new RxPermissions(this);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mTvTitleCenter.setVisibility(View.INVISIBLE);
         mIvTitleLeft.setVisibility(View.INVISIBLE);
@@ -118,6 +139,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
             // TODO: 2020/6/13 设置点击事件跳转到通知界面
         });
         setMenuVisible();
+
+        HeadIcon headIcon = mKv.decodeParcelable(SpUtil.HEAD_ICON, HeadIcon.class);
+        if (headIcon != null) {
+            Glide.with(MineFragment.this).load(headIcon.getHeadIcon()).into(mRivMine);
+        }
     }
 
     @Override
@@ -149,13 +175,32 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         }
     }
 
+    @SuppressLint("CheckResult")
     @OnClick({R.id.iv_title_right, R.id.riv_mine, R.id.ll_coin_mine, R.id.ll_share_mine, R.id.ll_collect_mine, R.id.ll_open_mine, R.id.ll_about_me_mine, R.id.ll_setting_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_title_right:
                 break;
             case R.id.riv_mine:
-                ActivityUtil.startActivity(LoginActivity.class);
+                if (SpUtil.getBoolean(SpUtil.IS_LOGIN)) {
+                    mRxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            .subscribe(granted -> {
+                                if (granted) {
+                                    Matisse.from(MineFragment.this)
+                                            .choose(MimeType.ofImage())
+                                            .countable(false)
+                                            .maxSelectable(1)
+                                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                                            .thumbnailScale(0.85f)
+                                            .imageEngine(new GlideEngine())
+                                            .showPreview(true)
+                                            .forResult(REQUEST_CODE_CHOOSE);
+                                }
+                            });
+                } else {
+                    ActivityUtil.startActivity(LoginActivity.class);
+                }
                 break;
             case R.id.ll_coin_mine:
                 checkLogin(CoinActivity.class);
@@ -180,6 +225,21 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         }
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
+            if (data != null) {
+                mHeadIcon = Matisse.obtainResult(data);
+                Glide.with(MineFragment.this).load(mHeadIcon.get(0)).into(mRivMine);
+                HeadIcon headIcon = new HeadIcon(mHeadIcon.get(0));
+                // 将头像存入 mmkv
+                mKv.encode(SpUtil.HEAD_ICON, headIcon);
+            }
+
+        }
+    }
 
     /**
      * 检测登陆后自动跳转到对应的界面

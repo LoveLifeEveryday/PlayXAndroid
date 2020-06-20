@@ -2,6 +2,7 @@ package com.xcynice.playxandroid.app;
 
 import android.app.Application;
 
+import com.tencent.mmkv.MMKV;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.LogUtil;
 import com.xcynice.playxandroid.util.XUtil;
@@ -23,6 +24,7 @@ public class App extends Application {
         super.onCreate();
         //初始化
         XUtil.initialize(this);
+        MMKV.initialize(this);
         //设置打印开关
         LogUtil.setIsLog(true);
         //注册Activity生命周期
