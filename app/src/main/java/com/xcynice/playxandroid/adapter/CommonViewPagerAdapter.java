@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2020/6/4
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description ViewPager 的 adapter
+ * @Description ViewPager 的通用 adapter
  */
 
 

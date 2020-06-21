@@ -24,6 +24,7 @@ public class App extends Application {
         super.onCreate();
         //初始化
         XUtil.initialize(this);
+        //初始化 MMKV
         MMKV.initialize(this);
         //设置打印开关
         LogUtil.setIsLog(true);

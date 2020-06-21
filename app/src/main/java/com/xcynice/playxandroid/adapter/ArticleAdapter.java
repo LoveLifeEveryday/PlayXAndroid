@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.util.StringUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  * @Date 2020/6/10
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description ArticleAdapter
+ * @Description ArticleAdapter 文章列表的 adapter
  */
 
 
@@ -55,7 +56,7 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         if (TextUtils.isEmpty(item.author)) {
             // 如果是收藏列表的话，不会返回 shareUser 字段，因此直接设为匿名
             if (mTypeIsCollect) {
-                helper.setText(R.id.tv_article_author, "匿名");
+                helper.setText(R.id.tv_article_author, XUtil.getString(R.string.anonymity));
             } else {
                 helper.setText(R.id.tv_article_author, item.shareUser);
             }
@@ -92,7 +93,7 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         if (mTypeIsCollect) {
             helper.setText(R.id.tv_article_chapter_name, item.chapterName);
         } else {
-            helper.setText(R.id.tv_article_chapter_name, item.superChapterName + "·" + item.chapterName);
+            helper.setText(R.id.tv_article_chapter_name, item.superChapterName + XUtil.getString(R.string.dot) + item.chapterName);
         }
 
 

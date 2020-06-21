@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
@@ -35,6 +36,19 @@ public class XUtil {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
     }
+
+    public static String getString(int id) {
+        return getApplication().getResources().getString(id);
+
+    }
+
+    public static int getColor(int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return getApplication().getResources().getColor(id, getApplication().getTheme());
+        }
+        return 0;
+    }
+
 
     public static void showLoading(Activity activity, String msg) {
         progressDialog = ProgressDialog.show(activity, "", msg, true, true);

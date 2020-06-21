@@ -29,4 +29,10 @@
     <string name="basic_ui_dialog_btn_no">取消</string>
     <string name="basic_ui_dialog_btn_close">关闭</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="anonymity">匿名</string>
+    <string name="dot">·</string>
+    <string name="comma">,</string>
+    <string name="colon">：</string>
+    <string name="blank"> </string>
+    <string name="plus">+</string>
 </resources>

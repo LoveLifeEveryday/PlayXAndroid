@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.bean.MineShare;
 import com.xcynice.playxandroid.util.StringUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class MineShareAdapter extends BaseQuickAdapter<MineShare.ShareArticlesBe
                 helper.setText(R.id.tv_article_content, desc);
             }
         }
-        helper.setText(R.id.tv_article_chapter_name, item.getSuperChapterName() + "·" + item.getChapterName());
+        helper.setText(R.id.tv_article_chapter_name, item.getSuperChapterName() + XUtil.getString(R.string.dot) + item.getChapterName());
 
         //设置收藏的点击事件
         helper.addOnClickListener(R.id.iv_article_favorite);

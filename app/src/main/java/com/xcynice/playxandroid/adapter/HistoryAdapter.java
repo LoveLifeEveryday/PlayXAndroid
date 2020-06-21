@@ -50,7 +50,7 @@ public class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
             //如果要显示清除的按钮
             if (mRemoveMode) {
                 //缩放动画，逐渐显示
-                ScaleAnimation scaleAnimation = getScaleAnimationByMore(mRemoveMode);
+                ScaleAnimation scaleAnimation = getScaleAnimationByData(0F, 1F, 0F, 1F);
                 scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -69,7 +69,7 @@ public class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
                 ivRemove.startAnimation(scaleAnimation);
             } else {
                 //如果隐藏清除的按钮
-                ScaleAnimation scaleAnimation = getScaleAnimationByMore(mRemoveMode);
+                ScaleAnimation scaleAnimation = getScaleAnimationByData(1F, 0F, 1F, 0F);
                 scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -89,21 +89,6 @@ public class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
             }
         }
     }
-
-    /**
-     * 根据清除模式得到对应的缩放动画
-     *
-     * @param isRemove 是否是清除
-     * @return 缩放动画
-     */
-    private ScaleAnimation getScaleAnimationByMore(boolean isRemove) {
-        if (isRemove) {
-            return getScaleAnimationByData(0F, 1F, 0F, 1F);
-        } else {
-            return getScaleAnimationByData(1F, 0F, 1F, 0F);
-        }
-    }
-
 
 
     private ScaleAnimation getScaleAnimationByData(float fromX, float toX, float fromY, float toY) {

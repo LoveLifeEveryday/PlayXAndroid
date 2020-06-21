@@ -18,7 +18,7 @@ import java.util.List;
  * @Date 2020/6/16 14:16
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description OpenSourceAdapter
+ * @Description OpenSourceAdapter 开源框架的 adapter
  */
 
 public class OpenSourceAdapter extends BaseQuickAdapter<OpenEntity, BaseViewHolder> {

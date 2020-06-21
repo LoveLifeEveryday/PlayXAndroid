@@ -11,22 +11,22 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.bean.TreeChild;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
 
 /**
  * @Author 许朋友爱玩
- * @Date   2020/6/10
+ * @Date 2020/6/10
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- *
  * @Description TreeGrandsonAdapter
  */
 
 
 public class TreeGrandsonAdapter extends BaseQuickAdapter<TreeChild.DatasBean, BaseViewHolder> {
 
-    public TreeGrandsonAdapter(int layoutResId, List data) {
+    public TreeGrandsonAdapter(int layoutResId, List<TreeChild.DatasBean> data) {
         super(layoutResId, data);
     }
 
@@ -54,16 +54,17 @@ public class TreeGrandsonAdapter extends BaseQuickAdapter<TreeChild.DatasBean, B
             helper.setGone(R.id.tv_article_content, true);
             helper.setText(R.id.tv_article_content, item.getDesc());
         }
-        helper.setText(R.id.tv_article_chapter_name, item.getSuperChapterName() + "·" + item.getChapterName());
+        helper.setText(R.id.tv_article_chapter_name, item.getSuperChapterName() + XUtil.getString(R.string.dot) + item.getChapterName());
 
 
         //设置收藏的点击事件
         helper.addOnClickListener(R.id.iv_article_favorite);
 
-        if (item.isCollect())
+        if (item.isCollect()) {
             Glide.with(mContext).load(R.drawable.ic_like_checked).into((ImageView) helper.getView(R.id.iv_article_favorite));
-        else
+        } else {
             Glide.with(mContext).load(R.drawable.ic_like_normal).into((ImageView) helper.getView(R.id.iv_article_favorite));
+        }
 
     }
 

@@ -39,6 +39,9 @@
     <color name="tab_color">#a6c5fb</color>
     <color name="ripple_dark">#11000000</color>
     <color name="surface_mask">#ccffffff</color>
+    <color name="first_rank">#ffca28</color>
+    <color name="second_rank">#cdcdcd</color>
+    <color name="third_rank">#d49682</color>
 
 
     <color name="foreground_top">#f5f5f5</color>
