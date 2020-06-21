@@ -157,11 +157,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
             mLlUserIdMine.setVisibility(View.INVISIBLE);
             mLlUserLevelRanking.setVisibility(View.INVISIBLE);
             mTvCoinMine.setVisibility(View.INVISIBLE);
+            if (mSrlMine.isRefreshing()) {
+                mSrlMine.setRefreshing(false);
+            }
         }
     }
 
     @SuppressLint("CheckResult")
-    @OnClick({ R.id.riv_mine, R.id.ll_coin_mine, R.id.ll_share_mine, R.id.ll_collect_mine, R.id.ll_open_mine, R.id.ll_about_me_mine, R.id.ll_setting_mine})
+    @OnClick({R.id.riv_mine, R.id.ll_coin_mine, R.id.ll_share_mine, R.id.ll_collect_mine, R.id.ll_open_mine, R.id.ll_about_me_mine, R.id.ll_setting_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.riv_mine:
@@ -248,6 +251,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     public void logoutSuccess(MessageLogoutSuccessWrap messageLogoutSuccessWrap) {
         if (messageLogoutSuccessWrap.isLogoutSuccess()) {
             initUserData();
+            Glide.with(MineFragment.this).load(R.drawable.image_holder).into(mRivMine);
+            mKv.clearAll();
         }
     }
 
