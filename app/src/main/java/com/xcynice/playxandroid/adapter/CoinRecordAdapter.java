@@ -29,14 +29,14 @@ public class CoinRecordAdapter extends BaseQuickAdapter<Coin.DatasBean, BaseView
     protected void convert(@NonNull BaseViewHolder helper, Coin.DatasBean item) {
         String desc = item.getDesc();
         //找到第一个空格的位置
-        int firstSpace = desc.indexOf(XUtil.getString(R.string.blank));
+        int firstSpace = desc.indexOf(" ");
         //找到第二个空格的位置
-        int secondSpace = desc.indexOf(XUtil.getString(R.string.blank), firstSpace + 1);
+        int secondSpace = desc.indexOf(" ", firstSpace + 1);
         String time = desc.substring(0, secondSpace);
         String title = desc.substring(secondSpace + 1)
                 .replace(XUtil.getString(R.string.comma), "")
                 .replace(XUtil.getString(R.string.colon), "")
-                .replace(XUtil.getString(R.string.blank), "");
+                .replace(" ", "");
         helper.setText(R.id.tv_coin_count, XUtil.getString(R.string.plus) + item.getCoinCount());
         helper.setText(R.id.tv_title, title);
         helper.setText(R.id.tv_time, time);
