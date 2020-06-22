@@ -37,6 +37,7 @@ import com.xcynice.playxandroid.module.mine.view.IMineView;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -102,7 +103,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
     LinearLayout mLlSettingMine;
     @BindView(R.id.srl_mine)
     SwipeRefreshLayout mSrlMine;
-    private List<Uri> mHeadIcon = new ArrayList<>();
     private static final int REQUEST_CODE_CHOOSE = 123;
     private RxPermissions mRxPermissions;
     private MMKV mKv = MMKV.defaultMMKV();
@@ -153,7 +153,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
             mTvCoinMine.setVisibility(View.VISIBLE);
             presenter.getUserInfo();
         } else {
-            mTvUsernameMine.setText("请登陆");
+            mTvUsernameMine.setText(XUtil.getString(R.string.PleaseLogIn));
             mLlUserIdMine.setVisibility(View.INVISIBLE);
             mLlUserLevelRanking.setVisibility(View.INVISIBLE);
             mTvCoinMine.setVisibility(View.INVISIBLE);
@@ -169,6 +169,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         switch (view.getId()) {
             case R.id.riv_mine:
                 if (SpUtil.getBoolean(SpUtil.IS_LOGIN)) {
+                    //noinspection ResultOfMethodCallIgnored
                     mRxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             .subscribe(granted -> {
@@ -217,7 +218,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             if (data != null) {
-                mHeadIcon = Matisse.obtainResult(data);
+                List<Uri> mHeadIcon = Matisse.obtainResult(data);
                 Glide.with(MineFragment.this).load(mHeadIcon.get(0)).into(mRivMine);
                 HeadIcon headIcon = new HeadIcon(mHeadIcon.get(0));
                 // 将头像存入 mmkv
@@ -232,7 +233,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
      *
      * @param toClass 跳转到的界面
      */
-    private void checkLogin(Class toClass) {
+    private void checkLogin(@SuppressWarnings("rawtypes") Class toClass) {
         if (SpUtil.getBoolean(SpUtil.IS_LOGIN)) {
             ActivityUtil.startActivity(toClass);
         } else {
@@ -242,7 +243,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements IMineVi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getLoginMsg(MessageLoginSuccessWrap messageWrap) {
-        if (messageWrap.getMsg().equals("refresh user info")) {
+        if (messageWrap.getMsg().equals(XUtil.getString(R.string.refreshUser))) {
             initUserData();
         }
     }

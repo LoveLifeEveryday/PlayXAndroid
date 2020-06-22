@@ -18,6 +18,7 @@ import com.xcynice.playxandroid.bean.CoinRank;
 import com.xcynice.playxandroid.module.mine.presenter.CoinRankPresenter;
 import com.xcynice.playxandroid.module.mine.view.ICoinRankView;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -75,7 +76,7 @@ public class CoinRankActivity extends BaseActivity<CoinRankPresenter> implements
     @Override
     protected void initView() {
         ImmersionBar.with(this).titleBar(mRlTitle).init();
-        mTvTitleCenter.setText("积分排行榜");
+        mTvTitleCenter.setText(XUtil.getString(R.string.Leaderboard));
         mIvTitleLeft.setImageResource(R.drawable.back);
         mIvTitleRight.setVisibility(View.INVISIBLE);
         mRvCoinRank.setLayoutManager(new LinearLayoutManager(this));

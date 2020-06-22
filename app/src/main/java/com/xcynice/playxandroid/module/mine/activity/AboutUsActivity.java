@@ -14,6 +14,7 @@ import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.module.login.widget.LogoAnimView;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.HashMap;
 
@@ -29,6 +30,7 @@ import butterknife.OnClick;
  */
 
 
+@SuppressWarnings("rawtypes")
 public class AboutUsActivity extends BaseActivity {
 
     @BindView(R.id.iv_title_left)
@@ -69,7 +71,7 @@ public class AboutUsActivity extends BaseActivity {
     protected void initView() {
         mLav.randomBlink();
         mIvTitleLeft.setImageResource(R.drawable.back);
-        mTvTitleCenter.setText("关于我们");
+        mTvTitleCenter.setText(XUtil.getString(R.string.aboutUs));
         mIvTitleRight.setVisibility(View.INVISIBLE);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
     }
@@ -87,10 +89,10 @@ public class AboutUsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.ll_web:
-                skipToArticleDetailActivity("https://www.wanandroid.com");
+                skipToArticleDetailActivity(XUtil.getString(R.string.officialWebsite));
                 break;
             case R.id.ll_about:
-                skipToArticleDetailActivity("https://www.wanandroid.com/about");
+                skipToArticleDetailActivity(XUtil.getString(R.string.officialWebsiteAbout));
                 break;
             default:
         }

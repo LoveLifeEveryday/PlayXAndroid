@@ -1,6 +1,5 @@
 package com.xcynice.playxandroid.module.tree.tree_grandson;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.appcompat.widget.Toolbar;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @Author 许朋友爱玩

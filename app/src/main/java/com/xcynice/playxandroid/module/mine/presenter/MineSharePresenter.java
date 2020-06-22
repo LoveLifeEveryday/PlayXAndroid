@@ -1,11 +1,13 @@
 package com.xcynice.playxandroid.module.mine.presenter;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.MineShare;
 import com.xcynice.playxandroid.module.mine.view.IMineShareView;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
@@ -24,7 +26,7 @@ public class MineSharePresenter extends BasePresenter<IMineShareView> {
      * 第一次获取我的分享数据
      */
     public void getMineShareFirst() {
-        addDisposable(apiServer.getMineShare(1), new BaseObserver<BaseBean<MineShare>>(baseView,true) {
+        addDisposable(apiServer.getMineShare(1), new BaseObserver<BaseBean<MineShare>>(baseView, true) {
 
 
             @Override
@@ -67,8 +69,6 @@ public class MineSharePresenter extends BasePresenter<IMineShareView> {
         addDisposable(apiServer.getMineShare(page), new BaseObserver<BaseBean<MineShare>>(baseView) {
 
 
-
-
             @Override
             public void onSuccess(BaseBean<MineShare> bean) {
                 baseView.setShareMoreSuccess(bean.data.getShareArticles());
@@ -82,17 +82,18 @@ public class MineSharePresenter extends BasePresenter<IMineShareView> {
     }
 
     public void collect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.collectIn(id), new BaseObserver<BaseBean>(baseView) {
 
 
             @Override
-            public void onSuccess(@SuppressWarnings("rawtypes") BaseBean o) {
-                baseView.showCollectSuccess("收藏成功");
+            public void onSuccess(BaseBean o) {
+                baseView.showCollectSuccess(XUtil.getString(R.string.collectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.showCollectError(msg + "(°∀°)ﾉ");
+                baseView.showCollectError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -107,12 +108,12 @@ public class MineSharePresenter extends BasePresenter<IMineShareView> {
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
-                baseView.showUnCollectSuccess("取消收藏成功（￣▽￣）");
+                baseView.showUnCollectSuccess(XUtil.getString(R.string.unCollectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.showUnCollectError(msg + "(°∀°)ﾉ");
+                baseView.showUnCollectError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }

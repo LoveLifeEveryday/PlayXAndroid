@@ -13,6 +13,7 @@ import com.xcynice.playxandroid.bean.Article;
  * @Description ISearchResultView
  */
 
+@SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface ISearchResultView extends BaseView {
     void searchFirstSuccess(BaseBean<Article> bean);
 

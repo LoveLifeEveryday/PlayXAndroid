@@ -224,11 +224,7 @@ public final class SoftInputHelper implements ViewTreeObserver.OnGlobalLayoutLis
         int usableHeightNow = rect.bottom - rect.top;
         int usableHeightSansKeyboard = rootView.getHeight();
         int heightDifference = usableHeightSansKeyboard - usableHeightNow;
-        if (heightDifference > (usableHeightSansKeyboard / 4)) {
-            return true;
-        } else {
-            return false;
-        }
+        return heightDifference > (usableHeightSansKeyboard / 4);
     }
 
     private View isViewFocus() {

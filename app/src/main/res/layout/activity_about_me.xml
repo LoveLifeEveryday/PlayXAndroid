@@ -147,7 +147,7 @@
                         android:textSize="@dimen/text_content" />
 
                     <TextView
-                        android:id="@+id/tv_jeujin"
+                        android:id="@+id/tv_juejin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"

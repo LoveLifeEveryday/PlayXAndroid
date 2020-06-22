@@ -1,11 +1,13 @@
 package com.xcynice.playxandroid.module.login.presenter;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.User;
 import com.xcynice.playxandroid.module.login.view.IRegisterView;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
@@ -32,7 +34,7 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
 
             @Override
             public void onError(String msg) {
-                baseView.registerFail(msg + "(°∀°)ﾉ");
+                baseView.registerFail(msg + XUtil.getString(R.string.surprise));
             }
         });
     }

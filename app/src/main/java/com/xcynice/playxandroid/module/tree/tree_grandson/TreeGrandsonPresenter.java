@@ -1,10 +1,12 @@
 package com.xcynice.playxandroid.module.tree.tree_grandson;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.TreeChild;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
@@ -34,7 +36,7 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
 
             @Override
             public void onError(String msg) {
-                baseView.showTreeChildError(msg + "(°∀°)ﾉ");
+                baseView.showTreeChildError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -53,7 +55,7 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
 
             @Override
             public void onError(String msg) {
-                baseView.showTreeChildError(msg + "(°∀°)ﾉ");
+                baseView.showTreeChildError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -73,7 +75,7 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
 
             @Override
             public void onError(String msg) {
-                baseView.setTreeChildDataByLoadMoreFail(msg + "(°∀°)ﾉ");
+                baseView.setTreeChildDataByLoadMoreFail(msg +XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -83,12 +85,12 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
         addDisposable(apiServer.collectIn(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
-                baseView.showCollectSuccess("收藏成功（￣▽￣）");
+                baseView.showCollectSuccess(XUtil.getString(R.string.collectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.showCollectError(msg + "(°∀°)ﾉ");
+                baseView.showCollectError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -98,12 +100,12 @@ public class TreeGrandsonPresenter extends BasePresenter<ITreeGrandsonView> {
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
-                baseView.showUnCollectSuccess("取消收藏成功（￣▽￣）");
+                baseView.showUnCollectSuccess(XUtil.getString(R.string.unCollectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.showUnCollectError(msg + "(°∀°)ﾉ");
+                baseView.showUnCollectError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }

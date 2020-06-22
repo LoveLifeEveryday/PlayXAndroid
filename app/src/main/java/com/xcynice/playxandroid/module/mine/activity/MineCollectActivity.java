@@ -21,6 +21,7 @@ import com.xcynice.playxandroid.module.mine.presenter.MineCollectPresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineCollectView;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,7 +89,7 @@ public class MineCollectActivity extends BaseActivity<MineCollectPresenter> impl
     @Override
     protected void initView() {
         mIvTitleLeft.setImageResource(R.drawable.back);
-        mTvTitleCenter.setText("我的收藏");
+        mTvTitleCenter.setText(XUtil.getString(R.string.MyCollection));
         mIvTitleRight.setVisibility(View.INVISIBLE);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mSrlMineCollect.setColorSchemeResources(R.color.colorPrimary);

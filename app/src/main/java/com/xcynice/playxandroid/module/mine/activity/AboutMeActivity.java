@@ -30,6 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 
+@SuppressWarnings("rawtypes")
 public class AboutMeActivity extends BaseActivity {
 
     @BindView(R.id.iv_title_left)
@@ -52,8 +53,8 @@ public class AboutMeActivity extends BaseActivity {
     TextView mTvGithub;
     @BindView(R.id.ll_github)
     LinearLayout mLlGithub;
-    @BindView(R.id.tv_jeujin)
-    TextView mTvJeujin;
+    @BindView(R.id.tv_juejin)
+    TextView mTvJuejin;
     @BindView(R.id.ll_juejin)
     LinearLayout mLlJuejin;
     @BindView(R.id.tv_jianshu)
@@ -116,7 +117,7 @@ public class AboutMeActivity extends BaseActivity {
                 break;
             case R.id.ll_juejin:
                 mHashMap.clear();
-                mHashMap.put(ArticleDetailActivity.WEB_URL, mTvJeujin.getText().toString());
+                mHashMap.put(ArticleDetailActivity.WEB_URL, mTvJuejin.getText().toString());
                 ActivityUtil.startActivity(ArticleDetailActivity.class, mHashMap);
                 break;
             case R.id.ll_jianshu:

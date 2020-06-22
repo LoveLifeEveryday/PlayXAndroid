@@ -19,9 +19,9 @@ import java.util.List;
 public interface ISearchHistoryView extends BaseView {
 
     /**
-     * 得到搜索热词失败
+     * 得到搜索热词成功
      *
-     * @param data
+     * @param data 搜索热词
      */
     void setHotKeyListSuccess(BaseBean<List<HotKey>> data);
 

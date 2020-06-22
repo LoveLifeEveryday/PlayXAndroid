@@ -12,7 +12,7 @@ import com.xcynice.playxandroid.module.mine.view.ICoinRankView;
  * @Date 2020/6/14 14:41
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description CoinRankPresenter 积分排行榜列表的 Presenter
  */
 
 public class CoinRankPresenter extends BasePresenter<ICoinRankView> {

@@ -1,11 +1,13 @@
 package com.xcynice.playxandroid.module.login.presenter;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.User;
 import com.xcynice.playxandroid.module.login.view.ILoginView;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
@@ -29,7 +31,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
             @Override
             public void onError(String msg) {
-                baseView.loginFail(msg + "(°∀°)ﾉ");
+                baseView.loginFail(msg + XUtil.getString(R.string.surprise));
             }
         });
     }

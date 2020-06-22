@@ -21,9 +21,20 @@ import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.AnimatorUtils;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+/**
+ * @Author 许朋友爱玩
+ * @Date   2020/6/22
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ *
+ * @Description CoinActivity
+ */
+
 
 public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinView, BaseQuickAdapter.RequestLoadMoreListener {
 
@@ -73,7 +84,7 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
     @Override
     protected void initView() {
         ImmersionBar.with(this).titleBar(mRlTitle).init();
-        mTvTitleCenter.setText("我的积分");
+        mTvTitleCenter.setText(XUtil.getString(R.string.MyPoints));
         mIvTitleLeft.setImageResource(R.drawable.back);
         mIvTitleRight.setImageResource(R.drawable.ic_rank);
         mRvCoin.setLayoutManager(new LinearLayoutManager(this));

@@ -17,6 +17,7 @@ import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.OpenEntity;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public class OpenSourceActivity extends BaseActivity implements BaseQuickAdapter
     @Override
     protected void initView() {
         mIvTitleLeft.setImageResource(R.drawable.back);
-        mTvTitleCenter.setText("开源项目");
+        mTvTitleCenter.setText(XUtil.getString(R.string.OpenSource));
         mIvTitleRight.setVisibility(View.INVISIBLE);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mRvOpenSource.setLayoutManager(new LinearLayoutManager(this));

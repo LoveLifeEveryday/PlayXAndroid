@@ -1,18 +1,20 @@
 package com.xcynice.playxandroid.module.mine.presenter;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.module.mine.view.IMineCollectView;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
  * @Date 2020/6/15 23:02
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description MineCollectPresenter
  */
 
 public class MineCollectPresenter extends BasePresenter<IMineCollectView> {
@@ -73,17 +75,18 @@ public class MineCollectPresenter extends BasePresenter<IMineCollectView> {
 
 
     public void unCollect(int id, int originId) {
+        //noinspection rawtypes
         addDisposable(apiServer.unCollectInMineCollect(id, originId), new BaseObserver<BaseBean>(baseView) {
 
 
             @Override
             public void onSuccess(BaseBean bean) {
-                baseView.unCollectSuccess("取消收藏成功（￣▽￣）");
+                baseView.unCollectSuccess(XUtil.getString(R.string.unCollectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.unCollectFail(msg + "(°∀°)ﾉ");
+                baseView.unCollectFail(msg + XUtil.getString(R.string.surprise));
             }
         });
     }

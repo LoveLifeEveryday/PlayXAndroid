@@ -1,11 +1,13 @@
 package com.xcynice.playxandroid.module.search.presenter;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.module.search.view.ISearchResultView;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
@@ -81,27 +83,28 @@ public class SearchResultPresenter extends BasePresenter<ISearchResultView> {
 
             @Override
             public void onSuccess(BaseBean o) {
-                baseView.collectSuccess("收藏成功");
+                baseView.collectSuccess(XUtil.getString(R.string.collectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.collectFail("收藏失败");
+                baseView.collectFail(XUtil.getString(R.string.collectFail));
             }
         });
     }
 
     public void unCollect(int id) {
+        //noinspection rawtypes
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
 
             @Override
             public void onSuccess(BaseBean o) {
-                baseView.unCollectSuccess("收藏成功");
+                baseView.unCollectSuccess(XUtil.getString(R.string.collectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.unCollectFail("收藏失败");
+                baseView.unCollectFail(XUtil.getString(R.string.collectFail));
             }
         });
     }

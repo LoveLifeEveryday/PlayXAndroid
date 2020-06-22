@@ -20,6 +20,7 @@ import com.xcynice.playxandroid.module.mine.presenter.MineSharePresenter;
 import com.xcynice.playxandroid.module.mine.view.IMineShareView;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +91,7 @@ public class MineShareActivity extends BaseActivity<MineSharePresenter> implemen
     protected void initView() {
         mIvTitleLeft.setImageResource(R.drawable.back);
         mIvTitleRight.setImageResource(R.drawable.ic_add);
-        mTvTitleCenter.setText("我的分享");
+        mTvTitleCenter.setText(XUtil.getString(R.string.MyShare));
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mSrlMineShare.setColorSchemeResources(R.color.colorPrimary);
         mRvMineShare.setLayoutManager(new LinearLayoutManager(this));

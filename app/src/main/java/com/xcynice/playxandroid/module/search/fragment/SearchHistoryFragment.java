@@ -51,7 +51,6 @@ public class SearchHistoryFragment extends BaseFragment<SearchHistoryPresenter> 
     private HistoryAdapter mHistoryAdapter;
     private HotKeyAdapter mHotKeyAdapter;
     private boolean mRemoveMode = false;
-    private boolean mRemoveModeChanging = false;
 
     @Override
     protected SearchHistoryPresenter createPresenter() {
@@ -119,10 +118,8 @@ public class SearchHistoryFragment extends BaseFragment<SearchHistoryPresenter> 
         if (mRemoveMode == removeMode) {
             return;
         }
-        mRemoveModeChanging = true;
         mRemoveMode = removeMode;
-        // TODO: 2020/6/18
-        mHistoryAdapter.setRemoveModeChanging(mRemoveModeChanging);
+        mHistoryAdapter.setRemoveModeChanging(true);
         mHistoryAdapter.setRemoveMode(mRemoveMode);
         mHistoryAdapter.notifyDataSetChanged();
         if (removeMode) {

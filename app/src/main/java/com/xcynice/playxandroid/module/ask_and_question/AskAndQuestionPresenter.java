@@ -1,10 +1,12 @@
 package com.xcynice.playxandroid.module.ask_and_question;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.Article;
+import com.xcynice.playxandroid.util.XUtil;
 
 /**
  * @Author 许朋友爱玩
@@ -70,7 +72,7 @@ public class AskAndQuestionPresenter extends BasePresenter<IAskAndQuestionView> 
 
             @Override
             public void onError(String msg) {
-                baseView.showArticleErrorByMore(msg + "(°∀°)ﾉ");
+                baseView.showArticleErrorByMore(msg + XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -85,12 +87,12 @@ public class AskAndQuestionPresenter extends BasePresenter<IAskAndQuestionView> 
         addDisposable(apiServer.collectIn(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
-                baseView.showCollectSuccess("收藏成功（￣▽￣）");
+                baseView.showCollectSuccess(XUtil.getString(R.string.collectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.showCollectError(msg + "(°∀°)ﾉ");
+                baseView.showCollectError(msg + XUtil.getString(R.string.surprise));
             }
         });
     }
@@ -105,12 +107,12 @@ public class AskAndQuestionPresenter extends BasePresenter<IAskAndQuestionView> 
         addDisposable(apiServer.unCollect(id), new BaseObserver<BaseBean>(baseView) {
             @Override
             public void onSuccess(BaseBean bean) {
-                baseView.showUnCollectSuccess("取消收藏成功（￣▽￣）");
+                baseView.showUnCollectSuccess(XUtil.getString(R.string.unCollectSuccess));
             }
 
             @Override
             public void onError(String msg) {
-                baseView.showUnCollectError(msg + "(°∀°)ﾉ");
+                baseView.showUnCollectError(msg + R.string.surprise);
             }
         });
     }

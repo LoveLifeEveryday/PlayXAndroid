@@ -12,7 +12,7 @@ import com.xcynice.playxandroid.module.mine.view.IMineView;
  * @Date 2020/6/12 17:46
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description MinePresenter 我的界面的 presenter
  */
 
 public class MinePresenter extends BasePresenter<IMineView> {

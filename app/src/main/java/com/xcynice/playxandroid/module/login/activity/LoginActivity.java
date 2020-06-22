@@ -21,16 +21,25 @@ import com.xcynice.playxandroid.module.login.fragment.LoginFragment;
 import com.xcynice.playxandroid.module.login.fragment.RegisterFragment;
 import com.xcynice.playxandroid.module.login.widget.LogoAnimView;
 import com.xcynice.playxandroid.util.SoftInputHelper;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 import per.goweii.percentimageview.percentimageview.PercentImageView;
 
+/**
+ * @Author 许朋友爱玩
+ * @Date 2020/6/22
+ * @Github https://github.com/LoveLifeEveryday
+ * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
+ * @Description LoginActivity
+ */
+
+
+@SuppressWarnings("rawtypes")
 public class LoginActivity extends BaseActivity {
 
 
@@ -49,7 +58,6 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.rl_input_login)
     RelativeLayout mRlInputLogin;
 
-    private final long mMaxMoveDuration = 10000L;
     private final int mMaxMoveDistanceX = 200;
     private final int mMaxMoveDistanceY = 20;
     private Random mRandom = new Random();
@@ -82,8 +90,8 @@ public class LoginActivity extends BaseActivity {
 
         mSoftInputHelper = SoftInputHelper.attach(this).moveBy(mRlInputLogin);
         List<String> titleList = new ArrayList<>();
-        titleList.add("登陆");
-        titleList.add("注册");
+        titleList.add(XUtil.getString(R.string.login));
+        titleList.add(XUtil.getString(R.string.register));
         CommonViewPagerAdapter commonViewPagerAdapter = new CommonViewPagerAdapter(getSupportFragmentManager(), titleList);
         commonViewPagerAdapter.addFragment(new LoginFragment());
         commonViewPagerAdapter.addFragment(new RegisterFragment());
@@ -126,14 +134,11 @@ public class LoginActivity extends BaseActivity {
         if (close) {
             mLavLogin.close(null);
         } else {
-            mLavLogin.open(new Function0<Unit>() {
-                @Override
-                public Unit invoke() {
-                    if (mLavLogin != null) {
-                        mLavLogin.randomBlink();
-                    }
-                    return null;
+            mLavLogin.open(() -> {
+                if (mLavLogin != null) {
+                    mLavLogin.randomBlink();
                 }
+                return null;
             });
         }
     }
@@ -194,9 +199,9 @@ public class LoginActivity extends BaseActivity {
         float fromX = target.getTranslationX();
         float fromY = target.getTranslationY();
         long duration = calculateDuration(fromX, fromY, toX, toY);
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(target, "translationX", fromX, toX);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(target, XUtil.getString(R.string.translationX), fromX, toX);
         animatorX.setDuration(duration);
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(target, "translationY", fromY, toY);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(target, XUtil.getString(R.string.translationY), fromY, toY);
         animatorY.setDuration(duration);
         AnimatorSet set = new AnimatorSet();
         set.playTogether(animatorX, animatorY);
@@ -206,8 +211,8 @@ public class LoginActivity extends BaseActivity {
     private long calculateDuration(float x1, float y1, float x2, float y2) {
         float distance = (float) Math.abs(Math.sqrt(Math.pow(Math.abs((x1 - x2)), 2) + Math.pow(Math.abs((y1 - y2)), 2)));
         float maxDistance = (float) Math.abs(Math.sqrt(Math.pow(mMaxMoveDistanceX, 2) + Math.pow(mMaxMoveDistanceY, 2)));
-        long duration = (long) (mMaxMoveDuration * (distance / maxDistance));
-        return duration;
+        long mMaxMoveDuration = 10000L;
+        return (long) (mMaxMoveDuration * (distance / maxDistance));
     }
 
     /**

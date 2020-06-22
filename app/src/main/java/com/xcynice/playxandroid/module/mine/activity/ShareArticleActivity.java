@@ -1,6 +1,5 @@
 package com.xcynice.playxandroid.module.mine.activity;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +14,7 @@ import com.xcynice.playxandroid.module.mine.presenter.ShareArticlePresenter;
 import com.xcynice.playxandroid.module.mine.view.IShareArticleView;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -71,7 +71,7 @@ public class ShareArticleActivity extends BaseActivity<ShareArticlePresenter> im
     @Override
     protected void initView() {
         mIvTitleLeft.setImageResource(R.drawable.back);
-        mTvTitleCenter.setText("分享文章");
+        mTvTitleCenter.setText(XUtil.getString(R.string.ShareArticle));
         mIvTitleRight.setVisibility(View.INVISIBLE);
         ImmersionBar.with(this).titleBar(mRlTitle).init();
 
@@ -109,7 +109,7 @@ public class ShareArticleActivity extends BaseActivity<ShareArticlePresenter> im
                     hashMap.put(ArticleDetailActivity.WEB_URL, mEtLink.getText().toString().trim());
                     ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
                 } else {
-                    ToastUtil.showToast("输入的网站格式不正确");
+                    ToastUtil.showToast(XUtil.getString(R.string.WebsiteFormatError));
                 }
                 break;
             case R.id.tv_share:

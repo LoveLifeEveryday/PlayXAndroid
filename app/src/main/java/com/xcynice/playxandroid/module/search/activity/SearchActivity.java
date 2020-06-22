@@ -29,6 +29,7 @@ import per.goweii.actionbarex.common.ActionBarSearch;
  */
 
 
+@SuppressWarnings("rawtypes")
 public class SearchActivity extends BaseActivity {
 
     @BindView(R.id.abs)

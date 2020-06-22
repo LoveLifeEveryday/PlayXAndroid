@@ -96,7 +96,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
         SpUtil.setString(SpUtil.USERNAME, user.data.username);
         SpUtil.setString(SpUtil.PASSWORD, user.data.password);
         SpUtil.setString(SpUtil.NICK_NAME, user.data.nickname);
-        EventBus.getDefault().post(new MessageLoginSuccessWrap("refresh user info"));
+        EventBus.getDefault().post(new MessageLoginSuccessWrap(XUtil.getString(R.string.refreshUser)));
 
         Objects.requireNonNull(getActivity()).finish();
     }
