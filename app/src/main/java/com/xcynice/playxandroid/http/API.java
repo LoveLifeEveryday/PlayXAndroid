@@ -35,10 +35,12 @@ import retrofit2.http.Query;
  */
 
 
+@SuppressWarnings("AlibabaClassNamingShouldBeCamel")
 public class API {
 
     static final String BASE_URL = XUtil.getApplication().getString(R.string.baseUrl);
 
+    @SuppressWarnings("AlibabaClassNamingShouldBeCamel")
     public interface IWAZApi {
 
         //-----------------------【首页相关】----------------------
@@ -80,12 +82,18 @@ public class API {
          * 退出登陆
          * @return 是否退出登陆成功
          */
+        @SuppressWarnings("rawtypes")
         @GET("user/logout/json")
         Observable<BaseBean> logout();
 
 
         //-----------------------【  问答  】----------------------
 
+        /**
+         * 得到问答列表
+         * @param page 页数
+         * @return 问答列表
+         */
         @GET("wenda/list/{page}/json")
         Observable<BaseBean<Article>> getAskAndQuestionList(@Path("page") Integer page);
 
@@ -108,6 +116,7 @@ public class API {
          * @param id 文章的 id
          * @return 文章数据
          */
+        @SuppressWarnings("rawtypes")
         @POST("lg/collect/{id}/json")
         Observable<BaseBean> collectIn(@Path("id") Integer id);
 
@@ -118,6 +127,7 @@ public class API {
          * @param id 文章 id
          * @return 是否取消收藏成功
          */
+        @SuppressWarnings("rawtypes")
         @POST("lg/uncollect_originId/{id}/json")
         Observable<BaseBean> unCollect(@Path("id") Integer id);
 
@@ -129,6 +139,7 @@ public class API {
          * @param originId 收藏之前的那篇文章本身的id
          * @return 是否取消收藏成功
          */
+        @SuppressWarnings("rawtypes")
         @FormUrlEncoded
         @POST("lg/uncollect/{id}/json")
         Observable<BaseBean> unCollectInMineCollect(@Path("id") Integer id, @Field("originId") Integer originId);
@@ -214,6 +225,7 @@ public class API {
          * @param link  链接
          * @return 分享文章信息
          */
+        @SuppressWarnings("rawtypes")
         @FormUrlEncoded
         @POST("lg/user_article/add/json")
         Observable<BaseBean> shareArticle(@Field("title") String title, @Field("link") String link);
