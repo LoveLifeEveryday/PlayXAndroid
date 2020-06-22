@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
@@ -99,7 +100,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
      */
     @Override
     public void showLoading() {
-        XUtil.showLoading(ActivityUtil.getCurrentActivity(), "加载中");
+        XUtil.showLoading(ActivityUtil.getCurrentActivity(), XUtil.getString(R.string.loading));
     }
 
     /**

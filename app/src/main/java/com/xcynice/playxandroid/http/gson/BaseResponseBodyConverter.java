@@ -60,7 +60,7 @@ public class BaseResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         } catch (JSONException e) {
             e.printStackTrace();
             //数据解析异常即json格式有变动
-            throw new BaseException(BaseException.PARSE_ERROR_MSG);
+            throw new BaseException(XUtil.getString(R.string.PARSE_ERROR_MSG));
         } finally {
             value.close();
         }

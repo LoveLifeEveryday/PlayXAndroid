@@ -50,7 +50,7 @@ public class ActivityUtil {
      *
      * @param classes 需要跳转到的 activity
      */
-    public static void startActivity(Class classes) {
+    public static void startActivity(@SuppressWarnings("rawtypes") Class classes) {
         startActivity(classes, false);
     }
 
@@ -61,7 +61,7 @@ public class ActivityUtil {
      * @param classes  需要打开的 activity
      * @param isFinish 是否 finish 当前 activity
      */
-    public static void startActivity(Class classes, boolean isFinish) {
+    public static void startActivity(@SuppressWarnings("rawtypes") Class classes, boolean isFinish) {
         Activity currentActivity = getCurrentActivity();
         Intent intent = new Intent(currentActivity, classes);
         currentActivity.startActivity(intent);

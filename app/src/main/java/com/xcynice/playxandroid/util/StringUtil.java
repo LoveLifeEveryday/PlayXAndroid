@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @Date 2020/6/4 18:12
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- * @Description TODO
+ * @Description StringUtil
  */
 
 public class StringUtil {
@@ -17,6 +17,7 @@ public class StringUtil {
     public static String removeAllBank(String str) {
         String s = "";
         if (str != null) {
+
             Pattern p = Pattern.compile("\\s*|\t|\r|\n");
             Matcher m = p.matcher(str);
             s = m.replaceAll("");

@@ -1,9 +1,8 @@
 package com.xcynice.playxandroid.base;
 
 import com.google.gson.JsonParseException;
-import com.xcynice.playxandroid.module.login.activity.LoginActivity;
-import com.xcynice.playxandroid.util.ActivityUtil;
-import com.xcynice.playxandroid.util.SpUtil;
+import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.util.XUtil;
 
 import org.json.JSONException;
 
@@ -79,22 +78,22 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
             } else {
                 if (e instanceof HttpException) {
                     //HTTP错误
-                    be = new BaseException(BaseException.BAD_NETWORK_MSG, e);
+                    be = new BaseException(XUtil.getString(R.string.BAD_NETWORK_MSG), e);
                 } else if (e instanceof ConnectException || e instanceof UnknownHostException) {
                     //连接错误
-                    be = new BaseException(BaseException.CONNECT_ERROR_MSG, e);
+                    be = new BaseException(XUtil.getString(R.string.CONNECT_ERROR_MSG), e);
                 } else if (e instanceof InterruptedIOException) {
                     //连接超时
-                    be = new BaseException(BaseException.CONNECT_TIMEOUT_MSG, e);
+                    be = new BaseException(XUtil.getString(R.string.CONNECT_TIMEOUT_MSG), e);
                 } else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException) {
                     //解析错误
-                    be = new BaseException(BaseException.PARSE_ERROR_MSG, e);
+                    be = new BaseException(XUtil.getString(R.string.PARSE_ERROR_MSG), e);
                 } else {
-                    be = new BaseException(BaseException.OTHER_MSG, e);
+                    be = new BaseException(XUtil.getString(R.string.OTHER_MSG), e);
                 }
             }
         } else {
-            be = new BaseException(BaseException.OTHER_MSG);
+            be = new BaseException(XUtil.getString(R.string.OTHER_MSG));
         }
         onError(be.getErrorMsg());
     }

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.util.XUtil;
 
 import butterknife.ButterKnife;
@@ -80,7 +81,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     @Override
     public void showLoading() {
-        XUtil.showLoading(this, "加载中");
+        XUtil.showLoading(this, XUtil.getString(R.string.loading));
     }
 
     @Override
