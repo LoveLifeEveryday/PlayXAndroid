@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @Description BaseBean
  */
 
-
 public class BaseBean<T> implements Serializable {
 
 

@@ -57,6 +57,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     }
 
 
+    @SuppressWarnings("all")
     @Override
     public void onError(Throwable e) {
         if (view != null && isShowDialog) {
