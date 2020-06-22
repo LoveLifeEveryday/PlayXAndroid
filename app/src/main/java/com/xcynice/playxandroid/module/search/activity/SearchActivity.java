@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.search;
+package com.xcynice.playxandroid.module.search.activity;
 
 import android.text.TextUtils;
 import android.view.inputmethod.EditorInfo;
@@ -13,6 +13,8 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.base.BaseActivity;
 import com.xcynice.playxandroid.base.BasePresenter;
+import com.xcynice.playxandroid.module.search.fragment.SearchHistoryFragment;
+import com.xcynice.playxandroid.module.search.fragment.SearchResultFragment;
 import com.xcynice.playxandroid.util.XUtil;
 
 import butterknife.BindView;

@@ -16,7 +16,7 @@ import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
-import com.xcynice.playxandroid.module.home.view.SuperSwipeRefreshLayout;
+import com.xcynice.playxandroid.module.home.wiget.SuperSwipeRefreshLayout;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 

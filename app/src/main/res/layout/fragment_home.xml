@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".module.home.view.HomeFragment">
+    tools:context=".module.home.fragment.HomeFragment">
 
     <include
         layout="@layout/item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.xcynice.playxandroid.module.home.view.SuperSwipeRefreshLayout
+    <com.xcynice.playxandroid.module.home.wiget.SuperSwipeRefreshLayout
         android:id="@+id/srl_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +26,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-    </com.xcynice.playxandroid.module.home.view.SuperSwipeRefreshLayout>
+    </com.xcynice.playxandroid.module.home.wiget.SuperSwipeRefreshLayout>
 
 
 </LinearLayout>

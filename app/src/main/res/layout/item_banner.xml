@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
 
-    <com.xcynice.playxandroid.module.home.view.RoundAngleImageView
+    <com.xcynice.playxandroid.module.home.wiget.RoundAngleImageView
         android:id="@+id/banner_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

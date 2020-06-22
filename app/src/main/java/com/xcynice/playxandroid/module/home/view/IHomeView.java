@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.home;
+package com.xcynice.playxandroid.module.home.view;
 
 
 import com.xcynice.playxandroid.base.BaseBean;

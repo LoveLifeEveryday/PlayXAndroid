@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.home.view;
+package com.xcynice.playxandroid.module.home.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,9 +30,10 @@ import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.bean.SettingChangeEvent;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
-import com.xcynice.playxandroid.module.home.IHomeView;
+import com.xcynice.playxandroid.module.home.view.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
-import com.xcynice.playxandroid.module.search.SearchActivity;
+import com.xcynice.playxandroid.module.home.wiget.SuperSwipeRefreshLayout;
+import com.xcynice.playxandroid.module.search.activity.SearchActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;

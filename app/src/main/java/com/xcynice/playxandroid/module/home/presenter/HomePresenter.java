@@ -6,7 +6,7 @@ import com.xcynice.playxandroid.base.BaseObserver;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
-import com.xcynice.playxandroid.module.home.IHomeView;
+import com.xcynice.playxandroid.module.home.view.IHomeView;
 
 import java.util.List;
 

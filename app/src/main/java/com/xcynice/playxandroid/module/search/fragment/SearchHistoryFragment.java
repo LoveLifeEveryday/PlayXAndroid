@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.search;
+package com.xcynice.playxandroid.module.search.fragment;
 
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,10 +14,10 @@ import com.xcynice.playxandroid.adapter.HotKeyAdapter;
 import com.xcynice.playxandroid.base.BaseBean;
 import com.xcynice.playxandroid.base.BaseFragment;
 import com.xcynice.playxandroid.bean.HotKey;
+import com.xcynice.playxandroid.module.search.activity.SearchActivity;
 import com.xcynice.playxandroid.module.search.presenter.SearchHistoryPresenter;
 import com.xcynice.playxandroid.module.search.view.ISearchHistoryView;
 import com.xcynice.playxandroid.module.search.wiget.TipDialog;
-import com.xcynice.playxandroid.util.LogUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 
 import java.util.List;

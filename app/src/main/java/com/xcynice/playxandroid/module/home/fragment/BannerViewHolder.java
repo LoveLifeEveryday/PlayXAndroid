@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.home.view;
+package com.xcynice.playxandroid.module.home.fragment;
 
 
 import android.annotation.SuppressLint;

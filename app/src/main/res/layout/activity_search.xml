@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".module.search.SearchActivity">
+    tools:context=".module.search.activity.SearchActivity">
 
     <per.goweii.actionbarex.common.ActionBarSearch
         android:id="@+id/abs"

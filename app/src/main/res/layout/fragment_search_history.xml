@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".module.search.SearchHistoryFragment">
+    tools:context=".module.search.fragment.SearchHistoryFragment">
 
 
     <TextView

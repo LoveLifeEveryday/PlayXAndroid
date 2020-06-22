@@ -1,4 +1,4 @@
-package com.xcynice.playxandroid.module.search;
+package com.xcynice.playxandroid.module.search.fragment;
 
 import android.view.View;
 
