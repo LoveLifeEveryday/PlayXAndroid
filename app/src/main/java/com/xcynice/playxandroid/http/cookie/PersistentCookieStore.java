@@ -6,6 +6,9 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.xcynice.playxandroid.R;
+import com.xcynice.playxandroid.util.XUtil;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -44,7 +47,7 @@ public class PersistentCookieStore {
         //将持久化的cookies缓存到内存中 即map cookies
         Map<String, ?> prefsMap = cookiePrefs.getAll();
         for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
-            String[] cookieNames = TextUtils.split((String) entry.getValue(), ",");
+            String[] cookieNames = TextUtils.split((String) entry.getValue(), XUtil.getString(R.string.comma));
             for (String name : cookieNames) {
                 String encodedCookie = cookiePrefs.getString(name, null);
                 if (encodedCookie != null) {
@@ -118,7 +121,7 @@ public class PersistentCookieStore {
             if (cookiePrefs.contains(name)) {
                 prefsWriter.remove(name);
             }
-            prefsWriter.putString(url.host(), TextUtils.join(",", Objects.requireNonNull(cookies.get(url.host())).keySet()));
+            prefsWriter.putString(url.host(), TextUtils.join(XUtil.getString(R.string.comma), Objects.requireNonNull(cookies.get(url.host())).keySet()));
             prefsWriter.apply();
 
             return true;
@@ -150,7 +153,7 @@ public class PersistentCookieStore {
             ObjectOutputStream outputStream = new ObjectOutputStream(os);
             outputStream.writeObject(cookie);
         } catch (IOException e) {
-            Log.d(LOG_TAG, "IOException in encodeCookie", e);
+            Log.d(LOG_TAG, XUtil.getString(R.string.IOExceptionEncodeCookie), e);
             return null;
         }
 
@@ -171,9 +174,9 @@ public class PersistentCookieStore {
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
             cookie = ((SerializableOkHttpCookies) objectInputStream.readObject()).getCookies();
         } catch (IOException e) {
-            Log.d(LOG_TAG, "IOException in decodeCookie", e);
+            Log.d(LOG_TAG, XUtil.getString(R.string.IOExceptionDecodeCookie), e);
         } catch (ClassNotFoundException e) {
-            Log.d(LOG_TAG, "ClassNotFoundException in decodeCookie", e);
+            Log.d(LOG_TAG, XUtil.getString(R.string.ClassNotFoundException), e);
         }
 
         return cookie;

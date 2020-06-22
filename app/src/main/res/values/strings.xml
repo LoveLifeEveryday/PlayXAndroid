@@ -41,4 +41,7 @@
     <string name="CONNECT_ERROR_MSG">连接错误</string>
     <string name="CONNECT_TIMEOUT_MSG">连接超时</string>
     <string name="OTHER_MSG">未知错误</string>
+    <string name="IOExceptionEncodeCookie">IOException in encodeCookie</string>
+    <string name="IOExceptionDecodeCookie">IOException in decodeCookie</string>
+    <string name="ClassNotFoundException">ClassNotFoundException in decodeCookie</string>
 </resources>
