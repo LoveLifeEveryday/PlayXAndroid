@@ -26,7 +26,6 @@
         <activity android:name=".module.mine.activity.MineShareActivity" />
         <activity android:name=".module.mine.activity.CoinRankActivity" />
         <activity android:name=".module.mine.activity.CoinActivity" />
-        <activity android:name=".module.register.RegisterActivity" />
         <activity android:name=".module.login.activity.LoginActivity" />
         <activity android:name=".module.tree.tree_grandson.TreeGrandsonActivity" />
         <activity android:name=".module.article_detail.ArticleDetailActivity" />
