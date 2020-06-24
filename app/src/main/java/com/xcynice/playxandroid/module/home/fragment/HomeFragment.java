@@ -86,6 +86,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     private static final int CODE_SELECT_IMAGE = 1;
 
+    private static final String IS_URL = "^(http|https|ftp)://([a-zA-Z0-9.\\-]+(:[a-zA-Z0-9.&amp;%$\\-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.[a-zA-Z]{2,4})(:[0-9]+)?(/[^/][a-zA-Z0-9.,?'\\\\/+&amp;%$#=~_\\-@]*)*$";
     @SuppressWarnings("rawtypes")
     private MZBannerView mBannerHome;
     private ArticleAdapter mArticleAdapter;
@@ -352,9 +353,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     }
                 })
                 .setOnScanResultDelegate((activity, result, format) -> {
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put(ArticleDetailActivity.WEB_URL, result);
-                    ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
+                    if (result.matches(IS_URL)) {
+                        HashMap<String, String> hashMap = new HashMap<>(1);
+                        hashMap.put(ArticleDetailActivity.WEB_URL, result);
+                        ActivityUtil.startActivity(ArticleDetailActivity.class, hashMap);
+                    } else {
+                        ToastUtil.showToast("暂不支持该二维码，请更换另一个二维码");
+                    }
                 }).start();
     }
 
