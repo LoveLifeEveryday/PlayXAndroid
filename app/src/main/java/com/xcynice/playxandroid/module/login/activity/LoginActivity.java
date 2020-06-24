@@ -74,7 +74,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         overridePendingTransition(R.anim.bottom_in, R.anim.bottom_silent);
-
         super.onCreate(savedInstanceState);
     }
 

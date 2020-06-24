@@ -67,11 +67,11 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String title = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString();
-            title = StringUtil.removeAllBank(title, 2);
+            title = StringUtil.removeBlank(title, 2);
             helper.setText(R.id.tv_article_title, title);
         } else {
             String title = Html.fromHtml(item.title).toString();
-            title = StringUtil.removeAllBank(title, 2);
+            title = StringUtil.removeBlank(title, 2);
             helper.setText(R.id.tv_article_title, title);
         }
 
@@ -81,11 +81,11 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
             helper.setGone(R.id.tv_article_content, true);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 String desc = Html.fromHtml(item.desc, Html.FROM_HTML_MODE_LEGACY).toString();
-                desc = StringUtil.removeAllBank(desc, 2);
+                desc = StringUtil.removeBlank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             } else {
                 String desc = Html.fromHtml(item.desc).toString();
-                desc = StringUtil.removeAllBank(desc, 2);
+                desc = StringUtil.removeBlank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             }
         }

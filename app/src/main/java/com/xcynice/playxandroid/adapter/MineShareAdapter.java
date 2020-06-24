@@ -50,11 +50,11 @@ public class MineShareAdapter extends BaseQuickAdapter<MineShare.ShareArticlesBe
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String title = Html.fromHtml(item.getTitle(), Html.FROM_HTML_MODE_LEGACY).toString();
-            title = StringUtil.removeAllBank(title, 2);
+            title = StringUtil.removeBlank(title, 2);
             helper.setText(R.id.tv_article_title, title);
         } else {
             String title = Html.fromHtml(item.getTitle()).toString();
-            title = StringUtil.removeAllBank(title, 2);
+            title = StringUtil.removeBlank(title, 2);
             helper.setText(R.id.tv_article_title, title);
         }
 
@@ -64,11 +64,11 @@ public class MineShareAdapter extends BaseQuickAdapter<MineShare.ShareArticlesBe
             helper.setGone(R.id.tv_article_content, true);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 String desc = Html.fromHtml(item.getDesc(), Html.FROM_HTML_MODE_LEGACY).toString();
-                desc = StringUtil.removeAllBank(desc, 2);
+                desc = StringUtil.removeBlank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             } else {
                 String desc = Html.fromHtml(item.getDesc()).toString();
-                desc = StringUtil.removeAllBank(desc, 2);
+                desc = StringUtil.removeBlank(desc, 2);
                 helper.setText(R.id.tv_article_content, desc);
             }
         }
