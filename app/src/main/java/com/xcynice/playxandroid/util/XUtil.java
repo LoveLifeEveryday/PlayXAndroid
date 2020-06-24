@@ -39,7 +39,6 @@ public class XUtil {
 
     public static String getString(int id) {
         return getApplication().getResources().getString(id);
-
     }
 
     public static int getColor(int id) {
