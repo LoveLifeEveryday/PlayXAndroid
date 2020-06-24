@@ -154,8 +154,7 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
 
     @Override
     public void showCollectSuccess(String successMessage) {
-        mArticleList.get(mPosition).collect = false;
-        //因为取消收藏成功，所以要刷新界面，以取消显示小红心
+        mArticleList.get(mPosition).collect = true;
         mArticleAdapter.notifyDataSetChanged();
     }
 
