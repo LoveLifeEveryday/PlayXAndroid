@@ -198,13 +198,11 @@ public class TreeGrandsonFragment extends BaseFragment<TreeGrandsonPresenter> im
 
     @Override
     public void onLoadMoreRequested() {
-        mRvTreeGrandson.postDelayed(() -> {
-            if (mCurrentCounter < TOTAL_COUNTER) {
-                //数据加载完毕，没有更多的数据
-                mTreeGrandsonAdapter.loadMoreEnd();
-            } else {
-                presenter.getTreeChildListByLoadMore(++mPage, mCid);
-            }
-        }, 1000);
+        if (mCurrentCounter < TOTAL_COUNTER) {
+            //数据加载完毕，没有更多的数据
+            mTreeGrandsonAdapter.loadMoreEnd();
+        } else {
+            presenter.getTreeChildListByLoadMore(++mPage, mCid);
+        }
     }
 }

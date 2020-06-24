@@ -76,8 +76,6 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
     private int mPosition;
 
 
-
-
     @Override
     protected AskAndQuestionPresenter createPresenter() {
         return new AskAndQuestionPresenter(this);
@@ -205,13 +203,10 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
      */
     @Override
     public void onLoadMoreRequested() {
-        mRvAskAndQuestion.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                //数据加载完毕，没有更多的数据
-                mArticleAdapter.loadMoreEnd();
-            } else {
-                presenter.getArticleListByMore(++mPage);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            mArticleAdapter.loadMoreEnd();
+        } else {
+            presenter.getArticleListByMore(++mPage);
+        }
     }
 }

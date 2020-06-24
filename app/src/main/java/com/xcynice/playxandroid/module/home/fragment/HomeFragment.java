@@ -30,8 +30,8 @@ import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.bean.SettingChangeEvent;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
-import com.xcynice.playxandroid.module.home.view.IHomeView;
 import com.xcynice.playxandroid.module.home.presenter.HomePresenter;
+import com.xcynice.playxandroid.module.home.view.IHomeView;
 import com.xcynice.playxandroid.module.home.wiget.SuperSwipeRefreshLayout;
 import com.xcynice.playxandroid.module.search.activity.SearchActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
@@ -309,14 +309,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     @Override
     public void onLoadMoreRequested() {
-        mRvHome.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                //数据加载完毕，没有更多的数据
-                mArticleAdapter.loadMoreEnd();
-            } else {
-                presenter.getArticleListByMore(++mPage);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            //数据加载完毕，没有更多的数据
+            mArticleAdapter.loadMoreEnd();
+        } else {
+            presenter.getArticleListByMore(++mPage);
+        }
     }
 
     /**

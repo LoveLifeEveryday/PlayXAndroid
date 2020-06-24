@@ -125,12 +125,11 @@ public class CoinRankActivity extends BaseActivity<CoinRankPresenter> implements
 
     @Override
     public void onLoadMoreRequested() {
-        mRvCoinRank.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                mCoinRankAdapter.loadMoreEnd();
-            } else {
-                presenter.getCoinRankMore(++mPage);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            mCoinRankAdapter.loadMoreEnd();
+        } else {
+            presenter.getCoinRankMore(++mPage);
+        }
     }
+
 }

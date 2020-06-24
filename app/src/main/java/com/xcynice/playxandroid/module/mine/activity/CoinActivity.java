@@ -28,10 +28,9 @@ import butterknife.OnClick;
 
 /**
  * @Author 许朋友爱玩
- * @Date   2020/6/22
+ * @Date 2020/6/22
  * @Github https://github.com/LoveLifeEveryday
  * @JueJin https://juejin.im/user/5e429bbc5188254967066d1b/posts
- *
  * @Description CoinActivity
  */
 
@@ -145,14 +144,11 @@ public class CoinActivity extends BaseActivity<CoinPresenter> implements ICoinVi
 
     @Override
     public void onLoadMoreRequested() {
-        mRvCoin.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                mCoinRecordAdapter.loadMoreEnd();
-            } else {
-                presenter.getCoinMore(++mPage);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            mCoinRecordAdapter.loadMoreEnd();
+        } else {
+            presenter.getCoinMore(++mPage);
+        }
     }
-
 
 }

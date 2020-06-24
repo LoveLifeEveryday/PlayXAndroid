@@ -202,12 +202,11 @@ public class MineCollectActivity extends BaseActivity<MineCollectPresenter> impl
 
     @Override
     public void onLoadMoreRequested() {
-        mRvMineCollect.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                mAdapter.loadMoreEnd();
-            } else {
-                presenter.getMineCollectMore(++mPage);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            mAdapter.loadMoreEnd();
+        } else {
+            presenter.getMineCollectMore(++mPage);
+        }
     }
+
 }

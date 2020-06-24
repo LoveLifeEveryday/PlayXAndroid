@@ -145,7 +145,7 @@ public class MineShareActivity extends BaseActivity<MineSharePresenter> implemen
         mMineShareList = list.getDatas();
         mAdapter.setNewData(mMineShareList);
         mPage = 1;
-        if (mSrlMineShare.isRefreshing()){
+        if (mSrlMineShare.isRefreshing()) {
             mSrlMineShare.setRefreshing(false);
         }
     }
@@ -154,7 +154,7 @@ public class MineShareActivity extends BaseActivity<MineSharePresenter> implemen
     @Override
     public void setShareRefreshFail(String msg) {
         ToastUtil.showToast(msg);
-        if (mSrlMineShare.isRefreshing()){
+        if (mSrlMineShare.isRefreshing()) {
             mSrlMineShare.setRefreshing(false);
         }
     }
@@ -198,13 +198,11 @@ public class MineShareActivity extends BaseActivity<MineSharePresenter> implemen
 
     @Override
     public void onLoadMoreRequested() {
-        mRvMineShare.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                mAdapter.loadMoreEnd();
-            } else {
-                presenter.getMineShareMore(++mPage);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            mAdapter.loadMoreEnd();
+        } else {
+            presenter.getMineShareMore(++mPage);
+        }
     }
 
     @Override

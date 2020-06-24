@@ -202,13 +202,11 @@ public class SearchResultFragment extends BaseFragment<SearchResultPresenter> im
 
     @Override
     public void onLoadMoreRequested() {
-        mRv.postDelayed(() -> {
-            if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
-                //数据加载完毕，没有更多的数据
-                mAdapter.loadMoreEnd();
-            } else {
-                presenter.searchMore(++mPage, mKey);
-            }
-        }, 1000);
+        if (mCurrentCounter < SINGLE_PAGE_TOTAL_COUNTER) {
+            //数据加载完毕，没有更多的数据
+            mAdapter.loadMoreEnd();
+        } else {
+            presenter.searchMore(++mPage, mKey);
+        }
     }
 }
