@@ -113,7 +113,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onStop() {
         isRunning = false;
-        stopCircleAnim();
+        cancelAnimatorSet(mSet1, mSet2);
         super.onStop();
     }
 
@@ -144,16 +144,15 @@ public class LoginActivity extends BaseActivity {
 
 
     /**
-     * 停止圆圈的动画
+     * 取消 animatorSet
+     *
+     * @param animatorSets animatorSet 的列表
      */
-    private void stopCircleAnim() {
-        if (mSet1 != null) {
-            mSet1.cancel();
-            mSet1 = null;
-        }
-        if (mSet2 != null) {
-            mSet2.cancel();
-            mSet2 = null;
+    private void cancelAnimatorSet(AnimatorSet... animatorSets) {
+        for (AnimatorSet animatorSet : animatorSets) {
+            if (animatorSet != null) {
+                animatorSet.cancel();
+            }
         }
     }
 

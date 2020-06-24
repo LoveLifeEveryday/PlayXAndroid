@@ -45,8 +45,11 @@ public class XUtil {
     public static int getColor(int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return getApplication().getResources().getColor(id, getApplication().getTheme());
+        } else {
+            //noinspection deprecation
+            return getApplication().getResources().getColor(id);
         }
-        return 0;
+
     }
 
 

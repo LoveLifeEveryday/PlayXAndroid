@@ -80,7 +80,6 @@ public class CoinRankActivity extends BaseActivity<CoinRankPresenter> implements
         mIvTitleLeft.setImageResource(R.drawable.back);
         mIvTitleRight.setVisibility(View.INVISIBLE);
         mRvCoinRank.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     @Override

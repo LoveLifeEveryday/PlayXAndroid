@@ -13,6 +13,7 @@ import com.xcynice.playxandroid.base.BaseActivity;
 import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.module.article_detail.ArticleDetailActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.HashMap;
 
@@ -85,11 +86,8 @@ public class AboutMeActivity extends BaseActivity {
         mIvTitleLeft.setImageResource(R.drawable.back);
         mTvTitleCenter.setText("关于作者");
         mIvTitleRight.setVisibility(View.INVISIBLE);
-        //noinspection AliDeprecation
-        mRlTitle.setBackgroundColor(getResources().getColor(R.color.background));
+        mRlTitle.setBackgroundColor(XUtil.getColor(R.color.background));
         ImmersionBar.with(this).titleBar(mRlTitle).init();
-
-
     }
 
     @Override
@@ -111,7 +109,7 @@ public class AboutMeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.ll_github:
-
+                mHashMap.clear();
                 mHashMap.put(ArticleDetailActivity.WEB_URL, mTvGithub.getText().toString());
                 ActivityUtil.startActivity(ArticleDetailActivity.class, mHashMap);
                 break;

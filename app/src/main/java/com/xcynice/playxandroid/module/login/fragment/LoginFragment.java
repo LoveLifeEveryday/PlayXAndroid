@@ -85,7 +85,6 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
 
     @Override
     protected void initData() {
-
     }
 
 
@@ -97,7 +96,6 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
         SpUtil.setString(SpUtil.PASSWORD, user.data.password);
         SpUtil.setString(SpUtil.NICK_NAME, user.data.nickname);
         EventBus.getDefault().post(new MessageLoginSuccessWrap(XUtil.getString(R.string.refreshUser)));
-
         Objects.requireNonNull(getActivity()).finish();
     }
 
