@@ -63,7 +63,7 @@ public class AskAndQuestionFragment extends BaseFragment<AskAndQuestionPresenter
     /**
      * 每一次加载的数量
      */
-    private final static int SINGLE_PAGE_TOTAL_COUNTER = 30;
+    private final static int SINGLE_PAGE_TOTAL_COUNTER = 20;
 
     /**
      * 记录分页，方便进行加载更多

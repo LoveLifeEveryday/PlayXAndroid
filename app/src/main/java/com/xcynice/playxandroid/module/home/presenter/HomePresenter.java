@@ -8,6 +8,7 @@ import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.module.home.view.IHomeView;
+import com.xcynice.playxandroid.util.ToastUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
@@ -89,6 +90,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             @Override
             public void onSuccess(BaseBean<Article> bean) {
                 baseView.setArticleDataByMore(bean);
+                ToastUtil.showToast(bean.data.datas.size()+"");
             }
 
             @Override

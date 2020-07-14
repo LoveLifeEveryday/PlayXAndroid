@@ -101,7 +101,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     /**
      * 每一次加载的数量
      */
-    private final static int SINGLE_PAGE_TOTAL_COUNTER = 20;
+    private final static int SINGLE_PAGE_TOTAL_COUNTER = 18;
 
     /**
      * 记录分页，方便进行加载更多
