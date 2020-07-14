@@ -90,7 +90,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             @Override
             public void onSuccess(BaseBean<Article> bean) {
                 baseView.setArticleDataByMore(bean);
-                ToastUtil.showToast(bean.data.datas.size()+"");
             }
 
             @Override
