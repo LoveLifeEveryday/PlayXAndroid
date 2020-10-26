@@ -4,6 +4,7 @@
 >
 > - 每做一个东西，都要进行总结归纳，以便得以吸收最大的效果，让自己的努力发挥出最大的价值
 > - 总结一个东西，可以锻炼你的思维，增长你对知识的理解，有助于你吃透整个知识体系
+> - 玩 Android 是基于本人封装的一套 `MVP+Retrofit+RxJava2` 框架，开发的一款简单易用的软件，[点我跳转框架简单上手教程](https://juejin.im/post/6844904070373703687)
 
 ![image-20200623110554472](https://cdn.jsdelivr.net/gh/LoveLifeEveryday/FigureBed@master/typora202006/23/110556-928480.png)
 
@@ -62,7 +63,7 @@
 
 ## 三.项目的值得学习的地方
 
-### 3.1 使用自己开发的 `MVP` 框架
+### 3.1 使用自己开发的 `MVP` [框架](https://github.com/LoveLifeEveryday/RxJava2_Retrofit_MVP2)
 
 ### 3.2 `String` 类放到 `string.xml` 中
 
