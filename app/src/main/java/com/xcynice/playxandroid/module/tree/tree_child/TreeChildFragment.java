@@ -2,12 +2,10 @@ package com.xcynice.playxandroid.module.tree.tree_child;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.adapter.NavigationAdapter;
 import com.xcynice.playxandroid.adapter.TreeChildAdapter;

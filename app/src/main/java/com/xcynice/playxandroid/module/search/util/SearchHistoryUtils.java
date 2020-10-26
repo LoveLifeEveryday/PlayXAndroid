@@ -24,11 +24,21 @@ public class SearchHistoryUtils {
 
     private static final Gson GSON = new Gson();
 
+    /**
+     * 使用 json 存搜索历史
+     *
+     * @param history 搜索历史
+     */
     public static void save(List<String> history) {
         String json = GSON.toJson(history);
         SpUtil.setString(XUtil.getString(R.string.KEY_HISTORY), json);
     }
 
+    /**
+     * 得到搜索历史
+     *
+     * @return 搜索历史 List
+     */
     public static List<String> get() {
         String json = SpUtil.getString(XUtil.getString(R.string.KEY_HISTORY));
         if (TextUtils.isEmpty(json)) {

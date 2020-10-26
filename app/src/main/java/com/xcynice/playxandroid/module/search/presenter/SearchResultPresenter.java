@@ -27,7 +27,7 @@ public class SearchResultPresenter extends BasePresenter<ISearchResultView> {
     /**
      * 首次搜索
      *
-     * @param key
+     * @param key 关键词
      */
     public void searchFirst(String key) {
         addDisposable(apiServer.search(0, key), new BaseObserver<BaseBean<Article>>(baseView) {
@@ -45,6 +45,10 @@ public class SearchResultPresenter extends BasePresenter<ISearchResultView> {
     }
 
 
+    /**
+     * 刷新搜索结果
+     * @param key 关键词
+     */
     public void searchFresh(String key) {
         addDisposable(apiServer.search(0, key), new BaseObserver<BaseBean<Article>>(baseView) {
 

@@ -46,7 +46,7 @@ public class ArticleDetailActivity extends BaseActivity {
     @Override
     protected void initView() {
         //实现沉浸式
-        ImmersionBar.with(this).init();
+        ImmersionBar.with(this).titleBar(mPbArticleDetail).init();
 
         WebSettings webSettings = mWvArticleDetail.getSettings();
         //支持javascript脚本
@@ -71,7 +71,6 @@ public class ArticleDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         String mUrl = getIntent().getStringExtra(WEB_URL);
-        LogUtil.i(mUrl);
         String mTitle = getIntent().getStringExtra(WEB_TITLE);
         mWvArticleDetail.loadUrl(mUrl);
     }

@@ -209,4 +209,6 @@ public class SearchResultFragment extends BaseFragment<SearchResultPresenter> im
             presenter.searchMore(++mPage, mKey);
         }
     }
+
+
 }

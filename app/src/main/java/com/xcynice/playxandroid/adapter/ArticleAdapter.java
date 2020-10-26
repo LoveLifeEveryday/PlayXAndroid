@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.bean.Article;
+import com.xcynice.playxandroid.util.ImageLoader;
 import com.xcynice.playxandroid.util.StringUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
@@ -100,13 +101,15 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DataDetailBean, Bas
         //设置收藏的点击事件
         helper.addOnClickListener(R.id.iv_article_favorite);
         //先判断类型是不是收藏列表，因为收藏列表不返回item.collect字段，所以没法判断
+        ImageView imageView = helper.getView(R.id.iv_article_favorite);
         if (mTypeIsCollect) {
-            Glide.with(mContext).load(R.drawable.ic_like_checked).into((ImageView) helper.getView(R.id.iv_article_favorite));
+            ImageLoader.loadLocalIcon(imageView, R.drawable.ic_like_checked);
         } else {
             if (item.collect) {
-                Glide.with(mContext).load(R.drawable.ic_like_checked).into((ImageView) helper.getView(R.id.iv_article_favorite));
+                ImageLoader.loadLocalIcon(imageView, R.drawable.ic_like_checked);
             } else {
-                Glide.with(mContext).load(R.drawable.ic_like_normal).into((ImageView) helper.getView(R.id.iv_article_favorite));
+                ImageLoader.loadLocalIcon(imageView, R.drawable.ic_like_normal);
+                //  Glide.with(mContext).load(R.drawable.ic_like_normal).into((ImageView) helper.getView(R.id.iv_article_favorite));
             }
         }
 

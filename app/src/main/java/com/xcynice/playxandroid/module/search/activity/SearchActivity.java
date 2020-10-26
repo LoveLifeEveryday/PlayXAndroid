@@ -100,6 +100,7 @@ public class SearchActivity extends BaseActivity {
             mSearchResultFragment = (SearchResultFragment) searchResultFragment;
         }
 
+        // 显示搜索历史界面，隐藏搜索结果界面
         transaction.show(mSearchHistoryFragment);
         transaction.hide(mSearchResultFragment);
         transaction.commit();
@@ -115,6 +116,7 @@ public class SearchActivity extends BaseActivity {
         XUtil.closeSoftKeyboard();
         mAbs.getEditTextView().clearFocus();
         if (TextUtils.isEmpty(key)) {
+            // 如果现在是搜索结果界面的话，返回搜索历史界面
             if (mIsResultPage) {
                 showHistoryFragment();
             }
@@ -139,7 +141,7 @@ public class SearchActivity extends BaseActivity {
     private void showResultFragment() {
         mIsResultPage = true;
         FragmentTransaction t = mFragmentManager.beginTransaction();
-        //隐藏搜索历史，显示搜索结果
+        // 隐藏搜索历史，显示搜索结果
         t.hide(mSearchHistoryFragment);
         t.show(mSearchResultFragment);
         t.commit();

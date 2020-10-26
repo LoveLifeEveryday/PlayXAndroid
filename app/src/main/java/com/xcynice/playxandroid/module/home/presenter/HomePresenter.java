@@ -8,7 +8,6 @@ import com.xcynice.playxandroid.base.BasePresenter;
 import com.xcynice.playxandroid.bean.Article;
 import com.xcynice.playxandroid.bean.Banner;
 import com.xcynice.playxandroid.module.home.view.IHomeView;
-import com.xcynice.playxandroid.util.ToastUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
     public void getBanner() {
-        addDisposable(apiServer.getBanner(), new BaseObserver<BaseBean<List<Banner>>>(baseView,true) {
+        addDisposable(apiServer.getBanner(), new BaseObserver<BaseBean<List<Banner>>>(baseView) {
 
             @Override
             public void onSuccess(BaseBean<List<Banner>> list) {
@@ -62,21 +61,32 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * @param isFirst true 表示首次获取，false 表示通过刷新获取
      */
     public void getArticleListByFirstOrRefresh(boolean isFirst) {
-        addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
-            @Override
-            public void onSuccess(BaseBean<Article> list) {
-                if (isFirst) {
+
+        if (isFirst) {
+            addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView, true) {
+
+                @Override
+                public void onSuccess(BaseBean<Article> list) {
                     baseView.setArticleByFirst(list);
-                } else {
+                }
+
+                @Override
+                public void onError(String msg) {
+                    baseView.setArticleError(msg);
+                }
+            });
+        } else {
+            addDisposable(apiServer.getArticleList(0), new BaseObserver<BaseBean<Article>>(baseView) {
+                @Override
+                public void onSuccess(BaseBean<Article> list) {
                     baseView.setArticleByRefresh(list);
                 }
-            }
 
-            @Override
-            public void onError(String msg) {
-                baseView.setArticleError(msg);
-            }
-        });
+                @Override
+                public void onError(String msg) {
+                }
+            });
+        }
     }
 
 

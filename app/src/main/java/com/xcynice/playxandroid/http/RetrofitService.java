@@ -1,8 +1,10 @@
 package com.xcynice.playxandroid.http;
 
 
+import com.bumptech.glide.Glide;
 import com.xcynice.playxandroid.http.cookie.CookiesManager;
 import com.xcynice.playxandroid.http.gson.BaseConverterFactory;
+import com.xcynice.playxandroid.util.ActivityUtil;
 import com.xcynice.playxandroid.util.XUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -68,6 +70,7 @@ public class RetrofitService {
                 //设置Cookie持久化
                 .cookieJar(new CookiesManager(XUtil.getApplication()))
                 .build();
+
 
         //关联okHttp并加上rxJava和Gson的配置和baseUrl
         Retrofit retrofit = new Retrofit.Builder()

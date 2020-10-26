@@ -101,6 +101,7 @@ public class SearchHistoryFragment extends BaseFragment<SearchHistoryPresenter> 
         if (mHistoryAdapter == null) {
             mLlHistory.setVisibility(View.GONE);
         } else {
+            // 如果搜索历史数据为空的话，设置搜索历史不可见
             if (mHistoryAdapter.getData().isEmpty()) {
                 mLlHistory.setVisibility(View.GONE);
             } else {
@@ -112,7 +113,7 @@ public class SearchHistoryFragment extends BaseFragment<SearchHistoryPresenter> 
     /**
      * 改变清除模式
      *
-     * @param removeMode 清除模式
+     * @param removeMode 清除模式 ，true 显示完成 ，false 显示清除
      */
     private void changeRemoveMode(boolean removeMode) {
         if (mRemoveMode == removeMode) {

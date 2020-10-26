@@ -1,11 +1,16 @@
 package com.xcynice.playxandroid.module.home.fragment;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.immersionbar.ImmersionBar;
+import com.kennyc.view.MultiStateView;
 import com.xcynice.playxandroid.R;
 import com.xcynice.playxandroid.adapter.ArticleAdapter;
 import com.xcynice.playxandroid.base.BaseBean;
@@ -35,6 +41,8 @@ import com.xcynice.playxandroid.module.home.view.IHomeView;
 import com.xcynice.playxandroid.module.home.wiget.SuperSwipeRefreshLayout;
 import com.xcynice.playxandroid.module.search.activity.SearchActivity;
 import com.xcynice.playxandroid.util.ActivityUtil;
+import com.xcynice.playxandroid.util.LogUtil;
+import com.xcynice.playxandroid.util.MultiStateUtils;
 import com.xcynice.playxandroid.util.SpUtil;
 import com.xcynice.playxandroid.util.ToastUtil;
 import com.xcynice.playxandroid.util.XUtil;
@@ -45,6 +53,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.io.FileDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -83,10 +93,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     ImageView mIvSearch;
     @BindView(R.id.rl_title)
     RelativeLayout mRlTitle;
+    @BindView(R.id.msv_home)
+    MultiStateView mMsvHome;
 
     private static final int CODE_SELECT_IMAGE = 1;
 
     private static final String IS_URL = "^(http|https|ftp)://([a-zA-Z0-9.\\-]+(:[a-zA-Z0-9.&amp;%$\\-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.[a-zA-Z]{2,4})(:[0-9]+)?(/[^/][a-zA-Z0-9.,?'\\\\/+&amp;%$#=~_\\-@]*)*$";
+
     @SuppressWarnings("rawtypes")
     private MZBannerView mBannerHome;
     private ArticleAdapter mArticleAdapter;
@@ -130,8 +143,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         ImmersionBar.with(this).titleBar(mRlTitle).init();
         mSrlHome.setColorSchemeResources(R.color.colorPrimary);
         mRvHome.setLayoutManager(new LinearLayoutManager(mContext));
+        MultiStateUtils.setEmptyAndErrorClick(mMsvHome, this::initData);
     }
-
 
     @Nullable
     @Override
@@ -166,6 +179,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initData() {
+        MultiStateUtils.toLoading(mMsvHome);
         presenter.getArticleListByFirst();
         presenter.getBanner();
         mSrlHome.setOnRefreshListener(() -> {
@@ -197,6 +211,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mBannerList = list.data;
         mBannerHome.setPages(mBannerList, (MZHolderCreator<BannerViewHolder>) () -> new BannerViewHolder());
         mBannerHome.start();
+        MultiStateUtils.toContent(mMsvHome);
         if (mSrlHome.isRefreshing()) {
             //结束刷新
             mSrlHome.setRefreshing(false);
@@ -215,7 +230,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mArticleAdapter = new ArticleAdapter(R.layout.item_article_list, mArticleList);
         mArticleAdapter.addHeaderView(mBannerHome);
         mRvHome.setAdapter(mArticleAdapter);
-
+        MultiStateUtils.toContent(mMsvHome);
         // 开启加载动画
         mArticleAdapter.openLoadAnimation();
         // 设置点击事件
@@ -226,6 +241,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void setArticleByRefresh(BaseBean<Article> list) {
+        MultiStateUtils.toContent(mMsvHome);
         mArticleList = list.data.datas;
         mCurrentCounter = list.data.datas.size();
         mArticleAdapter.setNewData(mArticleList);
@@ -236,10 +252,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setArticleError(String errorMsg) {
         ToastUtil.showToast(errorMsg);
+        MultiStateUtils.toError(mMsvHome);
     }
 
     @Override
     public void setArticleDataByMore(BaseBean<Article> list) {
+        MultiStateUtils.toContent(mMsvHome);
         mCurrentCounter = list.data.datas.size();
         mArticleAdapter.addData(list.data.datas);
         mArticleAdapter.loadMoreComplete();
@@ -337,7 +355,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 .setFlashLightOffText(getStringFromValue(R.string.close_flash))
                 .setFlashLightOnDrawable(R.drawable.ic_highlight_blue_open_24dp)
                 .setFlashLightOffDrawable(R.drawable.ic_highlight_white_close_24dp)
-                .continuousScan()
                 .setOnClickAlbumDelegate(new ScanActivityDelegate.OnClickAlbumDelegate() {
                     @Override
                     public void onClickAlbum(Activity activity) {
@@ -378,21 +395,58 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         String picturePath = cursor.getString(columnIndex);
         cursor.close();
-
+        // 适当压缩图片
         // 适当压缩图片
         Bitmap bitmap = BitmapUtil.getDecodeAbleBitmap(picturePath);
         // 这个方法比较耗时，推荐放到子线程执行
         CodeResult result = BarcodeReader.getInstance().read(bitmap);
         if (result == null) {
             Log.e("Scan >>> ", "no code");
+            return;
         } else {
             Log.e("Scan >>> ", result.getText());
         }
-
+        ToastUtil.showToast(result.getText());
     }
 
     private int getColorFromValue(int color) {
         return ContextCompat.getColor(XUtil.getApplication(), color);
+    }
+
+
+    public static Uri getImageContentUri(Context context, String path) {
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[]{MediaStore.Images.Media._ID}, MediaStore.Images.Media.DATA + "=? ",
+                new String[]{path}, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, "" + id);
+        } else {
+            // 如果图片不在手机的共享图片数据库，就先把它插入。
+            if (new File(path).exists()) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, path);
+                return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            } else {
+                return null;
+            }
+        }
+    }
+
+    // 通过uri加载图片
+    public  Bitmap getBitmapFromUri(Context context, Uri uri) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor =
+                    context.getContentResolver().openFileDescriptor(uri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            parcelFileDescriptor.close();
+            return image;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

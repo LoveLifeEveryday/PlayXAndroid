@@ -28,7 +28,7 @@
     <color name="invert_alpha">#11000000</color>
     <color name="basic_ui_action_bar_text_alpha">@color/text_invert_alpha</color>
     <color name="text_invert_alpha">#88ffffff</color>
-
+    <color name="text_third">#999999</color>
 
     <color name="scan_side">#2A017CB4</color>
     <color name="scan_partial">#B20493D5</color>

@@ -47,7 +47,7 @@ public class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         if (!mRemoveModeChanging) {
             helper.setVisible(R.id.iv_remove, mRemoveMode);
         } else {
-            //如果要显示清除的按钮
+            //如果要显示每一项清除的按钮
             if (mRemoveMode) {
                 //缩放动画，逐渐显示
                 ScaleAnimation scaleAnimation = getScaleAnimationByData(0F, 1F, 0F, 1F);

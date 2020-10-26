@@ -27,9 +27,11 @@ public class SearchHistoryPresenter extends BasePresenter<ISearchHistoryView> {
     }
 
 
+    /**
+     * 得到搜索热词
+     */
     public void getHotKeyList() {
         addDisposable(apiServer.getHotKeyList(), new BaseObserver<BaseBean<List<HotKey>>>(baseView) {
-
 
             @Override
             public void onSuccess(BaseBean<List<HotKey>> bean) {
@@ -53,8 +55,14 @@ public class SearchHistoryPresenter extends BasePresenter<ISearchHistoryView> {
     }
 
 
+    /**
+     * 保存搜索历史
+     *
+     * @param list 搜索历史
+     */
     public void saveHistory(List<String> list) {
         List<String> saves = list;
+        // 设置搜索历史最多一百条
         int max = 100;
         if (list != null && list.size() > max) {
             saves = list.subList(0, max - 1);
